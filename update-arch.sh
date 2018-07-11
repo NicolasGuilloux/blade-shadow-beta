@@ -105,7 +105,7 @@ echo "Transform the deb file."
 debtap -Q shadowbeta.deb
 
 echo "Install Shadow Beta"
-sudo pacman --needed -U shadow-beta*.pkg.tar.xz
+sudo pacman -U shadow-beta*.pkg.tar.xz
 
 # Remove the temp files
 rm shadowbeta.deb
