@@ -4,6 +4,7 @@ This repository will gather a bunch of script to install and update Shadow Beta 
 
 Currently supported:
 - Arch Linux
+- Debian
 
 These scripts are designed by Shadow Discord community and have no link with Blade company.
 Moreover, there is no guarantee that the scripts will work for you.
@@ -33,5 +34,7 @@ To install or update Shadow bêta, simply launch the script and follow it: `Debi
 # Thanks
 
 Thanks to Alex^#1629 on Discord for being available everytime somebody needs to kill some bugs.
+
 Thanks to raphco#0312 on Discord for being the guinea pig for Arch.
+
 Thanks to PofMagicfingers for the corrections on the Arch scripts.
