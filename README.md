@@ -15,7 +15,11 @@ Moreover, don't start the scripts as root. Use you current user account.
 
 # Arch Linux
 
+<<<<<<< HEAD
 An AUR package is available. If it's not working after installation, please follow the tutorial or the Bash files. https://aur.archlinux.org/packages/shadow-beta
+=======
+An AUR package is available. If it's not working after installation, please follow the tutorial or the Bash file. https://aur.archlinux.org/packages/shadow-beta
+>>>>>>> ae786fc816d73c5cdeaacd1871b003c6a6593950
 
 A detailed tutorial is available : https://support.shadow.tech/hc/fr/community/posts/360012569613-Shadow-Beta-sur-Arch-Linux?flash_digest=093ef96dce0b9104156420b2389ad119e8b9f9bd
 
