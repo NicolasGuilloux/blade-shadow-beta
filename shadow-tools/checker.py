@@ -1,6 +1,5 @@
 #-*- encoding: UTF-8 -*-
 import os
-from pathlib import Path
 
 class shadowChecker:
 
