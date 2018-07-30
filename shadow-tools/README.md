@@ -11,4 +11,4 @@ L'outil nécessite Python3 et vainfo.
 - Solus: `sudo eopkg it libva-utils`
 
 Pour lancer l'application: `python3 main.py`.
-
+Si vous ne disposez pas de GTK, ou si l'interface ne fonctionne pas, vous pouvez visualiser un rapport dans le terminal : `python3 report.py`
