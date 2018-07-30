@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Autheur: Nicolas Guilloux
-# Website: https://nicolasguilloux.eu/
+# Author:   Nicolas Guilloux
+# Website:  https://nicolasguilloux.eu/
+# Email:    novares.x@gmail.com
 
 if [ -d "/opt/Shadow Beta" ]; then
   files=(

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Autheur: Nicolas Guilloux
-# Website: https://nicolasguilloux.eu/
-# Email:   novares.x@gmail.com
+# Author:   Kabouik
+# Discord:  kabouik#7008
 
-# Shadow dependencies: gconf libva-utils libbsd qt5-svg json-cDo
+
+# Shadow dependencies: gconf libva-utils libbsd qt5-svg json-c
 
 # ----------------------- Dependancies ----------------------- #
 echo "Installing dependencies..."

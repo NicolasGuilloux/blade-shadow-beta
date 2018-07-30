@@ -4,8 +4,9 @@ set -e
 
 # Install Shadow Beta for Arch Linux
 
-# Author: Nicolas Guilloux
-# Website: https://nicolasguilloux.eu/
+# Author:   Nicolas Guilloux
+# Website:  https://nicolasguilloux.eu/
+# Email:    novares.x@gmail.com
 
 # Contributors: PofMagicfingers
 

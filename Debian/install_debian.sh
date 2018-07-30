@@ -4,8 +4,9 @@ set -e
 
 # Install and Update Shadow Beta for Debian
 
-# Autheur: Nicolas Guilloux
-# Website: https://nicolasguilloux.eu/
+# Author:   Nicolas Guilloux
+# Website:  https://nicolasguilloux.eu/
+# Email:    novares.x@gmail.com
 
 # TODO: Use the bionic version
 # 	A better way to integrate Qt
