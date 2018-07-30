@@ -8,7 +8,7 @@ L'outil nécessite Python3 et vainfo.
 
 - Arch: `sudo pacman -S libva-utils`
 - Debian et variantes: `sudo apt install vainfo`
+- Solus: `sudo eopkg it libva-utils`
 
-Pour lancer l'application: `python3 test.py`.
+Pour lancer l'application: `python3 main.py`.
 
-J'arrangerai plus tard les noms des fichiers ;)

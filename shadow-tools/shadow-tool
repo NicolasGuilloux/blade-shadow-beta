@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Autheur: Nicolas Guilloux
+# Website: https://nicolasguilloux.eu/
+# Email:   novares.x@gmail.com
+
+python3 main.py
+
+exit 0;
