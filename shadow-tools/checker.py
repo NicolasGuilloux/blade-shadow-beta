@@ -1,5 +1,6 @@
 #-*- encoding: UTF-8 -*-
 import os
+import textwrap
 
 class shadowChecker:
 
@@ -66,12 +67,15 @@ class shadowChecker:
             self.logs = "".join( tmpLogs[len(tmpLogs)-index-1:] )
 
         else:
-            self.logs = "Aucun fichier de logs trouvé. Essayez de lancer le stream avant. Si le problème persiste, c'est que le stream crash avant d'avoir pu créer des logs, souvent à cause de librairies manquantes."
+            self.logs = "Aucun fichier de logs trouvé. Essayez de lancer le stream avant.\nSi le problème persiste, c'est que le stream crash avant d'avoir pu créer des logs, souvent à cause de librairies manquantes."
 
     ## toString
     def toString(self):
 
-        str = "-------------------------------------\n\n"
+        str  = os.popen("cat /etc/*-release").read()
+        str += os.popen("uname -mrs").read() + "\n"
+
+        str += "-------------------------------------\n\n"
 
         str += "Type d'environnement: " + os.popen("echo $XDG_SESSION_TYPE").read()
         if self.input:
@@ -84,7 +88,7 @@ class shadowChecker:
         str += "-------------------------------------\n"
 
         for lib in self.missingLib:
-            str += lib + "\n"
+            str += textwrap.dedent( lib.rstrip().rstrip("  ") ) + "\n"
         str += "\n\n"
 
         str += "-------------------------------------\n"

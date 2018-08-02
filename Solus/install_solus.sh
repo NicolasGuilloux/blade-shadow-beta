@@ -8,7 +8,7 @@
 
 # ----------------------- Dependancies ----------------------- #
 echo "Installing dependencies..."
-sudo eopkg it binutils gconf libva-utils libbsd qt5-svg json-c
+sudo eopkg it binutils gconf libva libva-utils libva-intel-driver libva-32bit libva1 libva1-32bit libbsd qt5-svg json-c
 
 
 # ----------------------- Installation ----------------------- #

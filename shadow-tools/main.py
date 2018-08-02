@@ -74,7 +74,7 @@ class MainWindow:
 
             str = ""
             for lib in self.check.missingLib:
-                str += lib + "\n"
+                str += lib
 
             self.setLabelText("lib-list", str)
 
@@ -145,9 +145,7 @@ class MainWindow:
 
     def sendToPastebin(self, other):
 
-        data  = os.popen("cat /etc/*-release").read();
-        data += os.popen("uname -mrs").read() + "\n";
-        data += self.check.toString()
+        data = self.check.toString()
 
         url = 'http://pastebin.com/api/api_post.php'
         params = {'api_dev_key': '1a8931a5541dd9c7a0a6e15b4920642c','api_option': 'paste','api_paste_code': data}
