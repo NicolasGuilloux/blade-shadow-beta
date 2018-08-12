@@ -31,7 +31,7 @@ if( $vainfo eq '' ) {
 
     # The GPU doesn't support H264.
     if( index($vainfo, 'H264') == -1 ) {
-        $errors .= "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU to use this application.\n\n";
+        $errors .= "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.\n\n";
         $errorsCount++;
     }
 
