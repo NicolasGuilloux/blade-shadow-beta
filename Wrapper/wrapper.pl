@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-# alert
+# Create a notification
 #
 # @param String Title
 # @param String Content
@@ -20,15 +20,11 @@ sub alert {
 my $errors = '',
 my $errorsCount = 0;
 
+
 # -------- Vainfo -------- #
 my $vainfo = `vainfo`;
 
-if( $vainfo eq '' ) {
-    $errors .= "Your GPU is not recognized. Please check the `vainfo` command.\n\n";
-    $errorsCount++;
-
-} else {
-
+if( $vainfo ne '' ) {
     # The GPU doesn't support H264.
     if( index($vainfo, 'H264') == -1 ) {
         $errors .= "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.\n\n";
@@ -38,7 +34,12 @@ if( $vainfo eq '' ) {
     if( index($vainfo, 'H265') == -1 and index($vainfo, 'HEVC') == 1 ) {
         print "Your GPU supports only H264. Do not use H265.\n\n";
     }
+
+} else {
+    $errors .= "Your GPU is not recognized. Please check the `vainfo` command.\n\n";
+    $errorsCount++;
 }
+
 
 
 # -------- Input --------- #
@@ -63,6 +64,11 @@ if( $env ne 'x11' ) {
     $errors .= "Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
     $errorsCount++;
 }
+
+
+# -------- Kill ClientSDL ------ #
+while( `pkill -e nautilus` ne '' ) {}
+
 
 # -------- Start Shadow -------- #
 if( $errorsCount > 0 ) {
