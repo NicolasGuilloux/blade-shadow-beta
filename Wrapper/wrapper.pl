@@ -20,6 +20,25 @@ sub alert {
 my $errors = '',
 my $errorsCount = 0;
 
+# -------- Arguments -------- #
+if( $#ARGV > -1 ) {
+
+    if( $ARGV[0] eq '--help' ) {
+        print "
+Wrapper for Shadow Beta that check your configuration and errors.
+
+Usage: wrapper.pl [OPTIONS]
+  --help             provides help about the wrapper
+  --bypass-check     bypass the check and directly launch shadow-beta\n";
+        exit;
+    }
+
+    if( $ARGV[0] eq '--bypass-check' ) {
+        goto START_SHADOW;
+    }
+
+    print $ARGV[0];
+}
 
 # -------- Vainfo -------- #
 my $vainfo = `vainfo`;
@@ -71,9 +90,15 @@ while( `pkill -e ClientSDL` ne '' ) {}
 
 
 # -------- Start Shadow -------- #
+START_SHADOW:
 if( $errorsCount > 0 ) {
-    alert("There is $errorsCount errors", $errors);
+    my $plurial = '';
+    if( $errorsCount > 1) { $plurial = 's'; }
+
+    print "$errorsCount error$plurial. The program can't continue.\n";
+    alert("There is $errorsCount error" . $plurial, $errors);
 
 } else {
+    print "Start Shadow Beta\n";
     system('/opt/Shadow\ Beta/shadow-beta');
 }
