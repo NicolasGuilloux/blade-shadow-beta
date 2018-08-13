@@ -27,7 +27,8 @@ Usage: wrapper.pl [OPTIONS]
 
     --error            Create a fake error message
     --warning          Create a fake warning message
-    --debug            Removes the previous log file and display the new one when the launcher is closed";
+    --debug            Removes the previous log file and display the new one when the launcher is closed
+    --strace           Launch the app with strace -f and put the result in /var/tmp/strace_shadowbeta";
 
 my $hotkeys = "Hotkeys:
     • lshift-rctrl-esc: exit
@@ -37,6 +38,8 @@ my $hotkeys = "Hotkeys:
 
 # Debug, errors and warnings
 my $debug = 0;
+my $strace = 0;
+
 my @errors = ();
 my @warnings = ();
 
@@ -80,6 +83,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
         $debug = 1;
     }
+
+    # Start Shadow with Strace
+    if( $arg eq '--strace' ) {
+        $strace = 1;
+    }
+
 
     # Create a false error
     if( $arg eq '--error' ) {
@@ -174,8 +183,17 @@ if( scalar @errors > 0 ) {
 # Start Shadow
 } else {
     print "$hotkeys\n";
-    system('./opt/Shadow\ Beta/shadow-beta.wrapper');
 
+    # Start Shadow with Strace
+    if( $strace ) {
+        system('strace -f ./opt/Shadow\ Beta/shadow-beta.wrapper &> /var/tmp/strace_shadowbeta');
+
+    # Start Shadow
+    } else {
+        system('./opt/Shadow\ Beta/shadow-beta.wrapper');
+    }
+
+    # Display the logs on launcher close
     if( $debug ) {
         my $logs = `cat ~/.cache/blade/shadow/shadow.log`;
         print "\n$logs\n";
