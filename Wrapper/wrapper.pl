@@ -21,10 +21,12 @@ sub alert {
 my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 
 Usage: wrapper.pl [OPTIONS]
-    --help             provides help about the wrapper
-    --bypass-check     bypass the check and directly launch shadow-beta
-    --error            create a fake error message
-    --warning          create a fake warning message";
+    --help             Provides help about the wrapper
+    --bypass-check     Bypass the check and directly launch shadow-beta
+
+    --error            Create a fake error message
+    --warning          Create a fake warning message
+    --debug            Removes the previous log file and display the new one when the launcher is closed";
 
 my $hotkeys = "Hotkeys:
     • lshift-rctrl-esc: exit
@@ -32,9 +34,11 @@ my $hotkeys = "Hotkeys:
     • lshift-rctrl-g: toggle input grab
     • lshift-rctrl-h: toggle Shadow Mode\n";
 
-# Errors and warnings
+# Debug, errors and warnings
+my $debug = 0;
 my @errors = ();
 my @warnings = ();
+
 
 # -------- Arguments -------- #
 for(my $i=0; $i < $#ARGV+1; $i++) {
@@ -49,6 +53,15 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--bypass-check' ) {
         push @warnings, "Bypassing the check";
         goto START_SHADOW;
+    }
+
+    # Remove the previous logs file and display the new one when the launcher is closed
+    if( $arg eq '--debug' ) {
+        if( -f '~/.cache/blade/shadow/shadow.log' ) {
+            `rm ~/.cache/blade/shadow/shadow.log`;
+        }
+
+        $debug = 1;
     }
 
     # Create a false error
@@ -144,6 +157,11 @@ if( scalar @errors > 0 ) {
 } else {
     print "$hotkeys\n";
     system('./opt/Shadow\ Beta/shadow-beta');
+
+    if( $debug ) {
+        my $logs = `cat ~/.cache/blade/shadow/shadow.log`;
+        print "\n$logs\n";
+    }
 
     exit 0;
 }
