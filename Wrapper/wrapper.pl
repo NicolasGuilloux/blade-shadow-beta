@@ -17,16 +17,14 @@ sub alert {
     exec($command);
 }
 
-# Test variable
-my $debug = 0;
-
 # Messages variables
-my $help = "
-Wrapper for Shadow Beta that check your configuration and errors.
+my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 
 Usage: wrapper.pl [OPTIONS]
     --help             provides help about the wrapper
-    --bypass-check     bypass the check and directly launch shadow-beta\n\n";
+    --bypass-check     bypass the check and directly launch shadow-beta
+    --error            create a fake error message
+    --warning          create a fake warning message";
 
 my $hotkeys = "Hotkeys:
     • lshift-rctrl-esc: exit
@@ -43,26 +41,31 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     my $arg = $ARGV[$i];
 
     if( $arg eq '--help' ) {
-        print $help;
+        print "\n$help\n\n";
         exit;
     }
 
     # Bypass the check and launch
     if( $arg eq '--bypass-check' ) {
-        print "/!\\ Bypassing the check\n";
+        push @warnings, "Bypassing the check";
         goto START_SHADOW;
     }
 
-    # Set the debug variable
-    if( $arg eq '--debug' ) {
-        $debug = 1;
+    # Create a false error
+    if( $arg eq '--error' ) {
+        push @errors, "This is a debug feature to test the notification. It creates a fake error.";
+    }
+
+    # Create a false warning
+    if( $arg eq '--warning' ) {
+        push @warnings, "This is a debug feature. It creates a fake warning.";
     }
 }
 
 # -------- Vainfo -------- #
 
 if( -f '/usr/bin/vainfo' == 0 ) {
-    push @warnings, "vainfo is not installed, couldn't determine GPU capabilities, if you experience issues, please install it.\n";
+    push @warnings, "vainfo is not installed, couldn't determine GPU capabilities, if you experience issues, please install it.";
 
 } else {
     my $vainfo = `vainfo`;
@@ -99,7 +102,7 @@ if( index($groups, 'input') == -1 ) {
 my $env = `echo \$XDG_SESSION_TYPE`;
 chomp $env;
 
-if( $env ne 'x11' or $debug ) {
+if( $env ne 'x11' ) {
     push @errors,  "Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
 }
 
@@ -110,6 +113,7 @@ while( `pkill -e ClientSDL` ne '' ) {}
 
 # -------- Start Shadow -------- #
 START_SHADOW:
+print "\n";
 
 # Warnings
 if( scalar @warnings > 0 ) {
@@ -131,14 +135,15 @@ if( scalar @errors > 0 ) {
         $str2 .= "• $errors[$i]\n";
     }
 
-    print "\nERROR ! The program can't continue. $str: \n$str2\n";
+    print "ERROR ! The program can't continue. $str: \n$str2\n";
     alert("$str detected", $str2);
 
     exit 1;
 
 # Start Shadow
 } else {
-    print "\n$hotkeys\n";
+    print "$hotkeys\n";
     system('./opt/Shadow\ Beta/shadow-beta');
+
     exit 0;
 }
