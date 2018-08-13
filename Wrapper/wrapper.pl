@@ -57,7 +57,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
     # Remove the previous logs file and display the new one when the launcher is closed
     if( $arg eq '--debug' ) {
-        if( -f '~/.cache/blade/shadow/shadow.log' ) {
+
+        my $dirname = `dirname ~/.cache/blade/shadow/shadow.log`;
+        chomp $dirname;
+
+        if( -e "$dirname/shadow.log" ) {
+            print "\nThe old logs has been removed.\n";
             `rm ~/.cache/blade/shadow/shadow.log`;
         }
 
