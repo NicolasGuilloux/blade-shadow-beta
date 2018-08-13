@@ -17,48 +17,70 @@ sub alert {
     exec($command);
 }
 
-my $errors = '',
-my $errorsCount = 0;
+# Test variable
+my $debug = 0;
 
-# -------- Arguments -------- #
-if( $#ARGV > -1 ) {
-
-    if( $ARGV[0] eq '--help' ) {
-        print "
+# Messages variables
+my $help = "
 Wrapper for Shadow Beta that check your configuration and errors.
 
 Usage: wrapper.pl [OPTIONS]
-  --help             provides help about the wrapper
-  --bypass-check     bypass the check and directly launch shadow-beta\n\n";
+    --help             provides help about the wrapper
+    --bypass-check     bypass the check and directly launch shadow-beta\n\n";
+
+my $hotkeys = "Hotkeys:
+    • lshift-rctrl-esc: exit
+    • lshift-rctrl-space: switch fullscreen
+    • lshift-rctrl-g: toggle input grab
+    • lshift-rctrl-h: toggle Shadow Mode\n";
+
+# Errors and warnings
+my @errors = ();
+my @warnings = ();
+
+# -------- Arguments -------- #
+for(my $i=0; $i < $#ARGV+1; $i++) {
+    my $arg = $ARGV[$i];
+
+    if( $arg eq '--help' ) {
+        print $help;
         exit;
     }
 
-    if( $ARGV[0] eq '--bypass-check' ) {
+    # Bypass the check and launch
+    if( $arg eq '--bypass-check' ) {
+        print "/!\\ Bypassing the check\n";
         goto START_SHADOW;
     }
 
-    print $ARGV[0];
+    # Set the debug variable
+    if( $arg eq '--debug' ) {
+        $debug = 1;
+    }
 }
 
 # -------- Vainfo -------- #
-my $vainfo = `vainfo`;
 
-if( $vainfo ne '' ) {
-    # The GPU doesn't support H264.
-    if( index($vainfo, 'H264') == -1 ) {
-        $errors .= "• Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.\n\n";
-        $errorsCount++;
-    }
-
-    if( index($vainfo, 'H265') == -1 and index($vainfo, 'HEVC') == 1 ) {
-        print "Your GPU supports only H264. Do not use H265.\n\n";
-    }
+if( -f '/usr/bin/vainfo' == 0 ) {
+    push @warnings, "vainfo is not installed, couldn't determine GPU capabilities, if you experience issues, please install it.\n";
 
 } else {
-    $errors .= "• Your GPU is not recognized. Please check the `vainfo` command.\n\n";
-    $errorsCount++;
-}
+    my $vainfo = `vainfo`;
 
+    if( $vainfo ne '' ) {
+        # The GPU doesn't support H264.
+        if( index($vainfo, 'H264') == -1 ) {
+            push @errors, "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.";
+        }
+
+        if( index($vainfo, 'H265') == -1 and index($vainfo, 'HEVC') == 1 ) {
+            push @warnings, "Your GPU supports only H264. Do not use H265.\n\n";
+        }
+
+    } else {
+        push @errors, "Your GPU is not recognized. Please check the `vainfo` command.";
+    }
+}
 
 
 # -------- Input --------- #
@@ -66,12 +88,10 @@ my $groups = `groups \$USER`;
 
 if( index($groups, 'input') == -1 ) {
 
-    $errorsCount++;
-
-    print 'Adding the user to the input group.';
+    print "Adding the user to the input group\n";
     my $in = `pkexec gpasswd -a \$USER input`;
 
-    $errors .= "• The program tried to add the user to the \"input\" group. If you entered the right administrator password, you should reboot to apply the changes. Otherwise, ask the administrator to enter it for you.\n\n";
+    push @errors, "The program tried to add the user to the \"input\" group. If you entered the right administrator password, you should reboot to apply the changes. Otherwise, ask the administrator to enter it for you.";
 }
 
 
@@ -79,9 +99,8 @@ if( index($groups, 'input') == -1 ) {
 my $env = `echo \$XDG_SESSION_TYPE`;
 chomp $env;
 
-if( $env ne 'x11' ) {
-    $errors .= "• Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
-    $errorsCount++;
+if( $env ne 'x11' or $debug ) {
+    push @errors,  "Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
 }
 
 
@@ -91,14 +110,35 @@ while( `pkill -e ClientSDL` ne '' ) {}
 
 # -------- Start Shadow -------- #
 START_SHADOW:
-if( $errorsCount > 0 ) {
-    my $plurial = '';
-    if( $errorsCount > 1) { $plurial = 's'; }
 
-    print "$errorsCount error$plurial. The program can't continue.\n";
-    alert("There is $errorsCount error" . $plurial, $errors);
+# Warnings
+if( scalar @warnings > 0 ) {
+    print "WARNING:\n";
+    foreach my $i (0 .. $#warnings) {
+        print "• $warnings[$i]\n";
+    }
+    print "\n";
+}
 
+# Display errors
+if( scalar @errors > 0 ) {
+
+    my $str = 'There is 1 error';
+    if( scalar @errors > 1 ) { $str = 'There are ' . scalar @errors . ' errors'; }
+
+    my $str2 = "";
+    foreach my $i (0 .. $#errors) {
+        $str2 .= "• $errors[$i]\n";
+    }
+
+    print "\nERROR ! The program can't continue. $str: \n$str2\n";
+    alert("$str detected", $str2);
+
+    exit 1;
+
+# Start Shadow
 } else {
-    print "Start Shadow Beta\n";
-    system('/opt/Shadow\ Beta/shadow-beta');
+    print "\n$hotkeys\n";
+    system('./opt/Shadow\ Beta/shadow-beta');
+    exit 0;
 }
