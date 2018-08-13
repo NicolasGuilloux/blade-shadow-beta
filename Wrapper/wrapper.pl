@@ -23,6 +23,7 @@ my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 Usage: wrapper.pl [OPTIONS]
     --help             Provides help about the wrapper
     --bypass-check     Bypass the check and directly launch shadow-beta
+    --clientsdl        Launch directly ClientSDL
 
     --error            Create a fake error message
     --warning          Create a fake warning message
@@ -49,10 +50,15 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         exit;
     }
 
-    # Bypass the check and launch
+    # Start directly ClientSDl and stops
     if( $arg eq '--bypass-check' ) {
-        push @warnings, "Bypassing the check";
-        goto START_SHADOW;
+        system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+        exit 0;
+    }
+
+    # Create a false warning
+    if( $arg eq '--warning' ) {
+        push @warnings, "This is a debug feature. It creates a fake warning.";
     }
 
     # Remove the previous logs file and display the new one when the launcher is closed
@@ -78,6 +84,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--warning' ) {
         push @warnings, "This is a debug feature. It creates a fake warning.";
     }
+
 }
 
 # -------- Vainfo -------- #
