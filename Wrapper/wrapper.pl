@@ -27,7 +27,7 @@ my $vainfo = `vainfo`;
 if( $vainfo ne '' ) {
     # The GPU doesn't support H264.
     if( index($vainfo, 'H264') == -1 ) {
-        $errors .= "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.\n\n";
+        $errors .= "• Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.\n\n";
         $errorsCount++;
     }
 
@@ -36,7 +36,7 @@ if( $vainfo ne '' ) {
     }
 
 } else {
-    $errors .= "Your GPU is not recognized. Please check the `vainfo` command.\n\n";
+    $errors .= "• Your GPU is not recognized. Please check the `vainfo` command.\n\n";
     $errorsCount++;
 }
 
@@ -52,7 +52,7 @@ if( index($groups, 'input') == -1 ) {
     print 'Adding the user to the input group.';
     my $in = `pkexec gpasswd -a \$USER input`;
 
-    $errors .= "The program tried to add the user to the \"input\" group. If you entered the right administrator password, you should reboot to apply the changes. Otherwise, ask the administrator to enter it for you.\n\n";
+    $errors .= "• The program tried to add the user to the \"input\" group. If you entered the right administrator password, you should reboot to apply the changes. Otherwise, ask the administrator to enter it for you.\n\n";
 }
 
 
@@ -61,13 +61,13 @@ my $env = `echo \$XDG_SESSION_TYPE`;
 chomp $env;
 
 if( $env ne 'x11' ) {
-    $errors .= "Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
+    $errors .= "• Your environnement is not Xorg but is identified as $env. Please switch to Xorg or you will not be able to start this application.";
     $errorsCount++;
 }
 
 
 # -------- Kill ClientSDL ------ #
-while( `pkill -e nautilus` ne '' ) {}
+while( `pkill -e ClientSDL` ne '' ) {}
 
 
 # -------- Start Shadow -------- #
@@ -75,5 +75,5 @@ if( $errorsCount > 0 ) {
     alert("There is $errorsCount errors", $errors);
 
 } else {
-    system('shadow-beta');
+    system('/opt/Shadow\ Beta/shadow-beta');
 }
