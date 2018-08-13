@@ -50,6 +50,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         exit;
     }
 
+    # Bypass the check and launch
+    if( $arg eq '--bypass-check' ) {
+        push @warnings, "Bypassing the check";
+        goto START_SHADOW;
+    }
+
     # Start directly ClientSDl and stops
     if( $arg eq '--clientsdl' ) {
         system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
