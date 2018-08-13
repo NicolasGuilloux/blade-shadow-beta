@@ -24,6 +24,7 @@ Usage: wrapper.pl [OPTIONS]
     --help             Provides help about the wrapper
     --bypass-check     Bypass the check and directly launch shadow-beta
     --clientsdl        Launch directly ClientSDL
+    --vainfo-appimage  Execute vainfo with the embedded VA library
 
     --error            Create a fake error message
     --warning          Create a fake warning message
@@ -48,6 +49,7 @@ my @warnings = ();
 for(my $i=0; $i < $#ARGV+1; $i++) {
     my $arg = $ARGV[$i];
 
+    # Display help and stop the program
     if( $arg eq '--help' ) {
         print "\n$help\n\n";
         exit;
@@ -65,10 +67,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         exit 0;
     }
 
-    # Create a false warning
-    if( $arg eq '--warning' ) {
-        push @warnings, "This is a debug feature. It creates a fake warning.";
+    # Execute vainfo with the embedded VA library
+    if( $arg eq '--vainfo-appimage' ) {
+        system('./usr/bin/vainfo');
+        exit 0;
     }
+
 
     # Remove the previous logs file and display the new one when the launcher is closed
     if( $arg eq '--debug' ) {
@@ -88,7 +92,6 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--strace' ) {
         $strace = 1;
     }
-
 
     # Create a false error
     if( $arg eq '--error' ) {
