@@ -29,7 +29,7 @@ Wrapper for Shadow Beta that check your configuration and errors.
 
 Usage: wrapper.pl [OPTIONS]
   --help             provides help about the wrapper
-  --bypass-check     bypass the check and directly launch shadow-beta\n";
+  --bypass-check     bypass the check and directly launch shadow-beta\n\n";
         exit;
     }
 
