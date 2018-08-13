@@ -51,7 +51,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     }
 
     # Start directly ClientSDl and stops
-    if( $arg eq '--bypass-check' ) {
+    if( $arg eq '--clientsdl' ) {
         system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
         exit 0;
     }
