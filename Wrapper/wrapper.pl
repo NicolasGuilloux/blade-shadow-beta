@@ -174,7 +174,7 @@ if( scalar @errors > 0 ) {
 # Start Shadow
 } else {
     print "$hotkeys\n";
-    system('./opt/Shadow\ Beta/shadow-beta');
+    system('./opt/Shadow\ Beta/shadow-beta.wrapper');
 
     if( $debug ) {
         my $logs = `cat ~/.cache/blade/shadow/shadow.log`;
