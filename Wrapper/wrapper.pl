@@ -105,6 +105,11 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
 }
 
+# -------- NVIDIA check -- #
+if( `lspci | grep NVIDIA` ne '' ) {
+    push @errors, "Your GPU brand is NVIDIA. Unfortunatelly, this brand is not yet supported by Shadow on Linux. You have to wait for a new release from Blade.";
+}
+
 # -------- Vainfo -------- #
 
 if( -f '/usr/bin/vainfo' == 0 ) {
