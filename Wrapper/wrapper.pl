@@ -103,7 +103,7 @@ sub bold {
 # Messages variables
 my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 
-Usage: " . basename($0) . " [OPTIONS]
+Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Provides help about the wrapper
     --bypass-check     Bypass the check and directly launch shadow-beta
     --clientsdl        Launch directly ClientSDL
@@ -113,12 +113,6 @@ Usage: " . basename($0) . " [OPTIONS]
     --warning          Create a fake warning message
     --debug            Removes the previous log file and display the new one when the launcher is closed
     --strace           Launch the app with strace -f and put the result in /var/tmp/strace_shadowbeta";
-
-my $hotkeys = "Hotkeys:
-    • lshift-rctrl-esc: exit
-    • lshift-rctrl-space: switch fullscreen
-    • lshift-rctrl-g: toggle input grab
-    • lshift-rctrl-h: toggle Shadow Mode";
 
 # Debug, errors and warnings
 my $debug = 0;
