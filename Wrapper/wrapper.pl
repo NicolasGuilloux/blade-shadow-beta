@@ -7,6 +7,7 @@
 use strict;
 use warnings;
 
+use File::Basename;
 use POSIX qw(locale_h);
 use locale;
 
@@ -102,7 +103,7 @@ sub bold {
 # Messages variables
 my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 
-Usage: wrapper.pl [OPTIONS]
+Usage: " . basename($0) . " [OPTIONS]
     --help             Provides help about the wrapper
     --bypass-check     Bypass the check and directly launch shadow-beta
     --clientsdl        Launch directly ClientSDL
