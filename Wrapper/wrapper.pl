@@ -13,8 +13,10 @@ use warnings;
 # @param String Content
 # @param Bool   (Optional) Question notification
 sub alert {
-    my $command = "notify-send '$_[0]' '$_[1]' -u critical -i shadow-beta";
-    exec($command);
+    if( -f "/usr/bin/notify-send" ) {
+        my $command = "notify-send '$_[0]' '$_[1]' -u critical -i shadow-beta";
+        exec($command);
+    }
 }
 
 # Messages variables
@@ -106,7 +108,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 }
 
 # -------- NVIDIA check -- #
-if( `lspci | grep NVIDIA` ne '' ) {
+if( `lspci -vnnn | perl -lne 'print if /^\\d+:.+([\\S+:\\S+])/' | grep "VGA controller" | grep -I NVIDIA` ne '' ) {
     push @errors, "Your GPU brand is NVIDIA. Unfortunatelly, this brand is not yet supported by Shadow on Linux. You have to wait for a new release from Blade.";
 }
 
@@ -184,7 +186,7 @@ if( scalar @errors > 0 ) {
     }
 
     print "ERROR ! The program can't continue. $str: \n$str2\n";
-    alert("$str detected", $str2);
+    alert("$str detected", "\n$str2");
 
     exit 1;
 
