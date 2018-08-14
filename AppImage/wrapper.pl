@@ -14,53 +14,53 @@ use locale;
 # ----------- Translations ------------ #
 
 my @fr = (
-    "Vérification non réalisée.",
+    "Vérification de compatibilité désactivée.",
     "Les anciens logs ont été supprimés.",
-    "C'est une fonctionnalité de debug pour tester les notifications. Cela envoie une fausse erreur.",
-    "C'est une fonctionnalité de debug. Cela envoie un faux Warning.",
+    "Ceci est une fonction de debug affichant une fausse erreur pour tester les notifications. Blip.",
+    "Ceci est une fonction de debug affichant un faux avertissement pour tester les notifications. Blip.",
 
-    "Votre carte graphique est de la marque NVIDIA. Malheureusement, ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application.",
-    "Le logiciel 'vainfo' n'est pas installé, les capacités de votre carte graphique ne peuvent être vérifiée. Installez 'vainfo' pour avoir une vérification complète.",
+    "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application ou utiliser le chipset Intel.",
+    "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
     "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
-    "Votre carte graphique ne supporte que le H264. Vous ne pouvez pas utiliser le H265 (HEVC).",
-    "Votre carte graphique n'est pas reconnu par la librarie VA-API. Veuillez vérifiez vos drivers VA-API avec la commande 'vainfo'.",
+    "Votre carte graphique ne supporte que le H.264. Vous ne pourrez pas utiliser le H.265 (HEVC).",
+    "Votre carte graphique n'est pas reconnue par la librarie VA-API. Veuillez vérifiez vos drivers VA-API avec la commande 'vainfo'.",
 
-    "Le programme a tenté d'ajouter l'utilisateur courant dans le groupe \"input\". Si vous avez entré le bon mot de passe administrateur, veuillez redémarrer votre ordinateur pour appliquer les changements. Sinon, demandez à votre administrateur de le faire pour vous.",
+    "Le programme a tenté d'ajouter l'utilisateur courant au groupe \"input\". Si vous avez entré le mot de passe administrateur, veuillez redémarrer votre ordinateur ou votre session pour appliquer le changement.",
 
-    "Votre environnement de bureau n'utilise pas Xorg, il est reconnu comme",
-    "Veuillez changer l'environnement pour utiliser Xorg ou l'application ne pourra pas se lancer.",
+    "Votre environnement de bureau n'utilise pas Xorg mais est identifié comme",
+    "Veuillez changer l'environnement pour utiliser Xorg ou l'application ne pourra pas fonctionner.",
 
-    "Les erreurs suivantes empêchent le Shadow de fonctionner",
+    "Les erreurs suivantes empêchent\nl'application Shadow de fonctionner",
 
     bold("Raccourcis") . "
     • lshift-rctrl-esc:      Quitter
-    • lshift-rctrl-space:    Basculer en plein écran
-    • lshift-rctrl-g:        Basculer la capture des entrées
-    • lshift-rctrl-h:        Basculer en Shadow Mode"
+    • lshift-rctrl-space:    Activer/désactiver le mode plein écran
+    • lshift-rctrl-g:        Activer/désactiver la capture du clavier et de la souris
+    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode"
 );
 
 my @en = (
-    "Bypassing the check.",
-    "The old logs has been removed.",
-    "This is a debug feature to test the notification. It creates a fake error.",
-    "This is a debug feature. It creates a fake warning.",
+    "Bypassing the compatibility check.",
+    "The old logs have been removed.",
+    "This is a debug feature showing a fake error to test notifications. Blip.",
+    "This is a debug feature showing a fake warning to test notifications. Blip.",
 
-    "Your GPU brand is NVIDIA. Unfortunatelly, this brand is not yet supported by Shadow on Linux. You have to wait for a new release from Blade.",
-    "vainfo is not installed, couldn't determine GPU capabilities, if you experience issues, please install it.",
+    "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade, or use your Intel GPU instead.",
+    "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
     "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
-    "Your GPU supports only H264. Do not use H265 (HEVC).",
-    "Your GPU is not recognized. Please check the `vainfo` command.",
+    "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
+    "Your GPU is not recognized. Please check your hardware decoding drivers with the 'vainfo' command.",
 
-    "The program tried to add the user to the \"input\" group. If you entered the right administrator password, you should reboot to apply the changes. Otherwise, ask the administrator to enter it for you.",
+    "The program tried to add the current user to the \"input\" group. If you entered the administrator password, please reboot or restart your session to apply the change.",
 
     "Your environnement is not Xorg but is identified as",
     "Please switch to Xorg or you will not be able to start this application.",
 
-    "The following errors block the Shadow application",
+    "The following errors prevented the\nShadow application from running",
 
     bold("Hotkeys") . "
     • lshift-rctrl-esc:      Exit
-    • lshift-rctrl-space:    Switch fullscreen
+    • lshift-rctrl-space:    Toggle fullscreen or windowed
     • lshift-rctrl-g:        Toggle input grab
     • lshift-rctrl-h:        Toggle Shadow Mode"
 );
@@ -101,17 +101,17 @@ sub bold {
 # ----------- Variables ------------ #
 
 # Messages variables
-my $help = "Wrapper for Shadow Beta that check your configuration and errors.
+my $help = "Wrapper for Shadow Beta that checks your configuration and compatibility errors.
 
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
-    --help             Provides help about the wrapper
-    --bypass-check     Bypass the check and directly launch shadow-beta
-    --clientsdl        Launch directly ClientSDL
+    --help             Show this help
+    --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
+    --clientsdl        Directly launch the ClientSDL renderer
 
-    --error            Create a fake error message
-    --warning          Create a fake warning message
-    --debug            Removes the previous log file and display the new one when the launcher is closed
-    --strace           Launch the app with strace -f and put the result in /var/tmp/strace_shadowbeta";
+    --error            Show a fake error notification
+    --warning          Show a fake warning notification
+    --debug            Clear the previous log file and display the new one when the launcher is closed
+    --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta";
 
 # Debug, errors and warnings
 my $debug = 0;
