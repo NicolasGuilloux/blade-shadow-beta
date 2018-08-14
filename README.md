@@ -18,6 +18,7 @@ Moreover, there is no guarantee that the scripts will work for you.
 As you will install programs, you will need the root rights with the "sudo" command. Please install it before running these scripts.
 Moreover, don't start the scripts as root. Use you current user account.
 
+You can talk to us on the french Shadow Discord: https://discord.gg/shadowtech
 
 # AppImage
 
