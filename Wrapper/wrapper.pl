@@ -107,7 +107,6 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Provides help about the wrapper
     --bypass-check     Bypass the check and directly launch shadow-beta
     --clientsdl        Launch directly ClientSDL
-    --vainfo-appimage  Execute vainfo with the embedded VA library
 
     --error            Create a fake error message
     --warning          Create a fake warning message
@@ -141,12 +140,6 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Start directly ClientSDl and stops
     if( $arg eq '--clientsdl' ) {
         system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
-        exit 0;
-    }
-
-    # Execute vainfo with the embedded VA library
-    if( $arg eq '--vainfo-appimage' ) {
-        system('./usr/bin/vainfo');
         exit 0;
     }
 
