@@ -2,7 +2,7 @@
 
 The Shadow application by Blade (https://shadow.tech) is available in Beta for Ubuntu 17.10 and 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation, or using scripts to get the missing dependencies on your OS and install/update the vanilla Shadow application. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled within the AppImage.
 
-The AppImage is confirmed to work on the following distributions, but is likely compatible with others (please let us know the outcome if you test it on another distribution):
+The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know):
  - Arch Linux
  - Debian
  - Solus (the i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is currently not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
