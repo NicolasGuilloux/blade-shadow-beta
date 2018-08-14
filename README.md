@@ -1,11 +1,16 @@
 # Install Shadow Beta on Linux
 
-This repository will gather a bunch of script to install and update Shadow Beta on several Linux Distributions.
+This repository will gather a bunch of script to install and update Shadow Beta on several Linux Distributions. It also hosts a AppImage for more compatibility.
 
-Currently supported:
+Currently supported by the scripts:
 - Arch Linux
 - Debian
 - Linux Mint
+
+Currently supported and tested by the AppImage:
+ - Arch Linux
+ - Debian
+ - Solus
 
 These scripts are designed by Shadow Discord community and have no link with Blade company.
 Moreover, there is no guarantee that the scripts will work for you.
@@ -16,10 +21,27 @@ Moreover, don't start the scripts as root. Use you current user account.
 
 # AppImage
 
-Alex is currently building an AppImage that will work on (almost) every distribution. The wrapper will be integrated to detect errors and propose fixes.
+Alex built an AppImage that work on (almost) every recent (>2017) distribution. Please, if a distribution fails to launch the AppImage, create an Issue entry on this git.
+It could support more if Blade would compile for Ubuntu 16.04 LTS. It could be improved soon when the unified version will be released.
+
+The AppImage embeds Ubuntu Bionic libs, Qt 5.9.5 and official Shadow Beta version. However it requires a **working libVA** on your system and a **compatible GLIBC**.$
+
+To install the AppImage, download the AppImage first, put it where you want, make it executable and start it. We advice to create a Menu Entry, which will make the AppImage available in the Application Menu.
+
+For lazy guys, just execute this command that will download the file in the the .local/Shadow\ Beta folder, make it executable and start it.
+
+```
+mkdir ~/.local/share/Shadow\ Beta
+cd ~/.local/share/Shadow\ Beta/
+wget https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage
+chmod +x shadowbeta-linux-x86_64.AppImage
+./shadowbeta-linux-x86_64.AppImage
+```
 
 
-# Arch Linux
+# Scripts
+
+## Arch Linux
 
 An AUR package is available. If it's not working after installation, please follow the tutorial or the Bash files. https://aur.archlinux.org/packages/shadow-beta
 
@@ -32,19 +54,19 @@ For the first install, launch install-arch.sh script: `./install-arch.sh`.
 For the next update, launch only update-arch.sh script: `./update-arch.sh`.
 
 
-# Debian
+## Debian
 
 First, make the script executable: `chmod +x Debian/*`
 
 To install or update Shadow bêta, simply launch the script and follow it: `Debian/install_debian.sh`.
 
 
-# Linux Mint
+## Linux Mint
 
 Linux Mint needs the extra package `gstreamer1.0-vaapi`. Execute the command: `sudo apt install gstreamer1.0-vaapi`
 
 
-# Solus
+## Solus
 
 **The Solus installation isn't working right now. We're still working on it.**
 
@@ -69,10 +91,10 @@ If a i965 driver is needed on Debian based, install the driver by executing the 
 
 # Thanks
 
-Thanks to Alex^#1629 on Discord for being available everytime somebody needs to kill some bugs.
+Thanks to **Alex^#1629** on Discord for being available everytime somebody needs to kill some bugs. Thanks a lot for the wonderful AppImage !
 
-Thanks to raphco#0312 on Discord for being the guinea pig for Arch.
+Thanks to **raphco#0312** on Discord for being the guinea pig for Arch.
 
-Thanks to PofMagicfingers for the corrections on the Arch scripts.
+Thanks to **PofMagicfingers** for the corrections on the Arch scripts.
 
-Thanks to kabouik#7008 for helping me on Solus.
+Thanks to **kabouik#7008** for helping us on Solus and killing some Solus bugs.
