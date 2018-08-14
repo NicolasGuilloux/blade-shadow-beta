@@ -5,8 +5,7 @@ The Shadow application by Blade (https://shadow.tech) is available in Beta for U
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (please let us know the outcome if you test it on another distribution):
  - Arch Linux
  - Debian
- - Solus<sup>*</sup>
-<sup>* The i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is currently not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU.</sup>
+ - Solus (the i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is currently not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
 
  Installation scripts currently support:
 - Arch Linux
