@@ -24,7 +24,7 @@ Moreover, don't start the scripts as root. Use you current user account.
 Alex built an AppImage that work on (almost) every recent (>2017) distribution. Please, if a distribution fails to launch the AppImage, create an Issue entry on this git.
 It could support more if Blade would compile for Ubuntu 16.04 LTS. It could be improved soon when the unified version will be released.
 
-The AppImage embeds Ubuntu Bionic libs, Qt 5.9.5 and official Shadow Beta version. However it requires a **working libVA** on your system and a **compatible GLIBC**.$
+The AppImage embeds Ubuntu Bionic libs, Qt 5.9.5 and official Shadow Beta version. However it requires a **working libVA** on your system and a **compatible GLIBC**.
 
 To install the AppImage, download the AppImage first, put it where you want, make it executable and start it. We advice to create a Menu Entry, which will make the AppImage available in the Application Menu.
 
