@@ -19,6 +19,16 @@ sub alert {
     }
 }
 
+###
+# Display in bold
+#
+# @param Input string
+#
+# @return Bold formated string
+sub bold {
+    return "\033[1m$_[0]\033[0m";
+}
+
 # Messages variables
 my $help = "Wrapper for Shadow Beta that check your configuration and errors.
 
@@ -167,9 +177,9 @@ print "\n";
 
 # Warnings
 if( scalar @warnings > 0 ) {
-    print "WARNING:\n";
+    print bold('WARNING') . ":\n";
     foreach my $i (0 .. $#warnings) {
-        print "• $warnings[$i]\n";
+        print "    • $warnings[$i]\n";
     }
     print "\n";
 }
@@ -182,10 +192,10 @@ if( scalar @errors > 0 ) {
 
     my $str2 = "";
     foreach my $i (0 .. $#errors) {
-        $str2 .= "• $errors[$i]\n";
+        $str2 .= "    • $errors[$i]\n";
     }
 
-    print "ERROR ! The program can't continue. $str: \n$str2\n";
+    print bold('ERROR') . ":\n$str2\n";
     alert("$str detected", "\n$str2");
 
     exit 1;
