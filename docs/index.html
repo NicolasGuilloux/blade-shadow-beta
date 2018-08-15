@@ -1,18 +1,299 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 	<head>
-		<title>Coming soon</title>
+		<title>Home - Shadow Linux Community</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
 
-		<!--
-			<link rel="stylesheet" href="assets/css/main.css" />
-			<link rel="icon" type="image/png" href="favicon.png" />
-
-			<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body>
-        Coming soon
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#appimage">AppImage</a></li>
+							<li><a href="#distrib">Distribution tutorials</a></li>
+							<li><a href="#vainfo">Setup your GPU for the VA-API</a></li>
+							<li><a href="#tool">Shadow tool</a></li>
+							<li><a href="https://github.com/NicolasGuilloux/blade-shadow-beta" target="_blank">Our work on Github</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Welcome</h2>
+										</header>
+										<p>
+											The goal of this Github and Website is to present all tweaks done for the Linux application of the Blade's <a href="https://shadow.tech/" target="_blank">Shadow</a>.<br />
+											This website was designed the community and is	 not related to the Blade group. All the work are made by people who are interrested in improving an already awesome technology.
+										</p>
+										<ul class="actions">
+											<li><a href="http://www.blade-group.com/" target="_blank" class="button">Learn More about the Blade group</a></li>
+										</ul>
+									</div>
+									<span class="image"><img src="images/logo.png" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- AppImage -->
+							<section id="appimage" class="main special">
+
+								<div class="content">
+									<header class="major">
+										<h2>AppImage</h2>
+										<p>One file to rule them all</p>
+										<span class="icon"><img src="images/appimage.png" alt="" /></span>
+
+									</header>
+
+									<p>
+										The Deb file was designed to use Ubuntu libraries, which is very unconvinient for non-Ubuntu distribution as it forces to tweaks in a dirty way with the libraries and messing them up. <b>Alex^#1629</b> did a really wonderful job by building this AppImage.
+									</p>
+									<p>
+										It embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it still needs a <a href="#vainfo">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
+									</p>
+
+									<p>
+										To use it, just download the AppImage, put it where you want, make it executable and then launch it.
+									</p>
+
+									<ul class="actions special">
+										<li><a href="http://www.blade-group.com/" target="_blank" class="button primary icon fa-download">Download the AppImage</a></li>
+									</ul>
+
+									<p>
+										For lazy people, here is a set of command that do everything and put the AppImage in <code>~/.local/share/Shadow Beta/</code> folder:
+										<pre><code>mkdir ~/.local/share/Shadow\ Beta
+cd ~/.local/share/Shadow\ Beta/
+wget https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage
+chmod +x shadowbeta-linux-x86_64.AppImage
+./shadowbeta-linux-x86_64.AppImage</code></pre>
+									</p>
+								</div>
+							</section>
+
+
+						<!-- Distribution tutorials -->
+							<section id="distrib" class="main special">
+								<header class="major">
+									<h2>Distribution tutorials</h2>
+								</header>
+
+								<ul class="features">
+									<li>
+										<a href="arch.html" class="bloc">
+											<span class="icon major"><img src="images/logos/arch.png" alt="" /></span>
+											<h3>Arch Linux</h3>
+										</a>
+									</li>
+									<li>
+										<a href="debian.html" class="bloc">
+											<span class="icon major"><img src="images/logos/debian.png" alt="" /></span>
+											<h3>Debian</h3>
+										</a>
+									</li>
+									<li>
+										<a href="mint.html" class="bloc">
+											<span class="icon major"><img src="images/logos/mint.png" alt="" /></span>
+											<h3>Linux Mint</h3>
+										</a>
+									</li>
+									<li>
+										<a href="solus.html" class="bloc">
+											<span class="icon major"><img src="images/logos/solus.png" alt="" /></span>
+											<h3>Solus</h3>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Second Section -->
+							<section id="vainfo" class="main">
+								<header class="major text-center">
+									<h2>Setup your GPU for the VA-API</h2>
+									<p>
+										As Shadow for Linux uses the VA-API, it is important to well setup your GPU for it.<br />
+										So it is important to understand how works <code>vainfo</code> and how to debug it.
+									</p>
+								</header>
+
+								<p>
+									<b style="color: red;">NVIDIA GPU aren't supported by VA-API because this brand chose a proprietary encode/decode system. That is why NVIDIA GPU aren't supported by Shadow for Linux. A fix needs to be released by Blade itself.</b>
+								</p>
+
+								<p>
+									First things first, <code>vainfo</code> needs to be installed on your OS. It is a program that describes how your GPU is detected by the VA-API.
+								</p>
+
+								<ul>
+									<li>Debian based distribution: <code>sudo apt install vainfo</code></li>
+									<li>Arch Linux: <code>sudo pacman -S libva-utils</code></li>
+									<li>Solus: <code>sudo eopkg it libva-utils</code></li>
+								</ul>
+
+								<p>
+									The <code>vainfo</code> when executed in a terminal will return the abilities of you GPU. There are 3 things to check:
+								</p>
+
+								<ul>
+									<li>If it returns nothing or returns -1 somewhere, it means that the GPU is not well detected. Your VA driver needs to be updated.</li>
+									<li>In the list of profiles, it mentions "H264" at least once. If supported, you can use the Shadow on Linux.</li>
+									<li>In the list of profiles, it mentions "H265" or "HEVC" at least once. If not, you will not be able to use H265 but as long as you have H264, you still can use Shadow on Linux.</li>
+								</ul>
+
+								<p>
+									The following <code>vainfo</code> works well. The elements highlighted summarise the 3 things to check.
+
+									<pre><code>libva info: VA-API version 1.1.0
+libva info: va_getDriverName() <b style="font-weight: 800; color: red;">returns 0</b>
+libva info: Trying to open /usr/lib/x86_64-linux-gnu/dri/i965_drv_video.so
+libva info: Found init function __vaDriverInit_1_1
+libva info: va_openDriver() <b style="font-weight: 800; color: red;">returns 0</b>
+vainfo: VA-API version: 1.1 (libva 2.1.0)
+vainfo: Driver version: Intel i965 driver for Intel(R) Skylake - 2.1.0
+vainfo: Supported profile and entrypoints
+      VAProfileMPEG2Simple            : VAEntrypointVLD
+      VAProfileMPEG2Simple            : VAEntrypointEncSlice
+      VAProfileMPEG2Main              : VAEntrypointVLD
+      VAProfileMPEG2Main              : VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSliceLP
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointFEI
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointStats
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSliceLP
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointFEI
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointStats
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSliceLP
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointFEI
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointStats
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointEncSlice
+      VAProfileVC1Simple              : VAEntrypointVLD
+      VAProfileVC1Main                : VAEntrypointVLD
+      VAProfileVC1Advanced            : VAEntrypointVLD
+      VAProfileNone                   : VAEntrypointVideoProc
+      VAProfileJPEGBaseline           : VAEntrypointVLD
+      VAProfileJPEGBaseline           : VAEntrypointEncPicture
+      VAProfileVP8Version0_3          : VAEntrypointVLD
+      VAProfileVP8Version0_3          : VAEntrypointEncSlice
+      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointVLD
+      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointEncSlice</code></pre>
+								</p>
+
+								<h1>Install the drivers</h1>
+
+								<p>
+									Even if Xorg recognizes your GPU, VA-API sometimes needs specific drivers to use it. The best way to install them is to follow the official documentation of your distribution about it:
+
+									<ul>
+										<li><a href="https://doc.ubuntu-fr.org/vaapi" target="_blank">Debian based</a></li>
+										<li><a href="https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Installing_VA-API" target="_blank">Arch Linux</a></li>
+									</ul>
+
+									You may also search in the repositories the name of your GPU with <code>libva</code>. For instance, on Solus with an Intel, <code>sudo eopkg it libva-intel-driver</code>.
+								</p>
+
+								<p>
+									Always check your <code>vainfo</code>. You do not need to reboot after the installation of the drivers.
+								</p>
+							</section>
+
+						<!-- Get Started -->
+							<section id="tool" class="main special">
+								<header class="major">
+									<h2>Shadow tool</h2>
+								</header>
+
+								<p>
+									If you still think you need to debug your application, a handful tool has been designed by the community to make it simple.<br />
+									It lists all the error on your computer like a bad VA-API integration, missing libraries or miscellaneous stuff.
+								</p>
+
+								<p>
+									To use it, make sure that <a href="#vainfo">vainfo</a> and python3 are installed on your computer. Then, to start it, follow the next command lines:
+								</p>
+
+								<pre><code>git clone https://github.com/NicolasGuilloux/blade-shadow-beta.git
+cd blade-shadow-beta/shadow-tools/
+python3 main.py</code></pre>
+
+								<p>
+									If GTK is not available on your machine, you can print a report in the terminal using <code>python3 report.py</code>.
+								</p>
+
+								<span class="image"><img src="images/shadow-tool.png" alt="" style="max-width: 30em;"/></span>
+
+								<p>
+									The update button refreshes the information shown in the window.<br />
+									The pastebin button creates a detailed report and give you back the link to share it to the community.<br />
+									The tabs gives extra information about your configuration: GPU, Libraries, Shadow Logs.
+								</p>
+
+								<footer class="major">
+									<ul class="actions special">
+										<li><a href="https://github.com/NicolasGuilloux/blade-shadow-beta/tree/master/shadow-tools" target="_blank" class="button primary  icon fa-github" style="background-color: #000;">Open on Github</a></li>
+									</ul>
+								</footer>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a HTML5Up template.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
 	</body>
 </html>

@@ -1,0 +1,30 @@
+/**
+    Custom CSS
+**/
+
+/* Global */
+img {
+    max-width: 100%;
+}
+
+code {
+    display: inline-block
+}
+
+/** INDEX **/
+
+#distrib a {
+    display: block;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+#distrib .icon.major {
+    cursor: pointer;
+}
+
+.icon img {
+    width: 10em;
+    height: 10em;
+    padding: 2em;
+}
