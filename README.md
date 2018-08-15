@@ -2,6 +2,8 @@
 
 The Shadow application by Blade (https://shadow.tech) is available in Beta for Ubuntu 17.10 and 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation, or using scripts to get the missing dependencies on your OS and install/update the vanilla Shadow application. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled within the AppImage.
 
+A sexy website has been created to summarise everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
+
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know):
  - Arch Linux
  - Debian
