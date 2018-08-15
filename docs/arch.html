@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Coming soon</title>
+		<title>Ubuntu tutorial - Shadow Linux Community</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -18,11 +18,85 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1>Coming soon</h1>
-						<p>Legend... <b>Wait for it</b>... Dary!</p>
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
 					</header>
 
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<span class="image main"><img src="images/banners/arch.png" alt="" /></span>
+
+								<p>
+									<a href="./" class="icon alt fa-chevron-left"></a>
+								</p>
+
+								<h2>Arch Linux</h2>
+
+								<p>
+									The application works well on Arch Linux but needs several tweaks to work perfectly. We will use the AUR entry made by <b>agentcobra#6142</b> because it simplifies a lot the installation.
+								</p>
+
+								<p>
+									First things first, several dependencies need to be installed: <br />
+									<code>sudo pacman --needed -S gconf libnotify libappindicator libxtst nss libcurl-compat libva libdrm freetype2 libbsd json-c opus sdl gcc7-libs ttf-dejavu</code>.
+								</p>
+
+								<p>
+									As the application was originally designed for Ubuntu, some fixes in the installed dependencies need to be done. Follow the next commands:
+									<pre><code>echo "Correct Libjson-c"
+sudo ln -f /usr/lib/libjson-c.so /usr/lib/libjson-c.so.3
+
+echo "Correct Libubsan"
+sudo cp /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0 /usr/lib/
+
+echo "Fix the font issue"
+sudo ln -sf /usr/share/fonts/TTF /usr/share/fonts/truetype</code></pre>
+								</p>
+
+								<p>
+									Then, we properly install the Shadow application. It depends on your favorite AUR installer:
+
+									<ul>
+										<li>Yay: <code>yay -S shadow-beta</code></li>
+										<li>Yaourt: <code>yaourt -S shadow-beta</code></li>
+										<li>Packer: <code>packer -s shadow-beta</code></li>
+										<li>Pacaur: <code>pacaur -s shadow-beta</code></li>
+									</ul>
+								</p>
+
+								<p>
+									Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.<br />
+									If you can't find the Xorg version of your desktop environement, please follow the <a href="https://wiki.archlinux.org/index.php/xorg" target="_blank">Arch topic</a> about it.
+								</p>
+
+								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
+
+								<p>
+									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
+								</p>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
+					</footer>
 			</div>
 
 		<!-- Scripts -->

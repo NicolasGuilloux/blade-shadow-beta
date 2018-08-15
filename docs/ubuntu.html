@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Coming soon</title>
+		<title>Ubuntu tutorial - Shadow Linux Community</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -18,11 +18,60 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1>Coming soon</h1>
-						<p>Legend... <b>Wait for it</b>... Dary!</p>
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
 					</header>
 
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<span class="image main"><img src="images/banners/ubuntu.png" alt="" /></span>
+
+								<p>
+									<a href="./" class="icon alt fa-chevron-left"></a>
+								</p>
+
+								<h2>Ubuntu 18.04</h2>
+
+								<p>
+									Shadow was designed natively for Ubuntu 18.04 and does not require a lot of tweaks. Still, some stuff need to be done before turning your Linux machine to a powerful gamer PC with Shadow.
+								</p>
+
+								<p>
+									First things first, download the deb file from the Shadow website by following this link <a href="https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb">https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb</a> and install it.
+								</p>
+
+								<p>The CURL library is often missing so just to be sure, run <code>sudo apt install curl</code>.</p>
+
+								<p>Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.</p>
+
+								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
+
+								<p>
+									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
+								</p>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
+					</footer>
 			</div>
 
 		<!-- Scripts -->
