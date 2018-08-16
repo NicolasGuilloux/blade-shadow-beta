@@ -55,7 +55,7 @@ Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --
 
 ## Scripts
 
-The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed.
+The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed. There is no need to use the scripts if you are using the AppImage, and reciprocally.
 
 ### Arch Linux
 
