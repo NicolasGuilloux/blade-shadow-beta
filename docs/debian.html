@@ -6,10 +6,11 @@
 -->
 <html>
 	<head>
-		<title>Coming soon</title>
+		<title>Debian tutorial - Shadow Linux Community</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -18,11 +19,101 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1>Coming soon</h1>
-						<p>Legend... <b>Wait for it</b>... Dary!</p>
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
 					</header>
 
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<span class="image main"><img src="images/banners/debian.png" alt="" /></span>
+
+								<p>
+									<a href="./" class="icon alt fa-chevron-left"></a>
+								</p>
+
+								<h2>Debian</h2>
+
+								<p>
+									<b style="color: red;">We strongly recommand you to use the <a href="./#appimage">AppImage</a> instead of following this tutorial as it makes things easier. Moreover, the wrapper helps to track error directly from the Shadow.</b>
+								</p>
+
+								<p>
+									The application works well on Debian but needs several tweaks to work perfectly, including a dirty installation of the Qt library which will take 1GB on your storage or dirty installation of Ubuntu's libraries (which is BAD, really BAD). Again, we strongly recommand to download the AppImage as it is updated, contains everything needed and is much more lighter.
+								</p>
+
+								<p>
+									First things first, let's install the needed dependencies: <code>sudo apt-get install libjson-c3 libsdl2-dev vainfo libgconf2-dev</code>
+								</p>
+
+								<p>
+									The next step is to install the Qt library. It will take 1GB on your storage, and also will take time so grab a cup of coffee, or start to watch Rick & Morty.
+
+									<pre><code>echo "Installing qt. This may take a while."
+									wget http://download.qt.io/official_releases/qt/5.9/5.9.1/qt-opensource-linux-x64-5.9.1.run
+									chmod a+x qt-opensource-linux-x64-5.9.1.run
+									sudo ./qt-opensource-linux-x64-5.9.1.run
+									rm qt-opensource-linux-x64-5.9.1.run</code></pre>
+								</p>
+
+								<p>
+									Because it's not enough DIRTY, we have to install some Ubuntu's libraries by hand and put them in the libs folder. It is dirty. Again, it is really dirty. It's not too late to download the AppImage.
+
+									<pre><code>mkdir debs_shadow
+									cd debs_shadow
+
+									if ! [ -f "/usr/bin/curl" ]; then
+									    wget https://launchpad.net/~ubuntu-security/+archive/ubuntu/ppa/+build/13787618/+files/curl_7.52.1-4ubuntu1.4_amd64.deb
+									fi
+
+									if ! [ -f "/usr/lib/x86_64-linux-gnu/libcurl.so.3" ]; then
+									    wget https://launchpad.net/~ubuntu-security/+archive/ubuntu/ppa/+build/13787618/+files/libcurl3_7.52.1-4ubuntu1.4_amd64.deb
+									fi
+
+									if ! [ -f "/lib/x86_64-linux-gnu/libssl.so.1.0.0" ]; then
+									    wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu13.6_amd64.deb
+									fi
+
+									if ! [ -z "$(ls)" ]; then
+									    echo "Installing libssl, libcurl and curl if needed"
+									    sudo dpkg -i *.deb
+									fi</code></pre>
+								</p>
+
+								<p>
+									With your frankenstein Debian, you can now install the deb file by downloading it (<a href="https://macosx.update.blade-group.fr/mpl/linux/beta/artful/shadowbeta.deb">https://macosx.update.blade-group.fr/mpl/linux/beta/artful/shadowbeta.deb</a>) and install it <code>sudo apt install ./shadowbeta.deb</code>
+								</p>
+
+
+								<p>Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.</p>
+
+								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
+
+								<p>
+									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
+								</p>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
+					</footer>
 			</div>
 
 		<!-- Scripts -->

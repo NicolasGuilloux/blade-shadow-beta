@@ -66,7 +66,6 @@
 										<h2>AppImage</h2>
 										<p>One file to rule them all</p>
 										<span class="icon"><img src="images/appimage.png" alt="" /></span>
-
 									</header>
 
 									<p>
@@ -75,6 +74,8 @@
 									<p>
 										It embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it still needs a <a href="#vainfo">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
 									</p>
+
+									<p>Tested on Ubuntu 18.04, Arch Linux, Solus, Fedora 28.</p>
 
 									<p>
 										To use it, just download the AppImage, put it where you want, make it executable and then launch it.
@@ -87,10 +88,10 @@
 									<p>
 										For lazy people, here is a set of command that do everything and put the AppImage in <code>~/.local/share/Shadow Beta/</code> folder:
 										<pre><code>mkdir ~/.local/share/Shadow\ Beta
-cd ~/.local/share/Shadow\ Beta/
-wget https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage
-chmod +x shadowbeta-linux-x86_64.AppImage
-./shadowbeta-linux-x86_64.AppImage</code></pre>
+										cd ~/.local/share/Shadow\ Beta/
+										wget https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage
+										chmod +x shadowbeta-linux-x86_64.AppImage
+										./shadowbeta-linux-x86_64.AppImage</code></pre>
 									</p>
 								</div>
 							</section>
@@ -174,46 +175,46 @@ chmod +x shadowbeta-linux-x86_64.AppImage
 									The following <code>vainfo</code> works well. The elements highlighted summarise the 3 things to check.
 
 									<pre><code>libva info: VA-API version 1.1.0
-libva info: va_getDriverName() <b style="font-weight: 800; color: red;">returns 0</b>
-libva info: Trying to open /usr/lib/x86_64-linux-gnu/dri/i965_drv_video.so
-libva info: Found init function __vaDriverInit_1_1
-libva info: va_openDriver() <b style="font-weight: 800; color: red;">returns 0</b>
-vainfo: VA-API version: 1.1 (libva 2.1.0)
-vainfo: Driver version: Intel i965 driver for Intel(R) Skylake - 2.1.0
-vainfo: Supported profile and entrypoints
-      VAProfileMPEG2Simple            : VAEntrypointVLD
-      VAProfileMPEG2Simple            : VAEntrypointEncSlice
-      VAProfileMPEG2Main              : VAEntrypointVLD
-      VAProfileMPEG2Main              : VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSliceLP
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointFEI
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointStats
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSliceLP
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointFEI
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointStats
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSliceLP
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointFEI
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointStats
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointEncSlice
-      VAProfileVC1Simple              : VAEntrypointVLD
-      VAProfileVC1Main                : VAEntrypointVLD
-      VAProfileVC1Advanced            : VAEntrypointVLD
-      VAProfileNone                   : VAEntrypointVideoProc
-      VAProfileJPEGBaseline           : VAEntrypointVLD
-      VAProfileJPEGBaseline           : VAEntrypointEncPicture
-      VAProfileVP8Version0_3          : VAEntrypointVLD
-      VAProfileVP8Version0_3          : VAEntrypointEncSlice
-      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointVLD
-      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointEncSlice</code></pre>
+									libva info: va_getDriverName() <b style="font-weight: 800; color: red;">returns 0</b>
+									libva info: Trying to open /usr/lib/x86_64-linux-gnu/dri/i965_drv_video.so
+									libva info: Found init function __vaDriverInit_1_1
+									libva info: va_openDriver() <b style="font-weight: 800; color: red;">returns 0</b>
+									vainfo: VA-API version: 1.1 (libva 2.1.0)
+									vainfo: Driver version: Intel i965 driver for Intel(R) Skylake - 2.1.0
+									vainfo: Supported profile and entrypoints
+									      VAProfileMPEG2Simple            : VAEntrypointVLD
+									      VAProfileMPEG2Simple            : VAEntrypointEncSlice
+									      VAProfileMPEG2Main              : VAEntrypointVLD
+									      VAProfileMPEG2Main              : VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointEncSliceLP
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointFEI
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>ConstrainedBaseline: VAEntrypointStats
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointEncSliceLP
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointFEI
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>Main               : VAEntrypointStats
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointEncSliceLP
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointFEI
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>High               : VAEntrypointStats
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>MultiviewHigh      : VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">H264</b>StereoHigh         : VAEntrypointEncSlice
+									      VAProfileVC1Simple              : VAEntrypointVLD
+									      VAProfileVC1Main                : VAEntrypointVLD
+									      VAProfileVC1Advanced            : VAEntrypointVLD
+									      VAProfileNone                   : VAEntrypointVideoProc
+									      VAProfileJPEGBaseline           : VAEntrypointVLD
+									      VAProfileJPEGBaseline           : VAEntrypointEncPicture
+									      VAProfileVP8Version0_3          : VAEntrypointVLD
+									      VAProfileVP8Version0_3          : VAEntrypointEncSlice
+									      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointVLD
+									      VAProfile<b style="font-weight: 800; color: red;">HEVC</b>Main               : VAEntrypointEncSlice</code></pre>
 								</p>
 
 								<h1>Install the drivers</h1>
@@ -250,8 +251,8 @@ vainfo: Supported profile and entrypoints
 								</p>
 
 								<pre><code>git clone https://github.com/NicolasGuilloux/blade-shadow-beta.git
-cd blade-shadow-beta/shadow-tools/
-python3 main.py</code></pre>
+								cd blade-shadow-beta/shadow-tools/
+								python3 main.py</code></pre>
 
 								<p>
 									If GTK is not available on your machine, you can print a report in the terminal using <code>python3 report.py</code>.

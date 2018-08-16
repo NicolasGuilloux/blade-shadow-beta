@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -37,6 +38,10 @@
 								<h2>Arch Linux</h2>
 
 								<p>
+									<b style="color: red;">We strongly recommand you to use the <a href="./#appimage">AppImage</a> instead of following this tutorial as it makes things easier. Moreover, the wrapper helps to track error directly from the Shadow.</b>
+								</p>
+
+								<p>
 									The application works well on Arch Linux but needs several tweaks to work perfectly. We will use the AUR entry made by <b>agentcobra#6142</b> because it simplifies a lot the installation.
 								</p>
 
@@ -48,13 +53,13 @@
 								<p>
 									As the application was originally designed for Ubuntu, some fixes in the installed dependencies need to be done. Follow the next commands:
 									<pre><code>echo "Correct Libjson-c"
-sudo ln -f /usr/lib/libjson-c.so /usr/lib/libjson-c.so.3
+									sudo ln -f /usr/lib/libjson-c.so /usr/lib/libjson-c.so.3
 
-echo "Correct Libubsan"
-sudo cp /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0 /usr/lib/
+									echo "Correct Libubsan"
+									sudo cp /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0 /usr/lib/
 
-echo "Fix the font issue"
-sudo ln -sf /usr/share/fonts/TTF /usr/share/fonts/truetype</code></pre>
+									echo "Fix the font issue"
+									sudo ln -sf /usr/share/fonts/TTF /usr/share/fonts/truetype</code></pre>
 								</p>
 
 								<p>

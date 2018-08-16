@@ -8,7 +8,12 @@ img {
 }
 
 code {
-    display: inline-block
+    display: inline-block;
+}
+
+pre code {
+    white-space: pre-line;
+    text-align: left;
 }
 
 /** INDEX **/
