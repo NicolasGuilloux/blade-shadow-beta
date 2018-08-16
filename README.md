@@ -1,27 +1,30 @@
-# Install Shadow Beta on Linux
+# Why this?
 
-The Shadow application by Blade (https://shadow.tech) is available in Beta for Ubuntu 17.10 and 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation, or using scripts to get the missing dependencies on your OS and install/update the vanilla Shadow application. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled within the AppImage.
+The Shadow cloud-computing application by Blade (https://shadow.tech) is available in Beta for Ubuntu 17.10 and 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation, or using scripts to get the missing dependencies on your OS and install/update the vanilla Shadow application. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled with the AppImage.
 
-A sexy website has been created to summarise everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
+A sexy website is in the works to summarize everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
+
+# How to use
 
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know):
  - Arch Linux
  - Debian
- - Solus (the i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is currently not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
+ - Solus (the current i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
+ - Ubuntu 18.04 (the official application should run too, but the AppImage might fix undocumented prerequisites of the Shadow application like adding $USER to group `input`)
 
  Installation scripts currently support:
 - Arch Linux
 - Debian
 - Linux Mint
 
-Note that none of these solutions are compatible with Nvidia GPUs yet, unless hardware decoding of H.264 and/or H.265 is taken care of by your Intel GPU instead; this is a limitation of the Shadow application.
+Note that none of these solutions are compatible with Nvidia GPUs yet. An unsatisfactory workaround is to take care of H.264/H.265 hardware decoding of with the Intel GPU instead, but since only one GPU can normally be active at a time (except from tweaks not covered here), this mean your dedicated Nvidia GPU would have to be uninstalled. This is a limitation of the current Shadow application.
 
 The scripts were written by the [Shadow Discord](https://discord.gg/shadowtech) community and are not affiliated with the Blade company. There is no guarantee whatsoever that the scripts will work for you. Use them at your own risk, preferably after reviewing them yourself. The AppImage should be harmless, worst case scenario is it does not work.
 
 
-# VA Drivers
+## VA Drivers
 
-The Shadow application requires your machine to support hardware decoding for H.264 or H.265, it will not work with software decoding. You can check whether hardware decoding is enabled by installing `vainfo` (Ubuntu, Linux Mint, Debian) or `libva-utils` (Arch, Solus) from the software center of your distribution, and then running `vainfo` in the terminal. If "H264" or "HEVC" show up in the output, you are good to go. Otherwise, you probably need drivers for VAAPI. Several options are available based on your GPU, please use the following documentation to enable hardware decoding on your machine:
+The Shadow application requires your machine to support hardware decoding for H.264 or H.265, it will not work with software decoding. You can check whether hardware decoding is enabled by installing `vainfo` (Ubuntu, Linux Mint, Debian) or `libva-utils` (Arch, Solus) from the repository of your distribution, and then running `vainfo` in the terminal. If "H264" or "HEVC" show up in the output, you are good to go. Otherwise, you probably need drivers for VAAPI, or your hardware is outdated. Several options are available based on your GPU, please use the following documentation to enable hardware decoding on your machine:
 
 - Debian based: https://doc.ubuntu-fr.org/vaapi
 - Arch Linux: https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Installing_VA-API
@@ -29,7 +32,7 @@ The Shadow application requires your machine to support hardware decoding for H.
 If your active GPU is an Intel chipset and you have no dedicated GPU, you will need the i965 Intel driver. On an APT-based distribution, install the driver with: `sudo apt install i965-va-driver`. On Solus, install it with `sudo eopkg it libva-intel-driver`.
 
 
-# AppImage
+## AppImage
 
 **Alex^#1629** built an AppImage that should work on most recent (>2017) distributions. Please, [create an issue](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/new) if it fails on your distribution. Compatibility could be further extended if Blade would compile their application for Ubuntu 16.04 LTS. It could be improved soon when the unified version will be released.
 
@@ -50,11 +53,11 @@ chmod +x shadowbeta-linux-x86_64.AppImage
 Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --help`.
 
 
-# Scripts
+## Scripts
 
-The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed.
+The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed. There is no need to use the scripts if you are using the AppImage, and reciprocally.
 
-## Arch Linux
+### Arch Linux
 
 An AUR package is available. If it is not working after installation, please follow the tutorial or the Bash files: https://aur.archlinux.org/packages/shadow-beta
 
@@ -67,19 +70,19 @@ For the first install, launch install-arch.sh: `./install-arch.sh`.
 For updates, launch only update-arch.sh: `./update-arch.sh`.
 
 
-## Debian
+### Debian
 
 Make the script executable: `chmod +x Debian/*`
 
 To install or update Shadow bêta, simply launch the script and follow instructions: `Debian/install_debian.sh`.
 
 
-## Linux Mint
+### Linux Mint
 
 No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi` is required. Install it with: `sudo apt install gstreamer1.0-vaapi` then install the vanilla Shadow Beta .deb file.
 
 
-## Solus
+### Solus
 
 **The Solus install script is not working yet. An updated version taking care of the extra dependencies will be available soon. Meanwhile, the AppImage works, and is the recommended solution.**
 
@@ -90,7 +93,7 @@ Go to the folder where the script is located and make it executable: `cd Solus &
 Then, run the script: `./install_solus.sh`
 
 
-# Thanks
+# Acknowledgments
 
 Thanks to **Alex^#1629** on Discord for being available every time somebody needs to kill a bug. Thanks a lot for the wonderful AppImage!
 
