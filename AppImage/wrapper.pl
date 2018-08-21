@@ -106,7 +106,7 @@ my $help = "Wrapper for Shadow Beta that checks your configuration and compatibi
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
-    --direct-launch    Start shadow-beta in the same directory of the wrapper
+    --opt-launch       Start shadow-beta in the same directory of the wrapper
     --clientsdl        Directly launch the ClientSDL renderer
 
     --error            Show a fake error notification
