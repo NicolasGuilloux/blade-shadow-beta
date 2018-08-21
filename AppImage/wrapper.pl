@@ -106,6 +106,7 @@ my $help = "Wrapper for Shadow Beta that checks your configuration and compatibi
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
+    --direct-launch    Start shadow-beta in the same directory of the wrapper
     --clientsdl        Directly launch the ClientSDL renderer
 
     --error            Show a fake error notification
@@ -114,8 +115,9 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta";
 
 # Debug, errors and warnings
-my $debug = 0;
+my $debug  = 0;
 my $strace = 0;
+my $opt    = 0;
 
 my @errors = ();
 my @warnings = ();
@@ -135,6 +137,11 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--bypass-check' ) {
         push @warnings, $lang[0];
         goto START_SHADOW;
+    }
+
+    # Start the Shadow launcher from the /opt/Shadow Beta/shadow-beta
+    if( $arg eq '--opt-launch' ) {
+        $opt = 1;
     }
 
     # Start directly ClientSDl and stops
@@ -262,6 +269,10 @@ if( scalar @errors > 0 ) {
     # Start Shadow with Strace
     if( $strace ) {
         system('strace -f ./opt/Shadow\ Beta/shadow-beta.wrapper &> /var/tmp/strace_shadowbeta');
+
+    # Start the Shadow launcher from the /opt/Shadow Beta/shadow-beta
+    } elsif( $opt ) {
+        system('/opt/Shadow\ Beta/shadow-beta');
 
     # Start Shadow
     } else {
