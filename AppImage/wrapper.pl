@@ -14,6 +14,8 @@ use File::Basename;
 use POSIX qw(locale_h);
 use locale;
 
+use version;
+
 # ----------- Translations ------------ #
 
 my @fr = (
@@ -115,7 +117,10 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
     --opt-launch       Start shadow-beta in the same directory of the wrapper
     --clientsdl        Directly launch the ClientSDL renderer
+
     --force-en         Force the launcher in english for people with translation issues (en_US)
+    --force-de         Force the launcher in german for people with translation issues (de_DE)
+    --force-fr         Force the launcher in french for people with translation issues (fr_FR)
 
     --error            Show a fake error notification
     --warning          Show a fake warning notification
@@ -159,10 +164,23 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         exit 0;
     }
 
+
     # Force the launcher in english
     if( $arg eq '--force-en' ) {
         $langF = 'LANG=en_US.utf8 ';
         push @warnings, "Language forced in english (en_US)"
+    }
+
+    # Force the launcher in german
+    if( $arg eq '--force-de' ) {
+        $langF = 'LANG=de_DE.utf8 ';
+        push @warnings, "Language forced in german (de_DE)"
+    }
+
+    # Force the launcher in english
+    if( $arg eq '--force-fr' ) {
+        $langF = 'LANG=fr_FR.utf8 ';
+        push @warnings, "Language forced in french (fr_FR)"
     }
 
 
@@ -199,6 +217,25 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
 # -------- Update -------- #
 my $url = 'https://gitlab.com/api/v4/projects/7962701/repository/tags';
+if( -f 'shadow-appimage-version' ) {
+
+    # Local version
+    open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
+      or die "Could not open file 'shadow-appimage-version' $!";
+    my $localVersion = <$fh>;
+    chomp $localVersion;
+
+    # Distant version
+    my $distantVersion = `curl $url | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
+    chomp $distantVersion;
+
+    # Update available
+    if( version->parse($localVersion) < version->parse($distantVersion) ) {
+        print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
+        alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
+    }
+
+}
 
 
 # -------- NVIDIA check -------- #
