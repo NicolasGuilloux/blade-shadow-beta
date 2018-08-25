@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Known issues - Shadow Linux Community</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
+
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="./#appimage">AppImage</a></li>
+							<li><a href="./#distrib">Distribution tutorials</a></li>
+							<li><a href="./#vainfo">Setup your GPU</a></li>
+							<li><a href="./#tool">Shadow tool</a></li>
+							<li><a href="#" class="active">Known issues</a></li>
+							<li><a href="https://github.com/NicolasGuilloux/blade-shadow-beta" target="_blank">Our work on Github</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Known issues</h2>
+										</header>
+										<p>
+											Especially on Linux, there are a lot of issues. This page describes well known issues, what is the cause and how to fix them when a workaround is available.
+										</p>
+									</div>
+								</div>
+							</section>
+
+						<!-- Application Issues -->
+							<section class="main special">
+								<div class="content">
+									<header class="major">
+										<h2>The application do not detect the trackpad</h2>
+									</header>
+
+									<p>
+										The Shadow application captures every input when the stream is on. However, the trackpad on some computer do not work at all except the mecanical click.
+									</p>
+
+									<p>
+										The Shadow application detects only mouse movement to control the mouse. Linux uses libinput, which detects the trackpad events as fingers action. This is visible inside the logs, when you tried to move the mouse with your trackpad. The logs will be spammed by a line like this: <code>input error: Unhandled KEY 0x...</code>. The codes are listed <a href="https://gitlab.freedesktop.org/libinput/libinput/blob/ba603ea1925cf68bafe24958d882dbe01d9111a5/include/linux/linux/input-event-codes.h" target="_blank">here</a>.
+									</p>
+
+									<p>
+										<table>
+											<th>
+												<td>Log line</td>
+												<td>Event</td>
+											</th>
+
+											<tr>
+												<td>input error: Unhandled KEY 0x14a (330)</td>
+												<td>BTN_TOUCH</td>
+											</tr>
+
+											<tr>
+												<td>input error: Unhandled KEY 0x145 (325)</td>
+												<td>BTN_TOOL_FINGER</td>
+											</tr>
+										</table>
+									</p>
+
+									<p>
+										There is no fix right know that will not disturb your system. We have to wait for a fix from Blade. You can try to remap the xinput events but it's a mess and may disturb the touchpad behaviour.
+									</p>
+
+									<p>
+										You can still use an external mouse and it will work perfectly. The unified client will propably fix this issue.
+									</p>
+
+								</div>
+							</section>
+
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -4,6 +4,9 @@
 # Website: https://nicolasguilloux.eu/
 # Email:   novares.x@gmail.com
 
+# --localprefix: command introuvable
+# Failed to call KDE config
+
 use strict;
 use warnings;
 
@@ -108,6 +111,7 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
     --opt-launch       Start shadow-beta in the same directory of the wrapper
     --clientsdl        Directly launch the ClientSDL renderer
+    --force-en         Force the launcher in english for people with translation issues (en_US)
 
     --error            Show a fake error notification
     --warning          Show a fake warning notification
@@ -118,6 +122,7 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
 my $debug  = 0;
 my $strace = 0;
 my $opt    = 0;
+my $langF  = '';
 
 my @errors = ();
 my @warnings = ();
@@ -148,6 +153,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--clientsdl' ) {
         system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
         exit 0;
+    }
+
+    # Force the launcher in english
+    if( $arg eq '--force-en' ) {
+        $langF = 'LANG=en_US.utf8 ';
+        push @warnings, "Language forced in english (en_US)"
     }
 
 
@@ -268,15 +279,15 @@ if( scalar @errors > 0 ) {
 
     # Start Shadow with Strace
     if( $strace ) {
-        system('strace -f ./opt/Shadow\ Beta/shadow-beta.wrapper &> /var/tmp/strace_shadowbeta');
+        system($langF . 'strace -f ./opt/Shadow\ Beta/shadow-beta.wrapper &> /var/tmp/strace_shadowbeta');
 
     # Start the Shadow launcher from the /opt/Shadow Beta/shadow-beta
     } elsif( $opt ) {
-        system('/opt/Shadow\ Beta/shadow-beta');
+        system($langF . '/opt/Shadow\ Beta/shadow-beta');
 
     # Start Shadow
     } else {
-        system('./opt/Shadow\ Beta/shadow-beta.wrapper');
+        system($langF . './opt/Shadow\ Beta/shadow-beta.wrapper');
     }
 
     # Display the logs on launcher close
