@@ -76,7 +76,38 @@
 										It embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it still needs a <a href="#vainfo">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
 									</p>
 
-									<p>Tested on Ubuntu 18.04, Linux Mint, Arch Linux, Solus, Fedora 28.</p>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th style="text-align: center;">Work on:</th>
+													<th style="text-align: center;">Do not work on:</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Ubuntu 18.04</td>
+													<td>Ubuntu 16.04</td>
+												</tr>
+												<tr>
+													<td>Linux Mint 18</td>
+													<td>GalliymOS 2.2</td>
+												</tr>
+												<tr>
+													<td>Arch Linux</td>
+													<td>Debian 9</td>
+												</tr>
+												<tr>
+													<td>Solus Budgie</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Fedora 28</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 
 									<p>
 										To use it, just download the AppImage, put it where you want, make it executable and then launch it.
@@ -94,6 +125,8 @@
 										<code>mkdir ~/.local/share/Shadow\ Beta
 											cd ~/.local/share/Shadow\ Beta/
 											wget <span id="app_link_code"></span>
+											unzip download?job=app_build
+											rm download?job=app_build
 											chmod +x shadowbeta-linux-x86_64.AppImage
 											./shadowbeta-linux-x86_64.AppImage</code>
 									</pre>
