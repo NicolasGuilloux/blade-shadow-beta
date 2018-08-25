@@ -83,14 +83,14 @@
 									</p>
 
 									<ul class="actions special">
-										<li><a href="https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage" target="_blank" class="button primary icon fa-download">Download the AppImage</a></li>
+										<li><a href="https://gitlab.com/aar642/shadow-appimage/-/jobs/" target="_blank" class="button primary icon fa-download" id="app_link">Download the AppImage <span id="app_version"></span></a></li>
 									</ul>
 
 									<p>
 										For lazy people, here is a set of command that do everything and put the AppImage in <code>~/.local/share/Shadow Beta/</code> folder:
 										<pre><code>mkdir ~/.local/share/Shadow\ Beta
 										cd ~/.local/share/Shadow\ Beta/
-										wget https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/AppImage/shadowbeta-linux-x86_64.AppImage
+										wget https://gitlab.com/aar642/shadow-appimage/-/jobs/92033231/artifacts/raw/shadowbeta-linux-x86_64.AppImage
 										chmod +x shadowbeta-linux-x86_64.AppImage
 										./shadowbeta-linux-x86_64.AppImage</code></pre>
 									</p>
@@ -303,5 +303,24 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
+			<script>
+				var url = 'https://gitlab.com/aar642/shadow-appimage/-/jobs/92033231/artifacts/raw/shadowbeta-linux-x86_64.AppImage';
+
+				$.getJSON('https://gitlab.com/api/v4/projects/7962701/repository/tags', function(data) {
+					var latest = null;
+
+					for(var i=0; i<data.length; i++) {
+						data[i].date = new Date( data[i]['commit']['created_at'] );
+
+						if( data[i].release && ( !latest  || latest.date < data[i].date ) ) {
+							latest = data[i];
+						}
+					}
+
+					$('#app_link').attr('href', url)
+					$('#app_version').text('(' + latest['release']['tag_name'] + ')');
+				});
+
+			</script>
 	</body>
 </html>

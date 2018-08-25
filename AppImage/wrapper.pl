@@ -22,7 +22,7 @@ my @fr = (
     "Ceci est une fonction de debug affichant une fausse erreur pour tester les notifications. Blip.",
     "Ceci est une fonction de debug affichant un faux avertissement pour tester les notifications. Blip.",
 
-    "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application ou utiliser le chipset Intel.",
+    "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application.",
     "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
     "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
     "Votre carte graphique ne supporte que le H.264. Vous ne pourrez pas utiliser le H.265 (HEVC).",
@@ -39,7 +39,9 @@ my @fr = (
     • lshift-rctrl-esc:      Quitter
     • lshift-rctrl-space:    Activer/désactiver le mode plein écran
     • lshift-rctrl-g:        Activer/désactiver la capture du clavier et de la souris
-    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode"
+    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode",
+
+    "Votre GPU est NVIDIA. L'application ne peut pas fonctionner sur ce GPU. Néanmoins, vous disposez de la technologie Optimus. Lancez le panneau de controle NVIDIA, allez dans la rubrique Prime profiles, choisissez le GPU Intel et relancez votre session."
 );
 
 my @en = (
@@ -48,7 +50,7 @@ my @en = (
     "This is a debug feature showing a fake error to test notifications. Blip.",
     "This is a debug feature showing a fake warning to test notifications. Blip.",
 
-    "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade, or use your Intel GPU instead.",
+    "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade..",
     "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
     "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
     "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
@@ -65,7 +67,9 @@ my @en = (
     • lshift-rctrl-esc:      Exit
     • lshift-rctrl-space:    Toggle fullscreen or windowed
     • lshift-rctrl-g:        Toggle input grab
-    • lshift-rctrl-h:        Toggle Shadow Mode"
+    • lshift-rctrl-h:        Toggle Shadow Mode",
+
+    "Your currently using the NVIDIA GPU. You can't start the application with it, but your computer supports Prime. Start the NVIDIA control panel, select the Prime panel, choose the Intel GPU and restart your session."
 );
 
 my $locale = setlocale(LC_CTYPE);
@@ -193,9 +197,23 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
 }
 
-# -------- NVIDIA check -- #
-if( `lspci -vnnn | perl -lne 'print if /^\\d+:.+([\\S+:\\S+])/' | grep "VGA controller" | grep -I NVIDIA` ne '' ) {
-    push @errors, $lang[4];
+# -------- Update -------- #
+my $url = 'https://gitlab.com/api/v4/projects/7962701/repository/tags';
+
+
+# -------- NVIDIA check -------- #
+if( index(`lspci | grep 'VGA'`, 'NVIDIA') != -1 ) {
+
+    # Intel iGPU detected
+    if( index(`lspci | grep 'VGA'`, 'Intel') != -1 ) {
+
+        if( index(`nvidia-smi -L`, 'GPU ') != 1 ) {
+            push @errors, $lang[14];
+        }
+
+    } else {
+        push @errors, $lang[4];
+    }
 }
 
 # -------- Vainfo -------- #
