@@ -8,6 +8,7 @@ use strict;
 use warnings;
 
 my $return = "Shadow Report\n";
+
 # -------- AppImage version -------- #
 if( -f 'shadow-appimage-version' ) {
 
@@ -38,14 +39,14 @@ $return .= "\n\n-------------------------------------\n";
 $return .= "          Missing libraries\n";
 $return .= "-------------------------------------\n";
 
-if( -f 'shadow-appimage-version' ) {
-    $return .= `ldd -v "./opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-    $return .= `ldd -v "./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not founD"`;
-
-} else {
-    $return .= `ldd -v "/opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-    $return .= `ldd -v "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
-}
+# if( -f 'shadow-appimage-version' ) {
+#     $return .= `ldd -v "./opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
+#     $return .= `ldd -v "./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
+#
+# } else {
+#     $return .= `ldd -v "/opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
+#     $return .= `ldd -v "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
+# }
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";
@@ -69,6 +70,6 @@ open(my $fh, '>', '/var/tmp/report_shadow');
 print $fh $return;
 close $fh;
 
-my $key = `curl -sf --data-binary "@/var/tmp/report_shadow" https://hastebin.com/documents | jq .key | sed -e "s/\"//g"`;
+my $key = `curl -sf --data-binary "@/var/tmp/report_shadow" https://hastebin.com/documents | jq .key | sed -e "s/\\\"//g"`;
 
 print "\nThe report is available at this link: https://hastebin.com/$key\n";
