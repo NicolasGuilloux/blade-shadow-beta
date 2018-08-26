@@ -21,13 +21,25 @@ from gi.repository import Gtk, Gio
 import urllib.request as urlopen
 import urllib.parse
 
+# Locale
+import locale
+from translation import *
+
 class MainWindow:
 
     def __init__(self):
 
         # Builder
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("gui/layout.glade")
+
+        # Translation
+        if "fr" in locale.getlocale()[0]:
+            self.trans = frTranslation
+            self.builder.add_from_file("gui/layout_fr.glade")
+
+        else:
+            self.trans = enTranslation
+            self.builder.add_from_file("gui/layout_en.glade")
 
         # Load window
         self.window = self.builder.get_object("window")
@@ -50,9 +62,9 @@ class MainWindow:
     def vainfoLayout(self):
         # Label
         if len(self.check.vainfo_error) > 0:
-            self.setLabelText("vainfo_label", "Votre carte graphique n'est pas correctement détectée. Vérifiez votre driver.")
+            self.setLabelText("vainfo_label", self.trans["vainfo_label_error"])
         else:
-            self.setLabelText("vainfo_label", "Votre carte graphique est correctement détectée.")
+            self.setLabelText("vainfo_label", self.trans["vainfo_label_success"])
 
         # Icons
         if self.check.h264:
@@ -69,8 +81,8 @@ class MainWindow:
 
     def libLayout(self):
         if len(self.check.missingLib) > 0:
-            self.setLabelText("lib-label", "Des librairies sont manquantes. Cliquez sur l'onglet \"Librairies\" pour plus d'informations")
-            self.setLabelText("lib-label2", "Les librairies suivantes sont manquantes:")
+            self.setLabelText("lib-label", self.trans["lib-label_error"])
+            self.setLabelText("lib-label2", self.trans["lib-label2_error"])
 
             str = ""
             for lib in self.check.missingLib:
@@ -79,7 +91,7 @@ class MainWindow:
             self.setLabelText("lib-list", str)
 
         else:
-            self.setLabelText("lib-label", "Toutes les librairies nécessaires sont installées.")
+            self.setLabelText("lib-label", self.trans["lib-label_success"])
             self.setLabelText("lib-list", "")
 
     def otherLayout(self):
@@ -88,15 +100,15 @@ class MainWindow:
         # Environnement (Xorg)
         env = os.popen("echo $XDG_SESSION_TYPE").read().rstrip()
         if env == "x11":
-            str += "Votre environnement est bien sur le serveur Xorg.\n"
+            str += self.trans["env_success"] + "\n"
         else:
-            str += "/!\ Votre environnement n'est pas sur le serveur Xorg (" + env + "), Shadow ne pourra fonctionner. Changez cela pour poursuivre.\n"
+            str += self.trans["env_error"] + env + ". \n"
 
         # User in input group
         if self.check.input:
-            str += "Utilisateur courant est dans le groupe input"
+            str += self.trans["input_success"]
         else:
-            str += "/!\ Utilisateur courant n'est pas dans le groupe input"
+            str += self.trans["input_error"]
 
         self.setLabelText("other-layout", str)
 
