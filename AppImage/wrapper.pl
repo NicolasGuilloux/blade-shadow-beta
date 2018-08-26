@@ -4,9 +4,6 @@
 # Website: https://nicolasguilloux.eu/
 # Email:   novares.x@gmail.com
 
-# --localprefix: command introuvable
-# Failed to call KDE config
-
 use strict;
 use warnings;
 
@@ -125,7 +122,8 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --error            Show a fake error notification
     --warning          Show a fake warning notification
     --debug            Clear the previous log file and display the new one when the launcher is closed
-    --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta";
+    --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta
+    --report           Upload the configuration information on Pastebin";
 
 # Debug, errors and warnings
 my $debug  = 0;
@@ -233,6 +231,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Create a false warning
     if( $arg eq '--warning' ) {
         push @warnings, $lang[3];
+    }
+
+    # Upload the configuration information on Pastebin
+    if( $arg eq '--report' ) {
+        system('./report.pl');
+        exit 0;
     }
 
 }
