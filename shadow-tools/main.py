@@ -46,7 +46,7 @@ class MainWindow:
 
         # Set action for buttons
         button = self.builder.get_object("paste-button")
-        button.connect("clicked", self.sendToPastebin)
+        button.connect("clicked", self.sendToHastebin)
         button = self.builder.get_object("update-button")
         button.connect("clicked", self.update)
 
@@ -155,24 +155,16 @@ class MainWindow:
             object = self.builder.get_object(objectName + str(i))
             i += 1
 
-    def sendToPastebin(self, other):
+    def sendToHastebin(self, other):
 
-        data = self.check.toString()
+        report = self.check.toString()
 
-        url = 'http://pastebin.com/api/api_post.php'
-        params = {'api_dev_key': '1a8931a5541dd9c7a0a6e15b4920642c','api_option': 'paste','api_paste_code': data}
+        file = open("/var/tmp/report_shadow", "w")
+        file.write(report)
+        file.close()
 
-        from contextlib import closing
-        try:
-            from urllib.parse import urlencode
-            from urllib.request import urlopen
-        except ImportError: # Python 2
-            from urllib import urlencode
-            from urllib2 import urlopen
-
-        data = urlencode(params).encode()
-        with closing(urlopen(url, data)) as response:
-            url = response.read().decode()
+        key = os.popen("curl -sf --data-binary \"@/var/tmp/report_shadow\" https://hastebin.com/documents | jq .key | sed -e \"s/\\\"//g\"").read().rstrip()
+        url = "https://hastebin.com/" + key
 
         dialog = self.builder.get_object("dialog")
         self.setLabelText("url-label", url)

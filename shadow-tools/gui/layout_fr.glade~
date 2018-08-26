@@ -483,7 +483,7 @@ Votre environnement est bien sur le serveur Xorg.</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="update-button">
-                <property name="label" translatable="yes">Actualiser</property>
+                <property name="label" translatable="yes">Mettre à jour</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

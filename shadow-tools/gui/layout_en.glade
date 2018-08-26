@@ -496,7 +496,7 @@ Your user is inside the "input" group.</property>
             </child>
             <child>
               <object class="GtkButton" id="paste-button">
-                <property name="label" translatable="yes">Pastebin</property>
+                <property name="label" translatable="yes">Hastebin</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
