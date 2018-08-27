@@ -39,14 +39,14 @@ $return .= "\n\n-------------------------------------\n";
 $return .= "          Missing libraries\n";
 $return .= "-------------------------------------\n";
 
-# if( -f 'shadow-appimage-version' ) {
-#     $return .= `ldd -v "./opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-#     $return .= `ldd -v "./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
-#
-# } else {
-#     $return .= `ldd -v "/opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-#     $return .= `ldd -v "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
-# }
+if( -f 'shadow-appimage-version' ) {
+    $return .= `ldd -v "./opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
+    $return .= `ldd -v "./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
+
+} else {
+    $return .= `ldd -v "/opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
+    $return .= `ldd -v "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
+}
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";
