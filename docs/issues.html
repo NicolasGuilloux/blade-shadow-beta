@@ -54,6 +54,7 @@
 										<ul>
 											<li><a href="#trackpad">The application do not detect the trackpad</a></li>
 											<li><a href="#gamepad">The application do not detect my gamepad</a></li>
+											<li><a href="#nvidia">The NVIDIA issue and workaround for Optimus</a></li>
 										</ul>
 									</div>
 								</div>
@@ -185,6 +186,44 @@
 										Keep in mind that to use this system, both VirtualHere and Hamachi should be launched on every computer. With the free Hamachi account, you can add up to 5 computers on this network.
 									</p>
 
+								</div>
+							</section>
+
+							<section class="main" id="nvidia">
+								<div class="content">
+									<header class="major">
+										<h2>The NVIDIA issue and workaround for Optimus</h2>
+									</header>
+
+									<p>
+										The Shadow application on Linux uses the VA API (Video Acceleration API) which gives a set of tools to manipulate video streams. Recent NVIDIA graphics cards does not support VA API but use a proprietary codec called NVdecode (NVCuvid) and NVencode. More information about it over <a href="https://developer.nvidia.com/nvidia-video-codec-sdk" target="_blank">here</a>.
+									</p>
+
+									<p>
+										The only way for the Shadow app to support NVIDIA graphics cards is to implement it directly in the code using these codec. It means for the user that we have to wait for an update from Blade itself.
+									</p>
+
+									<h3>The Optimus case</h3>
+
+									<p>
+										Optimus is a technology available on laptop where a NVIDIA and a Intel GPU are setup in the computer, working successively based on the workload. It gives a better power management for small tasks but provides the computing power stay high as for heavy tasks, the computer switches automatically to the NVIDIA GPU. So it means we can use Intel GPU instead of NVIDIA GPU if you have the sticker "NVIDIA Optimus".
+									</p>
+
+									<p>
+										First things first, you need to install proprietary drivers. I let you find, based on your distribution (<a href="https://websiteforstudents.com/install-proprietary-nvidia-gpu-drivers-on-ubuntu-16-04-17-10-18-04/" target="_blank">Ubuntu</a>, <a href="https://wiki.archlinux.org/index.php/NVIDIA#Installation" target="_blank">Arch Linux</a>).
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/nvidia_prime_profiles.png" alt="" style="width: 40em;" /></span>
+									</p>
+
+									<p>
+										Now open the NVIDIA X Server Settings (an application available now in your app menu) and click on "Prime profiles". You can now choose the Intel GPU. It can take a while (3 min) when you change your GPU. When the confirmation window appears, log out and in again (or reboot to be sure). Now reopen the NVIDIA X Server Settings, and you should see less options, and in the Prime profiles, the Intel GPU should be selected.
+									</p>
+
+									<p>
+										All you have to do now is to <a href="./#vainfo">configure your Intel GPU for the VA-API</a>.
+									</p>
 								</div>
 							</section>
 
