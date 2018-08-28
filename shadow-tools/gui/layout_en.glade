@@ -37,7 +37,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">The following link will help you to share the information gathered by this software.
-Share it on Discord to find help.</property>
+Share it on Discord to find help.
+Be quick, the uploaded file won't last forever.</property>
                 <property name="justify">center</property>
               </object>
               <packing>
@@ -496,7 +497,7 @@ Your user is inside the "input" group.</property>
             </child>
             <child>
               <object class="GtkButton" id="paste-button">
-                <property name="label" translatable="yes">Hastebin</property>
+                <property name="label" translatable="yes">Share</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

@@ -46,7 +46,7 @@ class MainWindow:
 
         # Set action for buttons
         button = self.builder.get_object("paste-button")
-        button.connect("clicked", self.sendToHastebin)
+        button.connect("clicked", self.share)
         button = self.builder.get_object("update-button")
         button.connect("clicked", self.update)
 
@@ -155,7 +155,7 @@ class MainWindow:
             object = self.builder.get_object(objectName + str(i))
             i += 1
 
-    def sendToHastebin(self, other):
+    def share(self, other):
 
         report = self.check.toString()
 
@@ -163,8 +163,7 @@ class MainWindow:
         file.write(report)
         file.close()
 
-        key = os.popen("curl -sf --data-binary \"@/var/tmp/report_shadow\" https://hastebin.com/documents | jq .key | sed -e \"s/\\\"//g\"").read().rstrip()
-        url = "https://hastebin.com/" + key
+        url = os.popen("curl -sf --data-binary \"@/var/tmp/report_shadow\" https://nicolasguilloux.eu/hostbin").read().rstrip()
 
         dialog = self.builder.get_object("dialog")
         self.setLabelText("url-label", url)

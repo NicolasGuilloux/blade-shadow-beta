@@ -37,7 +37,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Le lien suivant vous aidera à partager les informations cueillies par le logiciel.
-Partagez les sur le Discord pour trouver de l'aide.</property>
+Partagez les sur le Discord pour trouver de l'aide.
+Soyez rapide, le lien ne va pas être disponible éternellement.</property>
                 <property name="justify">center</property>
               </object>
               <packing>
@@ -483,7 +484,7 @@ Votre environnement est bien sur le serveur Xorg.</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="update-button">
-                <property name="label" translatable="yes">Mettre à jour</property>
+                <property name="label" translatable="yes">Actualiser</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -496,7 +497,7 @@ Votre environnement est bien sur le serveur Xorg.</property>
             </child>
             <child>
               <object class="GtkButton" id="paste-button">
-                <property name="label" translatable="yes">Hastebin</property>
+                <property name="label" translatable="yes">Partager</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

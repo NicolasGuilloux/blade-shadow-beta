@@ -7,6 +7,25 @@
 use strict;
 use warnings;
 
+
+# Send to Hostbin
+#
+# @parem String Content
+#
+# @return String URL
+sub share {
+    open(my $fh, '>', '/var/tmp/report_shadow');
+    print $fh $_[0];
+    close $fh;
+
+    my $url = `curl -sf --data-binary "@/var/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
+
+    system('rm /var/tmp/report_shadow');
+
+    return $url;
+}
+
+
 my $return = "Shadow Report\n";
 
 # -------- AppImage version -------- #
@@ -24,6 +43,7 @@ if( -f 'shadow-appimage-version' ) {
 # -------- Distribution information -------- #
 $return .= "\n-------------------------------------\n\n";
 $return .= `cat /etc/*-release`;
+$return .= `uname -mrs`;
 $return .= "\n-------------------------------------\n\n";
 
 # -------- Environment -------- #
@@ -63,13 +83,5 @@ $return .= "-------------------------------------\n";
 my @logs = split(/template_digit/, `cat ~/.cache/blade/shadow/shadow.log`);
 $return .= 'template_digit' . $logs[-1];
 
-# print $return;
-
-# -------- Send to Pastebin -------- #
-open(my $fh, '>', '/var/tmp/report_shadow');
-print $fh $return;
-close $fh;
-
-my $key = `curl -sf --data-binary "@/var/tmp/report_shadow" https://hastebin.com/documents | jq .key | sed -e "s/\\\"//g"`;
-
-print "\nThe report is available at this link: https://hastebin.com/$key\n";
+# -------- Send to Hostbin -------- #
+print share($return) . "\n";
