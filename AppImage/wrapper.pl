@@ -16,6 +16,12 @@ use version;
 use Cwd 'abs_path';
 use File::Basename;
 
+# ------ Exit if the user is root ------- #
+if( $> == 0 ) {
+    print "Please do not launch this application with the super administrator account.\n\n";
+    exit 1;
+}
+
 # ----------- Translations ------------ #
 
 my %fr = (
