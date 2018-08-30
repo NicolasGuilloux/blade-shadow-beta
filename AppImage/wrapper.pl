@@ -241,7 +241,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Upload a report of the configuration
     if( $arg eq '--report' ) {
         if( $isAppImg ) {
-            system( '"' . dirname(abs_path($0)) . '/report.pl" --appimage');
+            system( './report.pl" --appimage');
 
         } else {
             system( '"' . dirname(abs_path($0)) . '/report.pl"');
@@ -271,10 +271,7 @@ if( index(`lspci | grep 'VGA'`, 'NVIDIA') != -1 ) {
 }
 
 # -------- Vainfo -------- #
-if( -f '/usr/bin/vainfo' == 0 ) {
-    push @warnings, $lang{'vainfo-missing'};
-
-} else {
+if( -f '/usr/bin/vainfo' ) {
     my $vainfo = `vainfo`;
 
     if( $vainfo ne '' ) {
@@ -290,6 +287,9 @@ if( -f '/usr/bin/vainfo' == 0 ) {
     } else {
         push @errors, $lang{'vainfo-fail'};
     }
+
+} else {
+    push @warnings, $lang{'vainfo-missing'};
 }
 
 

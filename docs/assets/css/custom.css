@@ -12,7 +12,7 @@ code {
 }
 
 pre code {
-    white-space: pre-line;
+    white-space: pre;
     text-align: left;
 }
 
