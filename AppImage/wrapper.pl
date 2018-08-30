@@ -171,6 +171,8 @@ if( -d 'opt' ) {
         my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
         chomp $distantVersion;
 
+        print "Version $localVersion\nDistant Version $distantVersion"
+
         # Update available
         if( version->parse($localVersion) < version->parse($distantVersion) ) {
             print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
