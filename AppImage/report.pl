@@ -25,6 +25,14 @@ sub share {
     return $url;
 }
 
+# ------- Check AppImage ------- #
+my $path = '/opt/Shadow Beta';
+if( $#ARGV > -1 ) {
+    if( $ARGV[0] eq '--appimage' ) {
+        $path = './opt/Shadow Beta';
+    }
+}
+
 
 my $return = "Shadow Report\n";
 
@@ -59,14 +67,8 @@ $return .= "\n\n-------------------------------------\n";
 $return .= "          Missing libraries\n";
 $return .= "-------------------------------------\n";
 
-if( -f 'shadow-appimage-version' ) {
-    $return .= `ldd -v "./opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-    $return .= `ldd -v "./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
-
-} else {
-    $return .= `ldd -v "/opt/Shadow\ Beta/shadow-beta" | grep "not found"`;
-    $return .= `ldd -v "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
-}
+$return .= `ldd -v "$path/shadow-beta" | grep "not found"`;
+$return .= `ldd -v "$path/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";
@@ -80,8 +82,13 @@ $return .= "\n-------------------------------------\n";
 $return .= "                Logs\n";
 $return .= "-------------------------------------\n";
 
-my @logs = split(/template_digit/, `cat ~/.cache/blade/shadow/shadow.log`);
-$return .= 'template_digit' . $logs[-1];
+if( -f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log' ){
+    my @logs = split(/template_digit/, `cat ~/.cache/blade/shadow/shadow.log`);
+    $return .= 'template_digit' . $logs[-1];
+
+} else {
+    $return .= 'Logs not found.';
+}
 
 # -------- Send to Hostbin -------- #
 print share($return) . "\n";

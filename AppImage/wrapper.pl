@@ -13,69 +13,82 @@ use locale;
 
 use version;
 
+use Cwd 'abs_path';
+use File::Basename;
+
 # ----------- Translations ------------ #
 
-my @fr = (
-    "Vérification de compatibilité désactivée.",
-    "Les anciens logs ont été supprimés.",
-    "Ceci est une fonction de debug affichant une fausse erreur pour tester les notifications. Blip.",
-    "Ceci est une fonction de debug affichant un faux avertissement pour tester les notifications. Blip.",
+my %fr = (
+    'bypass'            => "Vérification de compatibilité désactivée.",
 
-    "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application.",
-    "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
-    "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
-    "Votre carte graphique ne supporte que le H.264. Vous ne pourrez pas utiliser le H.265 (HEVC).",
-    "Votre carte graphique n'est pas reconnue par la librarie VA-API. Veuillez vérifiez vos drivers VA-API avec la commande 'vainfo'.",
+    'fake-error'        => "Ceci est une fonction de debug affichant une fausse erreur pour tester les notifications. Blip.",
+    'fake-warning'      => "Ceci est une fonction de debug affichant un faux avertissement pour tester les notifications. Blip.",
 
-    "Le programme a tenté d'ajouter l'utilisateur courant au groupe \"input\". Si vous avez entré le mot de passe administrateur, veuillez redémarrer votre ordinateur ou votre session pour appliquer le changement.",
+    'lang-en'           => "Langage forcé en anglais (en_US)",
+    'lang-de'           => "Langage forcé en allemand (de_DE)",
+    'lang-fr'           => "Langage forcé en français (fr_FR)",
 
-    "Votre environnement de bureau n'utilise pas Xorg mais est identifié comme",
-    "Veuillez changer l'environnement pour utiliser Xorg ou l'application ne pourra pas fonctionner.",
+    'vainfo-nvidia'     => "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application.",
+    'vainfo-optimus'    => "Votre GPU est NVIDIA. L'application ne peut pas fonctionner sur ce GPU. Néanmoins, vous disposez de la technologie Optimus. Lancez le panneau de controle NVIDIA, allez dans la rubrique Prime profiles, choisissez le GPU Intel et relancez votre session.",
+    'vainfo-missing'    => "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
+    'vainfo-bad'        => "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
+    'vainfo-good'       => "Votre carte graphique ne supporte que le H.264. Vous ne pourrez pas utiliser le H.265 (HEVC).",
+    'vainfo-fail'       => "Votre carte graphique n'est pas reconnue par la librarie VA-API. Veuillez vérifiez vos drivers VA-API avec la commande 'vainfo'.",
 
-    "Les erreurs suivantes empêchent\nl'application Shadow de fonctionner",
+    'input-adding'      => "Ajout de l'utilisateur actuel au groupe input.",
+    'input-added'       => "Le programme a tenté d'ajouter l'utilisateur courant au groupe \"input\". Si vous avez entré le mot de passe administrateur, veuillez redémarrer votre ordinateur ou votre session pour appliquer le changement.",
 
-    bold("Raccourcis") . "
+    'xorg-fail'         => "Votre environnement de bureau n'utilise pas Xorg mais est identifié comme",
+    'xorg-fail2'        => "Veuillez changer l'environnement pour utiliser Xorg ou l'application ne pourra pas fonctionner.",
+    'xorg-empty'        => "Impossible de vérifier si vous êtes bien sur Xorg.",
+
+    'errors'            => "Les erreurs suivantes empêchent\nl'application Shadow de fonctionner",
+
+    'hotkeys'           => bold("Raccourcis") . "
     • lshift-rctrl-esc:      Quitter
     • lshift-rctrl-space:    Activer/désactiver le mode plein écran
     • lshift-rctrl-g:        Activer/désactiver la capture du clavier et de la souris
-    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode",
-
-    "Votre GPU est NVIDIA. L'application ne peut pas fonctionner sur ce GPU. Néanmoins, vous disposez de la technologie Optimus. Lancez le panneau de controle NVIDIA, allez dans la rubrique Prime profiles, choisissez le GPU Intel et relancez votre session."
+    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode"
 );
 
-my @en = (
-    "Bypassing the compatibility check.",
-    "The old logs have been removed.",
-    "This is a debug feature showing a fake error to test notifications. Blip.",
-    "This is a debug feature showing a fake warning to test notifications. Blip.",
+my %en = (
+    'bypass'            => "Bypassing the compatibility check.",
 
-    "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade..",
-    "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
-    "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
-    "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
-    "Your GPU is not recognized. Please check your hardware decoding drivers with the 'vainfo' command.",
+    'fake-error'      => "This is a debug feature showing a fake error to test notifications. Blip.",
+    'fake-warning'        => "This is a debug feature showing a fake warning to test notifications. Blip.",
 
-    "The program tried to add the current user to the \"input\" group. If you entered the administrator password, please reboot or restart your session to apply the change.",
+    'lang-en'           => "Language forced in english (en_US)",
+    'lang-de'           => "Language forced in german (de_DE)",
+    'lang-fr'           => "Language forced in french (fr_FR)",
 
-    "Your environnement is not Xorg but is identified as",
-    "Please switch to Xorg or you will not be able to start this application.",
+    'vainfo-nvidia'     => "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade.",
+    'vainfo-optimus'    => "Your currently using the NVIDIA GPU. You can't start the application with it, but your computer supports Prime. Start the NVIDIA control panel, select the Prime panel, choose the Intel GPU and restart your session.",
+    'vainfo-missing'    => "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
+    'vainfo-bad'        => "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
+    'vainfo-good'       => "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
+    'vainfo-fail'       => "Your GPU is not recognized. Please check your hardware decoding drivers with the 'vainfo' command.",
 
-    "The following errors prevented the\nShadow application from running",
+    'input-adding'      => "Adding the current user to the input group.",
+    'input-added'       => "The program tried to add the current user to the \"input\" group. If you entered the administrator password, please reboot or restart your session to apply the change.",
 
-    bold("Hotkeys") . "
+    'xorg-fail'         => "Your environnement is not Xorg but is identified as",
+    'xorg-fail2'        => "Please switch to Xorg or you will not be able to start this application.",
+    'xorg-empty'        => "Impossible to check if you are on Xorg or not.",
+
+    'errors'            => "The following errors prevented the\nShadow application from running",
+
+    'hotkeys'           => bold("Hotkeys") . "
     • lshift-rctrl-esc:      Exit
     • lshift-rctrl-space:    Toggle fullscreen or windowed
     • lshift-rctrl-g:        Toggle input grab
-    • lshift-rctrl-h:        Toggle Shadow Mode",
-
-    "Your currently using the NVIDIA GPU. You can't start the application with it, but your computer supports Prime. Start the NVIDIA control panel, select the Prime panel, choose the Intel GPU and restart your session."
+    • lshift-rctrl-h:        Toggle Shadow Mode"
 );
 
 my $locale = setlocale(LC_CTYPE);
-my @lang = @en;
+my %lang = %en;
 
 if( index($locale, 'fr') != -1 ) {
-    @lang = @fr;
+    %lang = %fr;
 }
 
 
@@ -112,7 +125,6 @@ my $help = "Wrapper for Shadow Beta that checks your configuration and compatibi
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
-    --opt-launch       Start shadow-beta in the same directory of the wrapper
     --clientsdl        Directly launch the ClientSDL renderer
 
     --force-en         Force the launcher in english for people with translation issues (en_US)
@@ -121,21 +133,22 @@ Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
 
     --error            Show a fake error notification
     --warning          Show a fake warning notification
-    --debug            Clear the previous log file and display the new one when the launcher is closed
     --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta
-    --report           Upload the configuration information on Pastebin";
+    --report           Upload a report of the configuration";
 
 # Debug, errors and warnings
 my $debug  = 0;
 my $strace = 0;
-my $opt    = 0;
 my $langF  = '';
 
+my $isAppImg = 0;
 my @errors = ();
 my @warnings = ();
 
 # -------- Update -------- #
 if( -f 'shadow-appimage-version' ) {
+
+    $isAppImg = 1;
 
     # Local version
     open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
@@ -169,18 +182,18 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
     # Bypass the check and launch
     if( $arg eq '--bypass-check' ) {
-        push @warnings, $lang[0];
+        push @warnings, $lang{'bypass'};
         goto START_SHADOW;
     }
 
-    # Start the Shadow launcher from the /opt/Shadow Beta/shadow-beta
-    if( $arg eq '--opt-launch' ) {
-        $opt = 1;
-    }
-
-    # Start directly ClientSDl and stops
+    # Start directly ClientSDL and stops
     if( $arg eq '--clientsdl' ) {
-        system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+        if( $isAppImg ) {
+            system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+        } else {
+            system('/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+        }
+
         exit 0;
     }
 
@@ -188,35 +201,21 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Force the launcher in english
     if( $arg eq '--force-en' ) {
         $langF = 'LANG=en_US.utf8 ';
-        push @warnings, "Language forced in english (en_US)"
+        push @warnings, $lang{'lang-en'}
     }
 
     # Force the launcher in german
     if( $arg eq '--force-de' ) {
         $langF = 'LANG=de_DE.utf8 ';
-        push @warnings, "Language forced in german (de_DE)"
+        push @warnings, $lang{'lang-de'}
     }
 
     # Force the launcher in english
     if( $arg eq '--force-fr' ) {
         $langF = 'LANG=fr_FR.utf8 ';
-        push @warnings, "Language forced in french (fr_FR)"
+        push @warnings, $lang{'lang-fr'}
     }
 
-
-    # Remove the previous logs file and display the new one when the launcher is closed
-    if( $arg eq '--debug' ) {
-
-        my $dirname = `dirname ~/.cache/blade/shadow/shadow.log`;
-        chomp $dirname;
-
-        if( -e "$dirname/shadow.log" ) {
-            print "\n$lang[1]\n";
-            `rm ~/.cache/blade/shadow/shadow.log`;
-        }
-
-        $debug = 1;
-    }
 
     # Start Shadow with Strace
     if( $arg eq '--strace' ) {
@@ -225,17 +224,23 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
     # Create a false error
     if( $arg eq '--error' ) {
-        push @errors, $lang[2];
+        push @errors, $lang{'fake-error'};
     }
 
     # Create a false warning
     if( $arg eq '--warning' ) {
-        push @warnings, $lang[3];
+        push @warnings, $lang{'fake-warning'};
     }
 
-    # Upload the configuration information on Pastebin
+    # Upload a report of the configuration
     if( $arg eq '--report' ) {
-        system('./report.pl');
+        if( $isAppImg ) {
+            system( dirname(abs_path($0)) . '/report.pl --appimage');
+
+        } else {
+            system( dirname(abs_path($0)) . '/report.pl');
+        }
+
         exit 0;
     }
 
@@ -248,19 +253,20 @@ if( index(`lspci | grep 'VGA'`, 'NVIDIA') != -1 ) {
     # Intel iGPU detected
     if( index(`lspci | grep 'VGA'`, 'Intel') != -1 ) {
 
+        # Currently on the NVIDIA GPU
         if( index(`nvidia-smi -L`, 'GPU ') != 1 ) {
-            push @errors, $lang[14];
+            push @errors, $lang{'vainfo-optimus'};
         }
 
+    # Only NVIDIA GPU available
     } else {
-        push @errors, $lang[4];
+        push @errors, $lang{'vainfo-nvidia'};
     }
 }
 
 # -------- Vainfo -------- #
-
 if( -f '/usr/bin/vainfo' == 0 ) {
-    push @warnings, $lang[5];
+    push @warnings, $lang{'vainfo-missing'};
 
 } else {
     my $vainfo = `vainfo`;
@@ -268,15 +274,15 @@ if( -f '/usr/bin/vainfo' == 0 ) {
     if( $vainfo ne '' ) {
         # The GPU doesn't support H264.
         if( index($vainfo, 'H264') == -1 ) {
-            push @errors, $lang[6];
+            push @errors, $lang{'vainfo-bad'};
         }
 
         if( index($vainfo, 'H265') == -1 and index($vainfo, 'HEVC') == 1 ) {
-            push @warnings, $lang[7];
+            push @warnings, $lang{'vainfo-good'};
         }
 
     } else {
-        push @errors, $lang[8];
+        push @errors, $lang{'vainfo-fail'};
     }
 }
 
@@ -286,10 +292,10 @@ my $groups = `groups \$USER`;
 
 if( index($groups, 'input') == -1 ) {
 
-    print "Adding the user to the input group\n";
+    print "$lang{'input-adding'}\n";
     my $in = `pkexec gpasswd -a \$USER input`;
 
-    push @errors, $lang[9];
+    push @errors, $lang{'input-added'};
 }
 
 
@@ -297,8 +303,14 @@ if( index($groups, 'input') == -1 ) {
 my $env = `echo \$XDG_SESSION_TYPE`;
 chomp $env;
 
-if( $env ne 'x11' ) {
-    push @errors,  "$lang[10] $env. $lang[11]";
+if( $env ne 'x11') {
+    if( $env ne '' ) {
+        push @errors,  "$lang{'xorg-fail'} $env. $lang{'xorg-fail2'}";
+
+    } else {
+        push @warnings, $lang{'xorg-empty'}
+    }
+
 }
 
 
@@ -328,31 +340,27 @@ if( scalar @errors > 0 ) {
     }
 
     print bold('ERROR') . ":\n$str\n";
-    alert($lang[12], "\n$str");
+    alert($lang{'errors'}, "\n$str");
 
     exit 1;
 
 # Start Shadow
 } else {
-    print "$lang[13]\n\n";
+    print "$lang{'hotkeys'}\n\n";
+
+    my $pathExec = '/opt/Shadow\ Beta/shadow-beta';
+
+    if( $isAppImg ) {
+        $pathExec = './opt/Shadow\ Beta/shadow-beta.wrapper';
+    }
 
     # Start Shadow with Strace
     if( $strace ) {
-        system($langF . 'strace -f ./opt/Shadow\ Beta/shadow-beta.wrapper &> /var/tmp/strace_shadowbeta');
-
-    # Start the Shadow launcher from the /opt/Shadow Beta/shadow-beta
-    } elsif( $opt ) {
-        system($langF . '/opt/Shadow\ Beta/shadow-beta');
+        system("$langF strace -f $pathExec &> /var/tmp/strace_shadowbeta");
 
     # Start Shadow
     } else {
-        system($langF . './opt/Shadow\ Beta/shadow-beta.wrapper');
-    }
-
-    # Display the logs on launcher close
-    if( $debug ) {
-        my $logs = `cat ~/.cache/blade/shadow/shadow.log`;
-        print "\n$logs\n";
+        system("$langF $pathExec");
     }
 
     exit 0;
