@@ -241,7 +241,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Upload a report of the configuration
     if( $arg eq '--report' ) {
         if( $isAppImg ) {
-            system( './report.pl" --appimage');
+            system( './report.pl --appimage');
 
         } else {
             system( '"' . dirname(abs_path($0)) . '/report.pl"');
