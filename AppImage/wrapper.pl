@@ -152,29 +152,34 @@ my @errors = ();
 my @warnings = ();
 
 # -------- Update -------- #
-if( -f 'shadow-appimage-version' ) {
-
+if( -d 'opt' ) {
+    # AppImage detection
     $isAppImg = 1;
+    print "AppImage detected.\n";
 
-    # Local version
-    open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
-      or die "Could not open file 'shadow-appimage-version' $!";
-    my $localVersion = <$fh>;
-    chomp $localVersion;
+    if( -f 'shadow-appimage-version' ) {
 
-    $help = "AppImage $localVersion. " . $help;
+        # Local version
+        open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
+          or die "Could not open file 'shadow-appimage-version' $!";
+        my $localVersion = <$fh>;
+        chomp $localVersion;
 
-    # Distant version
-    my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
-    chomp $distantVersion;
+        $help = "AppImage $localVersion. " . $help;
 
-    # Update available
-    if( version->parse($localVersion) < version->parse($distantVersion) ) {
-        print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
-        alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
+        # Distant version
+        my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
+        chomp $distantVersion;
+
+        # Update available
+        if( version->parse($localVersion) < version->parse($distantVersion) ) {
+            print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
+            alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
+        }
+
     }
-
 }
+
 
 # -------- Arguments -------- #
 for(my $i=0; $i < $#ARGV+1; $i++) {
