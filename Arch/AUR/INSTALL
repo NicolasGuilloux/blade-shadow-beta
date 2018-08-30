@@ -4,7 +4,10 @@ post_install() {
 	do
 		gpasswd -a $user input
 	done
-	fi
+
+	# Create the link to the binary
+	rm '/usr/bin/shadow-beta'
+	ln -sf '/opt/Shadow Beta/shadow-wrapper.pl' '/usr/bin/shadow-beta'
 }
 
 post_remove() {

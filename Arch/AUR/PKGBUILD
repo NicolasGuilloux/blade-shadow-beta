@@ -50,7 +50,7 @@ package() {
 
 	### Edit launcher
 	sed '/^Exec/ d' < "${pkgdir}/usr/share/applications/shadow-beta.desktop" > shadow-beta.desktop
-	echo "Exec=\"/opt/Shadow Beta/shadow-wrapper.pl\" %U --opt-launch" >> shadow-beta.desktop
+	echo "Exec=\"/opt/Shadow Beta/shadow-wrapper.pl\" %U" >> shadow-beta.desktop
 	chmod g-w shadow-beta.desktop
 
 	rm "${pkgdir}/usr/share/applications/shadow-beta.desktop"
