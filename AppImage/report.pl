@@ -27,15 +27,22 @@ sub share {
 
 # ------- Check AppImage ------- #
 my $path = '/opt/Shadow Beta';
+my $isAppImg = 0;
+
 if( $#ARGV > -1 ) {
     if( $ARGV[0] eq '--appimage' ) {
         $path = './opt/Shadow Beta';
+        $isAppImg = 1;
         print "AppImage detected! \n";
     }
 }
 
 
-my $return = "Shadow Report\n";
+my $return = "Shadow Report";
+
+if( $isAppImg ) { $return .= " (AppImage)"; }
+
+$return .= "\n";
 
 # -------- AppImage version -------- #
 if( -f 'shadow-appimage-version' ) {
