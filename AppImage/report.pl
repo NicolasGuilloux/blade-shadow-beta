@@ -30,6 +30,7 @@ my $path = '/opt/Shadow Beta';
 if( $#ARGV > -1 ) {
     if( $ARGV[0] eq '--appimage' ) {
         $path = './opt/Shadow Beta';
+        print "AppImage detected! \n";
     }
 }
 
