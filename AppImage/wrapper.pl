@@ -179,7 +179,7 @@ if( -d 'opt' ) {
                 alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
             }
         } catch {
-
+            warn "Failed get the update: $_";
         };
 
 
