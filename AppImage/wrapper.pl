@@ -60,8 +60,8 @@ my %fr = (
 my %en = (
     'bypass'            => "Bypassing the compatibility check.",
 
-    'fake-error'      => "This is a debug feature showing a fake error to test notifications. Blip.",
-    'fake-warning'        => "This is a debug feature showing a fake warning to test notifications. Blip.",
+    'fake-error'        => "This is a debug feature showing a fake error to test notifications. Blip.",
+    'fake-warning'      => "This is a debug feature showing a fake warning to test notifications. Blip.",
 
     'lang-en'           => "Language forced in english (en_US)",
     'lang-de'           => "Language forced in german (de_DE)",
@@ -96,7 +96,6 @@ my %lang = %en;
 if( index($locale, 'fr') != -1 ) {
     %lang = %fr;
 }
-
 
 
 # ----------- Functions ------------ #
@@ -155,8 +154,7 @@ my @warnings = ();
 if( -d 'opt' ) {
     # AppImage detection
     $isAppImg = 1;
-    print "AppImage detected.\n";
-
+    
     if( -f 'shadow-appimage-version' ) {
 
         # Local version

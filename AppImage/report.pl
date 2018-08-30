@@ -33,7 +33,6 @@ if( $#ARGV > -1 ) {
     if( $ARGV[0] eq '--appimage' ) {
         $path = './opt/Shadow Beta';
         $isAppImg = 1;
-        print "AppImage detected! \n";
     }
 }
 
@@ -83,7 +82,12 @@ $return .= "\n-------------------------------------\n";
 $return .= "               Vainfo\n";
 $return .= "-------------------------------------\n";
 
-$return .= `vainfo`;
+if( -f '/usr/bin/vainfo' ) {
+    $return .= `vainfo`;
+
+} else {
+    $return .= "'vainfo' is not installed.";
+}
 
 # -------- Logs -------- #
 $return .= "\n-------------------------------------\n";
