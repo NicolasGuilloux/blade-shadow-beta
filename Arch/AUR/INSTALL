@@ -6,7 +6,6 @@ post_install() {
 	done
 
 	# Create the link to the binary
-	rm '/usr/bin/shadow-beta'
 	ln -sf '/opt/Shadow Beta/shadow-wrapper.pl' '/usr/bin/shadow-beta'
 }
 
