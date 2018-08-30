@@ -11,6 +11,7 @@ use File::Basename;
 use POSIX qw(locale_h);
 use locale;
 
+use Try::Tiny;
 use version;
 
 use Cwd 'abs_path';
@@ -159,29 +160,32 @@ if( -d 'opt' ) {
 
     if( -f 'shadow-appimage-version' ) {
 
-        # Local version
-        open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
-          or die "Could not open file 'shadow-appimage-version' $!";
-        my $localVersion = <$fh>;
-        chomp $localVersion;
+        try {
+            # Local version
+            open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
+              or die "Could not open file 'shadow-appimage-version' $!";
+            my $localVersion = <$fh>;
+            chomp $localVersion;
 
-        $help = "AppImage $localVersion. " . $help;
+            $help = "AppImage $localVersion. " . $help;
 
-        # Distant version
-        my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
-        chomp $distantVersion;
+            # Distant version
+            my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
+            chomp $distantVersion;
 
-        print "Version $localVersion\nDistant Version $distantVersion"
+            # Update available
+            if( version->parse($localVersion) < version->parse($distantVersion) ) {
+                print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
+                alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
+            }
+        } catch {
 
-        # Update available
-        if( version->parse($localVersion) < version->parse($distantVersion) ) {
-            print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
-            alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
-        }
+        };
+
+
 
     }
 }
-
 
 # -------- Arguments -------- #
 for(my $i=0; $i < $#ARGV+1; $i++) {
