@@ -195,13 +195,14 @@ my @warnings = ();
 if( -d 'opt' ) {
     # AppImage detection
     $isAppImg = 1;
+    my $localVersion = 'Nightly build';
 
     if( -f 'shadow-appimage-version' ) {
 
         # Local version
         open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
           or die "Could not open file 'shadow-appimage-version' $!";
-        my $localVersion = <$fh>;
+        $localVersion = <$fh>;
         chomp $localVersion;
 
         $help = "AppImage $localVersion. " . $help;
@@ -234,7 +235,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Get the version of the AppImage
     if( $arg eq '--version' ) {
         if( $isAppImg ) {
-            print "$localVersion\n"
+            print "$localVersion\n";
             exit;
         }
     }
