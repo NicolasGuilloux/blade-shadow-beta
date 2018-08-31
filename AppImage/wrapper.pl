@@ -4,6 +4,9 @@
 # Website: https://nicolasguilloux.eu/
 # Email:   novares.x@gmail.com
 
+# Thanks Kabouik for his help for the english translations
+# Thanks Brother/Ilya#0013 and TheWolf#0985 for their help for the german translations
+
 use strict;
 use warnings;
 
@@ -74,6 +77,7 @@ my %en = (
     'vainfo-good'       => "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
     'vainfo-fail'       => "Your GPU is not recognized. Please check your hardware decoding drivers with the 'vainfo' command.",
 
+
     'input-adding'      => "Adding the current user to the input group.",
     'input-added'       => "The program tried to add the current user to the \"input\" group. If you entered the administrator password, please reboot or restart your session to apply the change.",
 
@@ -90,11 +94,47 @@ my %en = (
     • lshift-rctrl-h:        Toggle Shadow Mode"
 );
 
+my %de = (
+    'bypass'            => "Umgehung der Kompatibilitätsprüfung.",
+
+    'fake-error'        => "Dies ist eine Debug-Funktion, die einen gefälschten Fehler anzeigt, um Benachrichtigungen zu testen.",
+    'fake-warning'      => "Dies ist eine Debug-Funktion, die eine gefälschte Warnung anzeigt, um Benachrichtigungen zu testen.",
+
+    'lang-en'           => "Sprache erzwungen in english (en_US)",
+    'lang-de'           => "Sprache erzwungen in german (de_DE)",
+    'lang-fr'           => "Sprache erzwungen in french (fr_FR)",
+
+    'vainfo-nvidia'     => "Ihre GPU-Marke ist Nvidia. Diese Marke wird von Shadow unter Linux nicht unterstützt. Sie müssen auf eine neue Version von Blade warten.",
+    'vainfo-optimus'    => "Sie verwenden derzeit den NVIDIA Grafikprozessor. Sie können die Anwendung damit nicht starten, aber Ihr Computer unterstützt Prime. Starten Sie das NVIDIA Control Panel, wählen Sie das Prime Panel, wählen Sie den Intel Grafikprozessor und starten Sie Ihre Sitzung neu.",
+    'vainfo-missing'    => "'vainfo' nicht gefunden werden, konnte die H.264- und H.265-Unterstützung durch Ihren Grafikprozessor nicht überprüft werden. Installieren Sie 'vainfo' (Ubuntu, Linux  Mint, Debian) oder 'libva-utils' (Arch, Solus) und starten Sie die Anwendung neu.",
+    'vainfo-bad'        => "Ihr Grafikprozessor unterstützt keine von Shadow verwendete Kodierungstechnologie. Sie müssen Ihren Grafikprozessor wechseln oder Ihre VA-API-Treiber überprüfen, um diese Anwendung nutzen zu können.",
+    'vainfo-good'       => "Ihr Grafikprozessor unterstützt nur H.264. Sie können H.265 (HEVC) nicht verwenden.",
+    'vainfo-fail'       => "Ihre GPU wird nicht erkannt. Bitte überprüfen Sie Ihren Hardware-Dekodierungstreiber mit dem Befehl 'vainfo'.",
+
+    'input-adding'      => "Füge den aktuellen Benutzer zur Eingabengruppe hinzu.",
+    'input-added'       => "Das Programm hat versucht, den aktuellen Benutzer zur Gruppe \"input\" hinzuzufügen. Wenn Sie das Administratorkennwort eingegeben haben, starten Sie Ihre Sitzung neu, um die Änderung zu übernehmen.",
+
+    'xorg-fail'         => "Die Umgebung wurde nicht als Xorg identifiziert, sondern als",
+    'xorg-fail2'        => "Bitte wechseln Sie auf Xorg, ansonsten kann die Anwendung nicht gestartet werden.",
+    'xorg-empty'        => "Es konnte nicht geprüft werden ob Xorg verwendet wird oder nicht.",
+
+    'errors'            => " Folgende Fehler haben einen \nStart von Shadow verhindert",
+
+    'hotkeys'           => bold("Tastenbelegung") . "
+    • lshift-rctrl-esc:      Beenden
+    • lshift-rctrl-space:    Wechsel Vollbild / Fenster
+    • lshift-rctrl-g:        Eingaben fangen umschalten
+    • lshift-rctrl-h:        Shadowmodus umschalten"
+);
+
 my $locale = setlocale(LC_CTYPE);
 my %lang = %en;
 
 if( index($locale, 'fr') != -1 ) {
     %lang = %fr;
+
+} elsif( index($locale, 'de') != -1 ){
+    %lang = %de;
 }
 
 
@@ -129,6 +169,7 @@ my $help = "Wrapper for Shadow Beta that checks your configuration and compatibi
 
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
+    --version          Get the version of the AppImage
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
     --clientsdl        Directly launch the ClientSDL renderer
 
@@ -147,14 +188,14 @@ my $strace = 0;
 my $langF  = '';
 
 my $isAppImg = 0;
-my @errors = ();
+my @errors   = ();
 my @warnings = ();
 
 # -------- Update -------- #
 if( -d 'opt' ) {
     # AppImage detection
     $isAppImg = 1;
-    
+
     if( -f 'shadow-appimage-version' ) {
 
         # Local version
@@ -188,6 +229,14 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     if( $arg eq '--help' ) {
         print "\n$help\n\n";
         exit;
+    }
+
+    # Get the version of the AppImage
+    if( $arg eq '--version' ) {
+        if( $isAppImg ) {
+            print "$localVersion\n"
+            exit;
+        }
     }
 
     # Bypass the check and launch

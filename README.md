@@ -96,4 +96,6 @@ Thanks to **PofMagicfingers** for the corrections on the Arch scripts.
 
 Thanks to **kabouik#7008** for relentlessly bothering us to add support for Solus.
 
+Thanks to **TheWolf#0985** and **Brother/Ilya#0013** for their help with the german translations.
+
 You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech).
