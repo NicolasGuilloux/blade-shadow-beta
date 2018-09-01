@@ -191,29 +191,31 @@ my $isAppImg = 0;
 my @errors   = ();
 my @warnings = ();
 
+my $version = 'Standalone wrapper';
+
 # -------- Update -------- #
 if( -d 'opt' ) {
     # AppImage detection
     $isAppImg = 1;
-    my $localVersion = 'Nightly build';
+    $version = 'Nightly build';
 
     if( -f 'shadow-appimage-version' ) {
 
         # Local version
         open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
           or die "Could not open file 'shadow-appimage-version' $!";
-        $localVersion = <$fh>;
-        chomp $localVersion;
+        $version = <$fh>;
+        chomp $version;
 
-        $help = "AppImage $localVersion. " . $help;
+        $help = "AppImage $version. " . $help;
 
-        if( substr($localVersion, 0, 1) eq 'v' ) {
+        if( substr($version, 0, 1) eq 'v' ) {
             # Distant version
             my $distantVersion = `curl https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
             chomp $distantVersion;
 
             # Update available
-            if( version->parse($localVersion) < version->parse($distantVersion) ) {
+            if( version->parse($version) < version->parse($distantVersion) ) {
                 print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
                 alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
             }
@@ -234,10 +236,8 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
     # Get the version of the AppImage
     if( $arg eq '--version' ) {
-        if( $isAppImg ) {
-            print "$localVersion\n";
-            exit;
-        }
+        print "$version\n";
+        exit;
     }
 
     # Bypass the check and launch
