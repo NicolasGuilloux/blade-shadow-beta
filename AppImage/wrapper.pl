@@ -418,6 +418,12 @@ if( scalar @errors > 0 ) {
     if( $strace ) {
         system("$langF strace -f $pathExec &> /var/tmp/strace_shadowbeta");
 
+    	# Create the compressed archive in the user directory
+    	system('tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta');
+
+    	# Remove the uncompressed strace
+    	system('rm /var/tmp/strace_shadowbeta');
+
     # Start Shadow
     } else {
         system("$langF $pathExec");
