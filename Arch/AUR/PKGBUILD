@@ -60,23 +60,15 @@ package() {
 	### Fix stuff
 
 	# Create lib directory
-	mkdir "${pkgdir}/usr/lib"
+	mkdir -p "${pkgdir}/usr/lib"
 
 	# Correct Libjson-c
 	if [ ! -f /usr/lib/libjson-c.so.3 ]; then
-	    ln -f -s "libjson-c.so" "${pkgdir}/usr/lib/libjson-c.so.3"
+	    ln -f -s -r "libjson-c.so" "${pkgdir}/usr/lib/libjson-c.so.3"
 	fi
 
 	# Correct Libubsan
 	if [ ! -f /usr/lib/libubsan.so.0 ]; then
-		ln -f -s "gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0" "${pkgdir}/usr/lib/libubsan.so.0"
-	fi
-
-	# Create font directory
-	mkdir "${pkgdir}/usr/share/fonts"
-
-	# Fix the font issue
-	if [ ! -d /usr/share/fonts/truetype ]; then
-		ln -f -s "TTF" "${pkgdir}/usr/share/fonts/truetype"
+		ln -f -s -r "gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0" "${pkgdir}/usr/lib/libubsan.so.0"
 	fi
 }
