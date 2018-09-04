@@ -11,7 +11,7 @@ The AppImage is confirmed to work on the following distributions, but is likely 
  - Debian
  - Solus (the current i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
  - Ubuntu 18.04 (the official application should run too, but the AppImage might fix undocumented prerequisites of the Shadow application like adding $USER to group `input`)
- - Linux Mint 18
+ - Linux Mint 19
  - Fedora 28
  - GalliumOS 3.0
 
