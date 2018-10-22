@@ -44,16 +44,16 @@ package() {
 	### Move the Wrapper
 	chmod g-w wrapper.pl
 	chmod +x wrapper.pl
-	mv wrapper.pl "${pkgdir}/opt/Shadow Beta/shadow-wrapper.pl"
+	mv wrapper.pl "${pkgdir}/opt/shadowbeta/shadow-wrapper.pl"
 
 	### Move the Report.pl
 	chmod g-w report.pl
 	chmod +x report.pl
-	mv report.pl "${pkgdir}/opt/Shadow Beta/report.pl"
+	mv report.pl "${pkgdir}/opt/shadowbeta/report.pl"
 
 	### Edit launcher
 	sed ed '/^Exec\|Categories/,+2d' < sed '/^Exec/ d' < "${pkgdir}/usr/share/applications/shadow-beta.desktop" > shadow-beta.desktop
-	echo "Exec=\"/opt/Shadow Beta/shadow-wrapper.pl\" %U" >> shadow-beta.desktop
+	echo "Exec=\"/opt/shadowbeta/shadow-wrapper.pl\" %U" >> shadow-beta.desktop
 	echo "Categories=Games;Utility;Virtualization" >> shadow-beta.desktop
 	chmod g-w shadow-beta.desktop
 

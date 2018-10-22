@@ -2,7 +2,7 @@
 
 set -e
 
-# Install Shadow Beta for Arch Linux
+# Install shadowbeta for Arch Linux
 
 # Author:   Nicolas Guilloux
 # Website:  https://nicolasguilloux.eu/

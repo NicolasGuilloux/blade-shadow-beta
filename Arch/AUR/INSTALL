@@ -6,7 +6,7 @@ post_install() {
 	done
 
 	# Create the link to the binary
-	ln -sf '/opt/Shadow Beta/shadow-wrapper.pl' '/usr/bin/shadow-beta'
+	ln -sf '/opt/shadowbeta/shadow-wrapper.pl' '/usr/bin/shadow-beta'
 
 	## Fix fonts
 
@@ -37,8 +37,8 @@ post_remove() {
 			rm -R /home/$user/.cache/blade
 		fi
 
-		if [ -d /home/$user/.config/Shadow\ Beta ]; then
-			rm -R /home/$user/.config/Shadow\ Beta
+		if [ -d /home/$user/.config/shadowbeta ]; then
+			rm -R /home/$user/.config/shadowbeta
 		fi
 	done
 }

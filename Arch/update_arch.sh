@@ -18,17 +18,17 @@ set -e
 
 # ----------------------- Uninstallation ----------------------- #
 
-if [ -d "/opt/Shadow Beta" ]; then
+if [ -d "/opt/shadowbeta" ]; then
   files=(
-  "/opt/Shadow Beta/"
+  "/opt/shadowbeta/"
   "~/.cache/blade/"
   "~/.config/blade/"
-  "~/.config/Shadow Beta/"
+  "~/.config/shadowbeta/"
   "/usr/share/applications/shadow-beta.desktop"
   "/usr/share/doc/shadow-beta/changelog.gz"
   "/usr/share/icons/hicolor/512x512/apps/shadow-beta.png"
   )
-  echo "Shadow is already installed on /opt/Shadow Beta"
+  echo "Shadow is already installed on /opt/shadowbeta"
   echo  -e "\033[33;7mIt will be removed, and all settings will be lost\033[0m"
   echo "This script will remove the following folders and files : "
   printf '     %s\n' "${files[@]}"

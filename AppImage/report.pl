@@ -26,12 +26,12 @@ sub share {
 }
 
 # ------- Check AppImage ------- #
-my $path = '/opt/Shadow Beta';
+my $path = '/opt/shadowbeta';
 my $isAppImg = 0;
 
 if( $#ARGV > -1 ) {
     if( $ARGV[0] eq '--appimage' ) {
-        $path = './opt/Shadow Beta';
+        $path = './opt/shadowbeta';
         $isAppImg = 1;
     }
 }

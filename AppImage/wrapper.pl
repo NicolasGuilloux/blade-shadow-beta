@@ -191,7 +191,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 # ----------- Variables ------------ #
 
 # Messages variables
-my $help = "Wrapper for Shadow Beta that checks your configuration and compatibility errors.
+my $help = "Wrapper for shadowbeta that checks your configuration and compatibility errors.
 
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
@@ -283,9 +283,9 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Start directly ClientSDL and stops
     if( $arg eq '--clientsdl' ) {
         if( $isAppImg ) {
-            system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+            system('./opt/shadowbeta/resources/app.asar.unpacked/native/linux/ClientSDL');
         } else {
-            system('/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+            system('/opt/shadowbeta/resources/app.asar.unpacked/native/linux/ClientSDL');
         }
 
         exit 0;
@@ -441,10 +441,10 @@ if( scalar @errors > 0 ) {
 } else {
     print "$lang{'hotkeys'}\n\n";
 
-    my $pathExec = '/opt/Shadow\ Beta/shadow-beta';
+    my $pathExec = '/opt/shadowbeta/shadow-beta';
 
     if( $isAppImg ) {
-        $pathExec = './opt/Shadow\ Beta/shadow-beta.wrapper';
+        $pathExec = './opt/shadowbeta/shadow-beta.wrapper';
     }
 
     # Start Shadow with Strace

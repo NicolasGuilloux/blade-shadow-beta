@@ -5,8 +5,8 @@ import textwrap
 class shadowChecker:
 
     def __init__(self):
-        self.pathExec = "/opt/Shadow\ Beta/shadow-beta"
-        self.pathClientSDL = "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL"
+        self.pathExec = "/opt/shadowbeta/shadow-beta"
+        self.pathClientSDL = "/opt/shadowbeta/resources/app.asar.unpacked/native/linux/ClientSDL"
         self.pathLogs = "/home/" + os.popen("echo $USER").read().rstrip() + "/.cache/blade/shadow/shadow.log"
 
         self.vainfo()
