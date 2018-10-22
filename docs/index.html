@@ -77,6 +77,10 @@
 										It embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it still needs a <a href="#vainfo">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
 									</p>
 
+									<p>
+										The 2.0.0 version and greater uses the unified client. It supports the trackpad and the gamepads.
+									</p>
+
 									<div class="table-wrapper">
 										<table>
 											<thead>
@@ -130,6 +134,7 @@
 <code>mkdir -p ~/.local/share/Shadow\ Beta
 cd ~/.local/share/Shadow\ Beta/
 wget --content-disposition <span id="app_link_code"></span>
+rm -f shadowbeta-linux-x86_64.AppImage
 unzip shadowbeta-linux-x86_64.AppImage-<span class="app_version"></span>.zip
 rm shadowbeta-linux-x86_64.AppImage-<span class="app_version"></span>.zip
 chmod +x shadowbeta-linux-x86_64.AppImage
@@ -360,8 +365,8 @@ python3 main.py</code></pre>
 
 					var version = latest.release.tag_name;
 
-					$('#app_link').attr('href', 'https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=app_build');
-					$('#app_link_code').text('https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=app_build');
+					$('#app_link').attr('href', 'https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=bionic_build');
+					$('#app_link_code').text('https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=bionic_build');
 					$('#app_version').text('(' + version + ')');
 					$('.app_version').text(version);
 					$('.app_code').show();
