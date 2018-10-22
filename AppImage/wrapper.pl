@@ -60,7 +60,8 @@ my %fr = (
     • lShift-lCtrl-G:        Activer/désactiver la capture du clavier et de la souris\n\n"
 
  . bold('Notes') . ":
-    • Le H265 ne s'active malheureusement pas au lancement du stream. Vérifiez dans l'application Shadow Control Panel sur votre Shadow s'il est bien activé."
+    • Le H265 ne s'active malheureusement pas au lancement du stream. Vérifiez dans l'application Shadow Control Panel sur votre Shadow s'il est bien activé.
+    • Certains périphériques font planter le stream. Lors de la première installation, veillez à n'avoir que le strict minimum de brancher. Ensuite, brancher un à un chaque périphérique pour identifier si il y en a un qui provoque un crash."
 );
 
 my %en = (
@@ -99,7 +100,8 @@ my %en = (
     • lShift-lCtrl-G        Toggle input grab\n\n"
 
  . bold('Notes') . ":
-    • The H265 option is not enabled when the stream starts. Please enable it from the Shadow Control Panel on your Shadow."
+    • The H265 option is not enabled when the stream starts. Please enable it from the Shadow Control Panel on your Shadow.
+    • Some devices crash the stream. During the fisrt install, make sure your only have the minimum devices plugged. Then, plug them one by one to identify quickly which one produces an error."
 );
 
 my %de = (
@@ -137,7 +139,8 @@ my %de = (
     • lShift-lCtrl-G        Eingaben fangen umschalten\n\n"
 
  . bold('Anmerkungen') . ":
-    • Die H265-Option ist nicht aktiviert, wenn der Stream gestartet wird. Bitte aktiviere es über die Schatten-Kontrollleiste auf deinem Schatten."
+    • Die H265-Option ist nicht aktiviert, wenn der Stream gestartet wird. Bitte aktiviere es über die Schatten-Kontrollleiste auf deinem Schatten.
+    • Einige Geräte stürzen den Stream ab. Stellen Sie bei der ersten Installation sicher, dass nur die Mindestgeräte angeschlossen sind. Dann stecken Sie sie nacheinander ein, um schnell zu erkennen, welcher Fehler auftritt."
 );
 
 my $locale = setlocale(LC_CTYPE);

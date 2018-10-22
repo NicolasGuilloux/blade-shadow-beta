@@ -53,70 +53,21 @@
 										</p>
 
 										<ul>
-											<li><a href="#trackpad">The application do not detect the trackpad</a></li>
 											<li><a href="#gamepad">The application do not detect my gamepad</a></li>
 											<li><a href="#nvidia">The NVIDIA issue and workaround for Optimus</a></li>
-											<li><a href="#borders">The application have black borders in fullscreen</a></li>
 										</ul>
 									</div>
 								</div>
 							</section>
 
 						<!-- Application Issues -->
-							<section class="main" id="trackpad">
-								<div class="content">
-									<header class="major">
-										<h2>The application do not detect the trackpad</h2>
-									</header>
-
-									<p>
-										The Shadow application captures every input when the stream is on. However, the trackpad on some computer do not work at all except the mecanical click.
-									</p>
-
-									<p>
-										The Shadow application detects only mouse movement to control the mouse. Linux uses libinput, which detects the trackpad events as fingers action. This is visible inside the logs, when you tried to move the mouse with your trackpad. The logs will be spammed by a line like this: <code>input error: Unhandled KEY 0x...</code>. The codes are listed <a href="https://gitlab.freedesktop.org/libinput/libinput/blob/ba603ea1925cf68bafe24958d882dbe01d9111a5/include/linux/linux/input-event-codes.h" target="_blank">here</a>.
-									</p>
-
-									<p>
-										<table>
-											<tr>
-												<td>Log line</td>
-												<td>Event</td>
-											</tr>
-
-											<tr>
-												<td>input error: Unhandled KEY 0x14a (330)</td>
-												<td>BTN_TOUCH</td>
-											</tr>
-
-											<tr>
-												<td>input error: Unhandled KEY 0x145 (325)</td>
-												<td>BTN_TOOL_FINGER</td>
-											</tr>
-										</table>
-									</p>
-
-									<p>
-										There is no fix right know that will not disturb your system. We have to wait for a fix from Blade. You can try to remap the xinput events but it's a mess and may disturb the touchpad behaviour.
-									</p>
-
-									<p>
-										You can still use an external mouse and it will work perfectly. The unified client will propably fix this issue.
-									</p>
-
-								</div>
-							</section>
-
-							<section class="main" id="gamepad">
+														<section class="main" id="gamepad">
 								<div class="content">
 									<header class="major">
 										<h2>The application do not detect my gamepad</h2>
 									</header>
 									<p>
-										It's a well known issue, at the moment, Shadow on linux didn't detect any gamepad. This is still an issue with the input that aren't forwarded to the Shadow.
-									</p>
-									<p>
-										As a workaround, you can use <a href="https://www.vpn.net/" target="_blank">Hamachi</a> + <a href="https://www.virtualhere.com/" target="_blank">VirtualHere</a> to use any device on your Shadow seemlessly.
+										Some gamepads are sometimes badly recognized on Linux. As a workaround, you can use <a href="https://www.vpn.net/" target="_blank">Hamachi</a> + <a href="https://www.virtualhere.com/" target="_blank">VirtualHere</a> to use any device on your Shadow seemlessly.
 									</p>
 
 									<hr />
@@ -136,7 +87,7 @@
 									<p>
 										Now, let's install it, shall we ? We will consider that the computer where the gamepad is plugged is a Linux. But keep in mind that you can for instance plug a device on your Raspberry Pi and forward this device to your Shadow asweel, it's magic ! We will also that the "client" will be a Shadow, so on Windows.
 									</p>
-
+Quand 
 									<p>
 										First, we will install <b>VirtualHere</b>. On Linux, it is very straighforward as the Linux kernel already have this technology. Open a terminal, move where you want to put the one-file software and then, execute the following code:
 
@@ -225,26 +176,6 @@ sudo ./vhusbdx86_64</code></pre>
 
 									<p>
 										All you have to do now is to <a href="./#vainfo">configure your Intel GPU for the VA-API</a>.
-									</p>
-								</div>
-							</section>
-
-							<section class="main" id="borders">
-								<div class="content">
-									<header class="major">
-										<h2>The application have black borders in fullscreen</h2>
-									</header>
-
-									<p>
-										You may experience black borders on Linux when you application is in fullscreen mode, even if the Shadow resolution match your local resolution. This a bug that appears when you switch from windowed to fullscreen mode while the stream stays opened.
-									</p>
-
-									<p>
-										The only fix is to start the application directly in fullscreen mode from the launch option and do not switch to window mode.
-									</p>
-
-									<p style="text-align: center;">
-										<span class="image"><img src="images/borders_fullscreen.png" alt="" style="width: 30em;" /></span>
 									</p>
 								</div>
 							</section>
