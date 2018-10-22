@@ -26,12 +26,12 @@ sub share {
 }
 
 # ------- Check AppImage ------- #
-my $path = '/opt/Shadow Beta';
+my $path = '/opt/shadowbeta';
 my $isAppImg = 0;
 
 if( $#ARGV > -1 ) {
     if( $ARGV[0] eq '--appimage' ) {
-        $path = './opt/Shadow Beta';
+        $path = './opt/shadowbeta';
         $isAppImg = 1;
     }
 }
@@ -75,7 +75,7 @@ $return .= "          Missing libraries\n";
 $return .= "-------------------------------------\n";
 
 $return .= `ldd -v "$path/shadow-beta" | grep "not found"`;
-$return .= `ldd -v "$path/resources/app.asar.unpacked/native/linux/ClientSDL" | grep "not found"`;
+$return .= `ldd -v "$path/resources/app.asar.unpacked/native/linux/Shadow" | grep "not found"`;
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";

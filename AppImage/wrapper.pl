@@ -30,6 +30,7 @@ my %fr = (
 
     'fake-error'        => "Ceci est une fonction de debug affichant une fausse erreur pour tester les notifications. Blip.",
     'fake-warning'      => "Ceci est une fonction de debug affichant un faux avertissement pour tester les notifications. Blip.",
+    'strace-missing'    => "Strace n'est pas installé sur votre machine, veuillez l'installer pour utiliser cette option.",
 
     'lang-en'           => "Langage forcé en anglais (en_US)",
     'lang-de'           => "Langage forcé en allemand (de_DE)",
@@ -39,7 +40,7 @@ my %fr = (
     'vainfo-optimus'    => "Votre GPU est NVIDIA. L'application ne peut pas fonctionner sur ce GPU. Néanmoins, vous disposez de la technologie Optimus. Lancez le panneau de controle NVIDIA, allez dans la rubrique Prime profiles, choisissez le GPU Intel et relancez votre session.",
     'vainfo-missing'    => "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
     'vainfo-bad'        => "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
-    'vainfo-good'       => "Votre carte graphique ne supporte que le H.264. Vous ne pourrez pas utiliser le H.265 (HEVC).",
+    'vainfo-good'       => "Votre carte graphique ne supporte que le H.264. N'activez pas le H.265 (HEVC) dans l'application.",
     'vainfo-fail'       => "Votre carte graphique n'est pas reconnue par la librarie VA-API. Veuillez vérifiez vos drivers VA-API avec la commande 'vainfo'.",
 
     'input-adding'      => "Ajout de l'utilisateur actuel au groupe input.",
@@ -51,11 +52,15 @@ my %fr = (
 
     'errors'            => "Les erreurs suivantes empêchent\nl'application Shadow de fonctionner",
 
+    'website'           => "Le site de la communauté Shadow Linux",
+
     'hotkeys'           => bold("Raccourcis") . "
-    • lshift-rctrl-esc:      Quitter
-    • lshift-rctrl-space:    Activer/désactiver le mode plein écran
-    • lshift-rctrl-g:        Activer/désactiver la capture du clavier et de la souris
-    • lshift-rctrl-h:        Activer/désactiver le Shadow Mode"
+    • lShift-lCtrl-Esc:      Ouvre le gestionnaire de tâches de Windows
+    • lShift-lCtrl-F:        Activer/désactiver le mode plein écran
+    • lShift-lCtrl-G:        Activer/désactiver la capture du clavier et de la souris\n\n"
+
+ . bold('Notes') . ":
+    • Le H265 ne s'active malheureusement pas au lancement du stream. Vérifiez dans l'application Shadow Control Panel sur votre Shadow s'il est bien activé."
 );
 
 my %en = (
@@ -63,6 +68,7 @@ my %en = (
 
     'fake-error'        => "This is a debug feature showing a fake error to test notifications. Blip.",
     'fake-warning'      => "This is a debug feature showing a fake warning to test notifications. Blip.",
+    'strace-missing'    => "Strace is not installed on your computer, please install it before using this parameter.",
 
     'lang-en'           => "Language forced in english (en_US)",
     'lang-de'           => "Language forced in german (de_DE)",
@@ -72,7 +78,7 @@ my %en = (
     'vainfo-optimus'    => "Your currently using the NVIDIA GPU. You can't start the application with it, but your computer supports Prime. Start the NVIDIA control panel, select the Prime panel, choose the Intel GPU and restart your session.",
     'vainfo-missing'    => "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
     'vainfo-bad'        => "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
-    'vainfo-good'       => "Your GPU supports only H.264. You will not be able to use H.265 (HEVC).",
+    'vainfo-good'       => "Your GPU supports only H.264. Do not enable H.265 (HEVC) in the application.",
     'vainfo-fail'       => "Your GPU is not recognized. Please check your hardware decoding drivers with the 'vainfo' command.",
 
 
@@ -85,11 +91,15 @@ my %en = (
 
     'errors'            => "The following errors prevented the\nShadow application from running",
 
+    'website'           => "The website of the Shadow Linux community",
+
     'hotkeys'           => bold("Hotkeys") . "
-    • lshift-rctrl-esc:      Exit
-    • lshift-rctrl-space:    Toggle fullscreen or windowed
-    • lshift-rctrl-g:        Toggle input grab
-    • lshift-rctrl-h:        Toggle Shadow Mode"
+    • lShift-lCtrl-Esc      Open the Windows task manager
+    • lShift-lCtrl-F        Toggle fullscreen or windowed
+    • lShift-lCtrl-G        Toggle input grab\n\n"
+
+ . bold('Notes') . ":
+    • The H265 option is not enabled when the stream starts. Please enable it from the Shadow Control Panel on your Shadow."
 );
 
 my %de = (
@@ -97,6 +107,7 @@ my %de = (
 
     'fake-error'        => "Dies ist eine Debug-Funktion, die einen gefälschten Fehler anzeigt, um Benachrichtigungen zu testen.",
     'fake-warning'      => "Dies ist eine Debug-Funktion, die eine gefälschte Warnung anzeigt, um Benachrichtigungen zu testen.",
+    'strace-missing'    => "Strace ist nicht auf Ihrem Computer installiert, bitte installieren Sie es, bevor Sie diesen Parameter verwenden.",
 
     'lang-en'           => "Sprache erzwungen in english (en_US)",
     'lang-de'           => "Sprache erzwungen in german (de_DE)",
@@ -118,11 +129,15 @@ my %de = (
 
     'errors'            => " Folgende Fehler haben einen \nStart von Shadow verhindert",
 
+    'website'           => "Shadow Linux Community Website",
+
     'hotkeys'           => bold("Tastenbelegung") . "
-    • lshift-rctrl-esc:      Beenden
-    • lshift-rctrl-space:    Wechsel Vollbild / Fenster
-    • lshift-rctrl-g:        Eingaben fangen umschalten
-    • lshift-rctrl-h:        Shadowmodus umschalten"
+    • lShift-lCtrl-Esc      Öffnet den Windows Task-Manager
+    • lShift-lCtrl-F        Wechsel Vollbild / Fenster
+    • lShift-lCtrl-G        Eingaben fangen umschalten\n\n"
+
+ . bold('Anmerkungen') . ":
+    • Die H265-Option ist nicht aktiviert, wenn der Stream gestartet wird. Bitte aktiviere es über die Schatten-Kontrollleiste auf deinem Schatten."
 );
 
 my $locale = setlocale(LC_CTYPE);
@@ -177,17 +192,6 @@ sub version {
     return 10000*$a + 100*$b + $c;
 }
 
-# ----------- Bypass Check priority ------------ #
-for(my $i=0; $i < $#ARGV+1; $i++) {
-    my $arg = $ARGV[$i];
-
-    # Bypass the check and launch
-    if( $arg eq '--bypass-check' ) {
-        push @warnings, $lang{'bypass'};
-        goto START_SHADOW;
-    }
-}
-
 # ----------- Variables ------------ #
 
 # Messages variables
@@ -226,6 +230,7 @@ if( -d 'opt' ) {
     $version = 'Nightly build';
 }
 
+
 # ----------- Bypass Check priority ------------ #
 for(my $i=0; $i < $#ARGV+1; $i++) {
     my $arg = $ARGV[$i];
@@ -237,11 +242,12 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     }
 }
 
+
 # -------- Update -------- #
 if( $isAppImg ) {
     if( -f 'shadow-appimage-version' ) {
 
-        Local version
+        # Local version
         open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
           or die "Could not open file 'shadow-appimage-version' $!";
         $version = <$fh>;
@@ -251,7 +257,7 @@ if( $isAppImg ) {
 
         if( substr($version, 0, 1) eq 'v' ) {
             # Distant version
-            my $distantVersion = `wget -q -O - https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
+            my $distantVersion = `curl -s https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
             chomp $distantVersion;
 
             # Update available
@@ -283,9 +289,9 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Start directly ClientSDL and stops
     if( $arg eq '--clientsdl' ) {
         if( $isAppImg ) {
-            system('./opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+            system('./opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow');
         } else {
-            system('/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL');
+            system('/opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow');
         }
 
         exit 0;
@@ -295,25 +301,34 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
     # Force the launcher in english
     if( $arg eq '--force-en' ) {
         $langF = 'LANG=en_US.utf8 ';
+        %lang = %en;
         push @warnings, $lang{'lang-en'}
     }
 
     # Force the launcher in german
     if( $arg eq '--force-de' ) {
         $langF = 'LANG=de_DE.utf8 ';
+        %lang = %de;
         push @warnings, $lang{'lang-de'}
     }
 
     # Force the launcher in english
     if( $arg eq '--force-fr' ) {
         $langF = 'LANG=fr_FR.utf8 ';
+        %lang = %fr;
         push @warnings, $lang{'lang-fr'}
     }
 
 
     # Start Shadow with Strace
     if( $arg eq '--strace' ) {
-        $strace = 1;
+
+        if( -f '/usr/bin/strace' ) {
+            $strace = 1;
+
+        } else {
+            push @errors, $lang{'strace-missing'};
+        }
     }
 
     # Create a false error
@@ -408,12 +423,15 @@ if( $env ne 'x11') {
 
 
 # -------- Kill ClientSDL ------ #
-while( `pkill -e ClientSDL` ne '' ) {}
+while( `pkill -e Shadow` ne '' ) {}
 
 
 # -------- Start Shadow -------- #
 START_SHADOW:
 print "\n";
+
+# Website
+print bold( $lang{'website'} ) . ": https://nicolasguilloux.github.io/blade-shadow-beta\n\n";
 
 # Warnings
 if( scalar @warnings > 0 ) {
@@ -441,10 +459,10 @@ if( scalar @errors > 0 ) {
 } else {
     print "$lang{'hotkeys'}\n\n";
 
-    my $pathExec = '/opt/Shadow\ Beta/shadow-beta';
+    my $pathExec = '/opt/shadowbeta/shadow-beta';
 
     if( $isAppImg ) {
-        $pathExec = './opt/Shadow\ Beta/shadow-beta.wrapper';
+        $pathExec = './opt/shadowbeta/shadow-beta.wrapper';
     }
 
     # Start Shadow with Strace
