@@ -20,6 +20,8 @@ The AppImage is confirmed to work on the following distributions, but is likely 
 - Debian
 - Linux Mint
 
+Download it from this link: https://nicolasguilloux.github.io/blade-shadow-beta/#appimage
+
 Note that none of these solutions are compatible with Nvidia GPUs yet. An unsatisfactory workaround is to take care of H.264/H.265 hardware decoding of with the Intel GPU instead, but since only one GPU can normally be active at a time (except from tweaks not covered here), this mean your dedicated Nvidia GPU would have to be uninstalled. This is a limitation of the current Shadow application.
 
 The scripts were written by the [Shadow Discord](https://discord.gg/shadowtech) community and are not affiliated with the Blade company. There is no guarantee whatsoever that the scripts will work for you. Use them at your own risk, preferably after reviewing them yourself. The AppImage should be harmless, worst case scenario is it does not work.
