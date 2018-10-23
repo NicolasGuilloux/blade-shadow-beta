@@ -56,13 +56,9 @@ The below scripts are meant to be run by your normal user, do not execute them a
 
 An AUR package is available. If it is not working after installation, please follow the tutorial or the Bash files: https://aur.archlinux.org/packages/shadow-beta
 
-A detailed tutorial is also available: https://support.shadow.tech/hc/fr/community/posts/360012569613-Shadow-Beta-sur-Arch-Linux?flash_digest=093ef96dce0b9104156420b2389ad119e8b9f9bd
+First, go to the directory where the script is located and make it executable: `cd Arch && chmod +x install-arch.sh`.
 
-First, go to the directory where the script is located and make it executable: `cd Arch && chmod +x *`.
-
-For the first install, launch install-arch.sh: `./install-arch.sh`.
-
-For updates, launch only update-arch.sh: `./update-arch.sh`.
+To install it, launch install-arch.sh: `./install-arch.sh`.
 
 
 ### Debian
@@ -82,10 +78,6 @@ No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi
 **The Solus install script is not working yet. An updated version taking care of the extra dependencies will be available soon. Meanwhile, the AppImage works, and is the recommended solution.**
 
 See issues in this [gist](https://gist.github.com/Kabouik/f738c03f5dbb8a363870e4eddced3e54) or this [ticket](https://dev.solus-project.com/T6736) on dev-solus.org.
-
-Go to the folder where the script is located and make it executable: `cd Solus && chmod +x *`
-
-Then, run the script: `./install_solus.sh`
 
 
 # Acknowledgments
