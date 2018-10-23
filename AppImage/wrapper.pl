@@ -55,9 +55,10 @@ my %fr = (
     'website'           => "Le site de la communauté Shadow Linux",
 
     'hotkeys'           => bold("Raccourcis") . "
-    • lShift-lCtrl-Esc:      Ouvre le gestionnaire de tâches de Windows
-    • lShift-lCtrl-F:        Activer/désactiver le mode plein écran
-    • lShift-lCtrl-G:        Activer/désactiver la capture du clavier et de la souris\n\n"
+    • lShift-lCtrl-Esc      Ouvre le gestionnaire de tâches de Windows
+    • lShift-lCtrl-Q        Arrête le stream
+    • lShift-lCtrl-F        Activer/désactiver le mode plein écran
+    • lShift-lCtrl-G        Activer/désactiver la capture du clavier et de la souris\n\n"
 
  . bold('Notes') . ":
     • Le H265 ne s'active malheureusement pas au lancement du stream. Vérifiez dans l'application Shadow Control Panel sur votre Shadow s'il est bien activé.
@@ -96,6 +97,7 @@ my %en = (
 
     'hotkeys'           => bold("Hotkeys") . "
     • lShift-lCtrl-Esc      Open the Windows task manager
+    • lShift-lCtrl-Q        Stop the stream
     • lShift-lCtrl-F        Toggle fullscreen or windowed
     • lShift-lCtrl-G        Toggle input grab\n\n"
 
@@ -135,6 +137,7 @@ my %de = (
 
     'hotkeys'           => bold("Tastenbelegung") . "
     • lShift-lCtrl-Esc      Öffnet den Windows Task-Manager
+    • lShift-lCtrl-Q        Stoppen Sie den Stream
     • lShift-lCtrl-F        Wechsel Vollbild / Fenster
     • lShift-lCtrl-G        Eingaben fangen umschalten\n\n"
 
