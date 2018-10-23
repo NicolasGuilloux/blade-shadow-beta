@@ -7,7 +7,7 @@ class shadowChecker:
     def __init__(self):
         self.pathExec = "/opt/shadowbeta/shadow-beta"
         self.pathClientSDL = "/opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow"
-        self.pathLogs = "/tmp/shadow/shadow.log"
+        self.pathLogs = "/home/" + os.popen("echo $USER").read().rstrip() + "/.cache/blade/shadow/shadow.log"
 
         self.vainfo()
         self.libraries()
