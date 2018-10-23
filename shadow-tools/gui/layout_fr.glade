@@ -81,7 +81,7 @@ Soyez rapide, le lien ne va pas être disponible éternellement.</property>
     <property name="window_position">center</property>
     <property name="default_width">800</property>
     <property name="default_height">400</property>
-    <property name="icon_name">shadow-beta</property>
+    <property name="icon">../../docs/images/logo.png</property>
     <child>
       <object class="GtkNotebook">
         <property name="visible">True</property>

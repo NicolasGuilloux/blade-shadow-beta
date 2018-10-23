@@ -5,9 +5,9 @@ import textwrap
 class shadowChecker:
 
     def __init__(self):
-        self.pathExec = "/opt/Shadow\ Beta/shadow-beta"
-        self.pathClientSDL = "/opt/Shadow\ Beta/resources/app.asar.unpacked/native/linux/ClientSDL"
-        self.pathLogs = "/home/" + os.popen("echo $USER").read().rstrip() + "/.cache/blade/shadow/shadow.log"
+        self.pathExec = "/opt/shadowbeta/shadow-beta"
+        self.pathClientSDL = "/opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow"
+        self.pathLogs = "/tmp/shadow/shadow.log"
 
         self.vainfo()
         self.libraries()
@@ -67,7 +67,7 @@ class shadowChecker:
             self.logs = "".join( tmpLogs[len(tmpLogs)-index-1:] )
 
         else:
-            self.logs = "Aucun fichier de logs trouvé. Essayez de lancer le stream avant.\nSi le problème persiste, c'est que le stream crash avant d'avoir pu créer des logs, souvent à cause de librairies manquantes."
+            self.logs = "Aucun fichier de logs trouvé. Essayez de lancer le stream avant.\nSi le problème persiste, c'est que le stream crash avant d'avoir pu créer des logs.\n\nContactez la communauté Discord pour avoir plus d'informations. \nhttps://discordapp.com/invite/shadowtech"
 
     ## toString
     def toString(self):

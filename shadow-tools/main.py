@@ -10,7 +10,6 @@ __email__ = "novares.x@gmail.com"
 __status__ = "Production"
 
 from checker import *
-from fixer import *
 
 # GTK
 import gi
@@ -120,7 +119,6 @@ class MainWindow:
     def update(self, button):
         # Get information
         self.check = shadowChecker()
-        self.fix   = shadowFixer()
 
         # Layouts
         self.vainfoLayout()
