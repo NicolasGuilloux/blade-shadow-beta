@@ -36,57 +36,85 @@
 									<a href="./" class="icon alt fa-chevron-left"></a>
 								</p>
 
-								<h2>Arch Linux</h2>
+								<h1>Arch Linux</h1>
 
 								<p>
-									<b style="color: red;">We strongly recommand you to use the <a href="./#appimage">AppImage</a> instead of following this tutorial as it makes things easier. Moreover, the wrapper helps to track error directly from the Shadow.</b>
+									<b style="color: red;">We strongly recommand you to use the <a href="./#appimage">AppImage</a> instead of following this tutorial as it makes things easier.</b>
 								</p>
 
 								<p>
-									The application works well on Arch Linux but needs several tweaks to work perfectly. We will use the AUR entry made by <b>agentcobra#6142</b> because it simplifies a lot the installation.
+									The application works well on Arch Linux now without any tweaks. There are 2 options to install it: from an AUR package manager (yay, yaourt, etc) or from directly the PKGBUILD. We recommand to use the first option.
+								</p>
+
+
+								<h2>Good to know before installing</h2>
+
+								<p>
+									You will need to add your user to the input group to use Shadow: <code>sudo gpasswd -a $USER input</code><br />
+									To apply this, you will need to log out your session/reboot your computer.
 								</p>
 
 								<p>
-									First things first, several dependencies need to be installed: <br />
-									<code>sudo pacman --needed -S gconf libnotify libappindicator libxtst nss libcurl-compat libva libdrm freetype2 libbsd json-c opus sdl gcc7-libs ttf-dejavu</code>.
-								</p>
-
-								<p>
-									As the application was originally designed for Ubuntu, some fixes in the installed dependencies need to be done. Follow the next commands:
-<pre><code>echo "Correct Libjson-c"
-sudo ln -f /usr/lib/libjson-c.so /usr/lib/libjson-c.so.3
-
-echo "Correct Libubsan"
-sudo cp /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/libubsan.so.0 /usr/lib/
-
-echo "Fix the font issue"
-sudo ln -sf /usr/share/fonts/TTF /usr/share/fonts/truetype</code></pre>
-								</p>
-
-								<p>
-									Then, we properly install the Shadow application. It depends on your favorite AUR installer:
-
-									<ul>
-										<li>Yay: <code>yay -S shadow-beta</code></li>
-										<li>Yaourt: <code>yaourt -S shadow-beta</code></li>
-										<li>Packer: <code>packer -s shadow-beta</code></li>
-										<li>Pacaur: <code>pacaur -s shadow-beta</code></li>
-									</ul>
-								</p>
-
-								<p>
-									Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.<br />
-									If you can't find the Xorg version of your desktop environement, please follow the <a href="https://wiki.archlinux.org/index.php/xorg" target="_blank">Arch topic</a> about it.
+									Shadow does not work yet on Wayland. Make sure you are using Xorg. The following command should return x11: <code>echo $XDG_SESSION_TYPE</code>. If it returns Wayland, try to check if the environnement provides Xorg on the login screen.
 								</p>
 
 								<p style="text-align: center;">
 									<span class="image"><img src="images/xorg_pick.png" alt=""></span>
 								</p>
 
-								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
-
 								<p>
 									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
+								</p>
+
+
+								<h2>From AUR</h2>
+
+								<table>
+									<thead>
+										<tr>
+											<th>Package manager</th>
+											<th>Command</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Yay</td>
+											<td>yay -S shadow-beta</td>
+										</tr>
+										<tr>
+											<td>Yaourt</td>
+											<td>yaourt -S shadow-beta</td>
+										</tr>
+										<tr>
+											<td>Packer</td>
+											<td>packer -s shadow-beta</td>
+										</tr>
+										<tr>
+											<td>Pacaur</td>
+											<td>pacaur -s shadow-beta</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<p>
+									You can also search the package from your favorite GUI.
+								</p>
+
+								<span class="image"><img src="images/arch_install_gui.png" alt="" style="max-width: 30em;"/></span>
+
+								<p>
+									Using AUR allows the Shadow application to be updated when the system updates itself, bringing you always the last version.
+								</p>
+
+
+								<h2>Using directly the PKGBUILD</h2>
+
+								<p>
+									Clone the git and go in the Arch folder: <code>git clone https://github.com/NicolasGuilloux/blade-shadow-beta && cd blade-shadow-beta/Arch</code>
+								</p>
+
+								<p>
+									A script was made to make it quickly: <code>chmod +x install_arch.sh && ./install_arch.sh</code>
 								</p>
 							</section>
 

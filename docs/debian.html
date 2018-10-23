@@ -36,12 +36,35 @@
 									<a href="./" class="icon alt fa-chevron-left"></a>
 								</p>
 
-								<h2>Debian</h2>
+								<h1>Debian</h1>
 
 								<p>
 									The application works well on Debian but needs several tweaks to work perfectly, including a dirty installation of the Qt library which will take 1GB on your storage or dirty installation of Ubuntu's libraries (which is BAD, really BAD).<br />
 									Sadly, the AppImage do not work on Debian, so you will have to do all the tricks bellow to make it work.
 								</p>
+
+
+								<h2>Good to know before installing</h2>
+
+								<p>
+									You will need to add your user to the input group to use Shadow: <code>sudo gpasswd -a $USER input</code><br />
+									To apply this, you will need to log out your session/reboot your computer.
+								</p>
+
+								<p>
+									Shadow does not work yet on Wayland. Make sure you are using Xorg. The following command should return x11: <code>echo $XDG_SESSION_TYPE</code>. If it returns Wayland, try to check if the environnement provides Xorg on the login screen.
+								</p>
+
+								<p style="text-align: center;">
+									<span class="image"><img src="images/xorg_pick.png" alt=""></span>
+								</p>
+
+								<p>
+									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
+								</p>
+
+
+								<h2>Installation</h2>
 
 								<p>
 									First things first, let's install the needed dependencies: <code>sudo apt-get install libjson-c3 libsdl2-dev vainfo libgconf2-dev</code>

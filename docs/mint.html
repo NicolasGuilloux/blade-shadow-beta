@@ -36,7 +36,7 @@
 									<a href="./" class="icon alt fa-chevron-left"></a>
 								</p>
 
-								<h2>Linux Mint</h2>
+								<h1>Linux Mint</h1>
 
 								<p>
 									<b style="color: red;">We strongly recommand you to use the <a href="./#appimage">AppImage</a> instead of following this tutorial as it makes things easier. Moreover, the wrapper helps to track error directly from the Shadow.</b>
@@ -46,23 +46,34 @@
 									Shadow was designed natively for Ubuntu 18.04 (on which is based the latest version of Mint) and does not require a lot of tweaks. Still, some stuff need to be done before turning your Linux machine to a powerful gamer PC with Shadow.
 								</p>
 
+
+								<h2>Good to know before installing</h2>
+
 								<p>
-									First things first, download the deb file from the Shadow website by following this link <a href="https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb">https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb</a> and install it.
+									You will need to add your user to the input group to use Shadow: <code>sudo gpasswd -a $USER input</code><br />
+									To apply this, you will need to log out your session/reboot your computer.
 								</p>
 
-								<p>The CURL library and the gstreamer for VA-API are often missing so just to be sure, run <code>sudo apt install curl gstreamer1.0-vaapi</code>.</p>
-
-								<p>Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.</p>
+								<p>
+									Shadow does not work yet on Wayland. Make sure you are using Xorg. The following command should return x11: <code>echo $XDG_SESSION_TYPE</code>. If it returns Wayland, try to check if the environnement provides Xorg on the login screen.
+								</p>
 
 								<p style="text-align: center;">
 									<span class="image"><img src="images/xorg_pick.png" alt=""></span>
 								</p>
 
-								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
-
 								<p>
 									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
 								</p>
+
+
+								<h2>Installation</h2>
+
+								<p>
+									First things first, download the deb file from the Shadow website by following this link <a href="https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb">https://macosx.update.blade-group.fr/mpl/linux/beta/bionic/shadowbeta.deb</a> and install it.
+								</p>
+
+								<p>The CURL library and the gstreamer for VA-API are often missing so just to be sure, run <code>sudo apt install curl gstreamer1.0-vaapi</code>.</p>
 							</section>
 
 					</div>
