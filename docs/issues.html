@@ -55,13 +55,14 @@
 										<ul style="list-style-type: none;">
 											<li><a href="#gamepad">The application do not detect my gamepad</a></li>
 											<li><a href="#nvidia">The NVIDIA issue and workaround for Optimus</a></li>
+											<li><a href="#strace">The application crashed when I try to strace (AppImage)</a></li>
 										</ul>
 									</div>
 								</div>
 							</section>
 
 						<!-- Application Issues -->
-														<section class="main" id="gamepad">
+							<section class="main" id="gamepad">
 								<div class="content">
 									<header class="major">
 										<h2>The application do not detect my gamepad</h2>
@@ -87,7 +88,7 @@
 									<p>
 										Now, let's install it, shall we ? We will consider that the computer where the gamepad is plugged is a Linux. But keep in mind that you can for instance plug a device on your Raspberry Pi and forward this device to your Shadow asweel, it's magic ! We will also that the "client" will be a Shadow, so on Windows.
 									</p>
-Quand
+
 									<p>
 										First, we will install <b>VirtualHere</b>. On Linux, it is very straighforward as the Linux kernel already have this technology. Open a terminal, move where you want to put the one-file software and then, execute the following code:
 
@@ -176,6 +177,36 @@ sudo ./vhusbdx86_64</code></pre>
 
 									<p>
 										All you have to do now is to <a href="./#vainfo">configure your Intel GPU for the VA-API</a>.
+									</p>
+								</div>
+							</section>
+
+							<section class="main" id="strace">
+								<div class="content">
+									<header class="major">
+										<h2>The application crashed when I try to strace (AppImage)</h2>
+									</header>
+
+									<p>
+										The strace may crash the Shadow client with the AppImage. Indeed, strace disturbs the FUSE component of the AppImage used to mount it on your drive.<br />
+										A workaround is to manually mount the AppImage, then start the strace on the shadow-wrapper.pl.
+									</p>
+
+									<p>
+										First, mount the AppImage using the following command: <code>./shadowbeta-linux-x86_64.AppImage --appimage-mount</code>. You will get a path to a folder.
+									</p>
+
+									<p>
+										From another terminal, go to this folder, and use the following command to start the strace:<br />
+										<code>strace -f  ./shadow-wrapper.pl  &> /var/tmp/strace_shadowbeta && tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta && rm /var/tmp/strace_shadowbeta</code>
+									</p>
+
+									<p>
+										Use your Shadow. When finished, close the launcher. Wait for the terminal to finish the process. When done, it should have created a archive in your user directory. This is what you should share.
+									</p>
+
+									<p>
+										You may now close the first terminal to unmount the AppImage.
 									</p>
 								</div>
 							</section>
