@@ -17,3 +17,15 @@ chmod +x shadowbeta-linux-x86_64.AppImage
 ```
 
 Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --help`.
+
+## Strace
+
+The option `--strace` is buggued as `strace` disturbs the FUSE component of the AppImage. A workaround is to mount the AppImage dans to strace from the wrapper.
+
+First, mount the AppImage using the following command: `./shadowbeta-linux-x86_64.AppImage --appimage-mount`. You will get a path to a folder.
+
+From another terminal, go to this folder, and use the following command to start the strace: `strace -f  ./shadow-wrapper.pl  &> /var/tmp/strace_shadowbeta && tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta && rm /var/tmp/strace_shadowbeta`
+
+Use your Shadow. When finished, close the launcher. Wait for the terminal to finish the process. When done, it should have created a archive in your user directory. This is what you should share.
+
+You may now close the first terminal to unmount the AppImage.
