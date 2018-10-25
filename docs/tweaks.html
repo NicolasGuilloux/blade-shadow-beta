@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Tweaks - Shadow Linux Community</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<link rel="icon" type="image/png" href="images/logo.png" />
+
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
+		<link rel="stylesheet" href="assets/css/styles/color-brewer.css">
+
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1>Shadow tweaks</h1>
+						<p>The Linux community for <a href="https://shadow.tech/" target="_blank">Shadow</a>.</p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="./#appimage">AppImage</a></li>
+							<li><a href="./#vainfo">Setup your GPU</a></li>
+							<li><a href="./#tool">Shadow tool</a></li>
+							<li><a href="issues.html">Known issues</a></li>
+							<li><a href="#" class="active">Tweaks</a></li>
+							<li><a href="https://github.com/NicolasGuilloux/blade-shadow-beta" target="_blank">Our work on Github</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Tweaks</h2>
+										</header>
+										<p>
+											On Linux, a lot of scripts and tweaks can be designed, especially to integrate and interact with distant computers like your Shadow. This page provides some tutorials made by the community to integrate your Shadow in your favorite system.
+										</p>
+
+										<ul style="list-style-type: none;">
+											<li><a href="#mount">Mount the Shadow in your filesystem</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+
+						<!-- Application Issues -->
+							<section class="main" id="mount">
+								<div class="content">
+									<header class="major">
+										<h2>Mount your Shadow in your filesystem</h2>
+									</header>
+
+									<p>
+										Linux is very efficient to mount distant filesystem in your local one, providing a seemlessly integration in your favorite file browser. For this tutorial, <a href="https://www.vpn.net/" target="_blank">Hamachi</a> and Samba will be used.
+									</p>
+
+									<hr />
+									<h3>Explanations</h3>
+
+									<p>
+										Samba is a Linux effort to support the SMB protocol, proprietary protocol of Microsoft for Windows. We use this protocol as it is already implemented in Windows and do not need an additional server. SMB is mainly designed for local sharing.
+
+									</p>
+									<p>
+										This is were <a href="https://www.vpn.net/" target="_blank">Hamachi</a> takes place. Hamachi will create a VPN tunnel between all members of of the network (maximum 5 computers for a free account). Creating this VPN will also put these members on a "local" network for Windows, which also bring the ability to use SMB share protocol.
+									</p>
+
+									<hr />
+									<h3>Hamachi setup</h3>
+
+									<p>
+										We will install <a href="https://www.vpn.net/" target="_blank">Hamachi</a> on your machine. I let you download the appropriate file for your distribution and architecture on this link: <a href="https://www.vpn.net/linux" target="_blank">https://www.vpn.net/linux</a> (for Arch users, <a href="https://aur.archlinux.org/packages/logmein-hamachi/" target="_blank">logmein-hamachi</a><sup>AUR</sup>).<br />
+										Hamachi on Linux do not have a GUI, but you're not effraid right ? First let's configure Hamachi to allow your user to use it.
+									</p>
+
+									<p>
+										<code>echo "Ipc.User $USER" | sudo tee -a /var/lib/logmein-hamachi/h2-engine-override.cfg</code>
+									</p>
+
+									<p>
+										Then start the Hamachi service. This command depends on your distribution, I let you do this. Then, create an account on the official website of <a href="https://www.vpn.net/" target="_blank">Hamachi</a>. Then open a terminal, and let's configure Hamachi by doing <code>hamachi login && hamachi attach-net YOUR_EMAIL</code>. After this, go on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a> and accept the join request.
+									</p>
+
+									<p>
+										<b>Start the Shadow</b>, we are close to the end. Download the <a href="https://www.virtualhere.com/usb_client_software" target="_blank">VirtualHere executable</a> and Hamachi on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a>.
+									</p>
+
+									<p>
+										Install Hamachi first by following the steps. When the window is finally opened, log you in. The go on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a>, log you in and accept the request. Then create a network by clicking on "My network" and "Create a network". Choose a "mesh" architecture and name it whatever your want. When done, add your 2 computers, the Shadow and your PC, in the created network. You can now close your webbrowser but keep the Hamachi window open.
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/hamachi_config.png" alt="" style="width: 30em;" /></span>
+									</p>
+
+									<h3>Sharing setup</h3>
+
+									<p>
+										Your computers are now on the same network, we can start the SMB configuration. The first step will be to create a dedicated user with a password for the share to separate the share from your administrator account.
+									</p>
+
+									<p>
+										Go into the parameters, select Accounts, Family and other users and finally, click on "Add a new user". Please consider for security to make this account non administrator. Set a simple user name (all lower case to fit the UNIX standard) and a password. For this tutorial, we consider that the user is <code>nover</code>. Please change them to the one you actually typed.
+									</p>
+
+									<p>
+										Now we need to allow the share for Windows. It sounds scary but we will use commands on Windows... Open a terminal on your Shadow by searching "cmd" and right click on the result, execute as Administrator. When openned, type the following commands:
+									</p>
+
+									<p>
+										<code>netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes<br />
+											netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes</code>
+
+									<p>
+										Right click on the folder you want to share and click on parameters. For the next screen, I chose to share the whole user folder called "Nicolas Guilloux". Under the "Share" tab, click on "Advanced share". Check the checkbox to share it, give it a pretty name if you want and then click Authorizations. My advice is to remove all users already present in the window, especially "All". Then click on "Add", type <code>nover</code>, click on verify and then validate. You can manage specific rights for specific users, I chose to give a full access to my user. You can now close all windows by clicking on "OK".
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/share_folder.png" alt="" style="width: 30em;" /></span>
+									</p>
+
+									<p>
+										Back on your Linux, install Samba and start your favorite file browser. Get the IP of your Shadow from Hamachi too. You can now access to your share by going to <code>smb://HAMACHI_IP_ADDRESS</code> and entering the share user and his password.
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/dolphin_share.png" alt="" style="width: 30em;" /></span>
+									</p>
+
+									<p>
+										On Dolphin, you can add a shortcut for instance under Network.
+									</p>
+
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+							<p>
+								<ul>
+									<li><a href="https://discordapp.com/invite/shadowtech" target="_blank">Discord Shadow FR</a></li>
+									<li><a href="https://discordapp.com/invite/shadowen" target="_blank">Discord Shadow EN</a></li>
+									<li><a href="https://discordapp.com/invite/shadowde" target="_blank">Discord Shadow DE</a></li>
+									<li><a href="https://discordapp.com/invite/KRafPYV" target="_blank">Discord Shadow US</a></li>
+								</ul>
+							</p>
+						-->
+						<p class="copyright">This website and its content is not linked with the Blade company. It was made by the community to the community.</p>
+						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script src="assets/js/highlight.pack.js"></script>
+			<script>
+				var codes = document.getElementsByTagName('code');
+				for(var i=0; i<codes.length; i++) {
+					codes[i].className += ' bash';
+				}
+				hljs.initHighlightingOnLoad();
+			</script>
+
+	</body>
+</html>
