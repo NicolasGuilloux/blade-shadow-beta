@@ -95,8 +95,8 @@ $return .= "                Logs\n";
 $return .= "-------------------------------------\n";
 
 if( -f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log' ){
-    my @logs = split(/template_digit/, `cat ~/.cache/blade/shadow/shadow.log`);
-    $return .= 'template_digit' . $logs[-1];
+    my @logs = split(/Welcome/, `cat ~/.cache/blade/shadow/shadow.log`);
+    $return .= 'Welcome' . $logs[-1];
 
 } else {
     $return .= 'Logs not found.';
