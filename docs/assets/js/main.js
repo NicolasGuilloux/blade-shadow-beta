@@ -45,7 +45,7 @@
 					});
 
 			// Links.
-				var $nav_a = $nav.find('a');
+				var $nav_a = $nav.find('a.scrolly');
 
 				$nav_a
 					.scrolly({
