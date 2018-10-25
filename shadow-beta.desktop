@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Shadow Beta
+Comment=Play your games in streaming from your Shadow
+Comment[fr]=Jouez à vos jeux en streaming avec votre Shadow
+Comment[de]=Spiele deine Spiele im Streaming von deinem Shadow
+Exec="/opt/shadowbeta/shadow-wrapper.pl"
+Terminal=false
+Type=Application
+Icon=shadow-beta
+Categories=Games;Virtualization
