@@ -80,14 +80,11 @@ No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi
 See issues in this [gist](https://gist.github.com/Kabouik/f738c03f5dbb8a363870e4eddced3e54) or this [ticket](https://dev.solus-project.com/T6736) on dev-solus.org.
 
 
-# Support
-
-If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP
-
-
 # Acknowledgments
 
 Thanks to **Alex^#1629** on Discord for being available every time somebody needs to kill a bug. Thanks a lot for the wonderful AppImage!
+
+Thanks to **agentcobra#6142** on Discord for maintaining the AUR package and review my code. Many mistakes were corrected by you.
 
 Thanks to **raphco#0312** on Discord for being the guinea pig for Arch.
 
@@ -98,3 +95,15 @@ Thanks to **kabouik#7008** for relentlessly bothering us to add support for Solu
 Thanks to **TheWolf#0985** and **Brother/Ilya#0013** for their help with the german translations.
 
 You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech).
+
+
+# Miscalleneous
+
+### Support
+
+If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP
+
+
+### Community projects
+
+- Shadow Gaming: A discord to share the configuration of the game and discuss about benchmark. https://discord.gg/N48zStu
