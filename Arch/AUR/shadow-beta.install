@@ -27,6 +27,5 @@ pre_upgrade(){
 }
 
 post_upgrade(){
-	# Replace current shortcut with the new one
-	ln -sf '/opt/shadowbeta/shadow-wrapper.pl' '/usr/bin/shadow-beta'
+	post_install()
 }
