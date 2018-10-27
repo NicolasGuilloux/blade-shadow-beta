@@ -80,6 +80,11 @@ No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi
 See issues in this [gist](https://gist.github.com/Kabouik/f738c03f5dbb8a363870e4eddced3e54) or this [ticket](https://dev.solus-project.com/T6736) on dev-solus.org.
 
 
+# Support
+
+If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP
+
+
 # Acknowledgments
 
 Thanks to **Alex^#1629** on Discord for being available every time somebody needs to kill a bug. Thanks a lot for the wonderful AppImage!
