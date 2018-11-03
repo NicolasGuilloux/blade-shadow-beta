@@ -55,6 +55,11 @@
 											The goal of this Github and Website is to present all tweaks done for the Linux application of the Blade's <a href="https://shadow.tech/" target="_blank">Shadow</a>.<br />
 											This website was designed the community and is	 not related to the Blade group. All the work are made by people who are interrested in improving an already awesome technology.
 										</p>
+
+										<p>
+											If you plan to suscribe to Shadow or you want to help me, please use my referral code <code>NICNC9DP</code> or suscribe <a href="https://shop.shadow.tech/invite/NICNC9DP" target="_blank">here</a> to get a discount on your first month.
+										</p>
+
 										<ul class="actions">
 											<li><a href="http://www.blade-group.com/" target="_blank" class="button">Learn More about the Blade group</a></li>
 										</ul>
@@ -136,10 +141,8 @@
 									<pre class="app_code" style="display: none;">
 <code>mkdir -p ~/.local/share/Shadow\ Beta
 cd ~/.local/share/Shadow\ Beta/
-wget --content-disposition <span id="app_link_code"></span>
 rm -f shadowbeta-linux-x86_64.AppImage
-unzip shadowbeta-linux-x86_64.AppImage-<span class="app_version"></span>.zip
-rm shadowbeta-linux-x86_64.AppImage-<span class="app_version"></span>.zip
+wget --content-disposition <span id="app_link_code"></span>
 chmod +x shadowbeta-linux-x86_64.AppImage
 ./shadowbeta-linux-x86_64.AppImage</code>
 									</pre>
@@ -347,8 +350,6 @@ python3 main.py</code></pre>
 			<script src="assets/js/main.js"></script>
 
 			<script>
-				var url = 'https://gitlab.com/aar642/shadow-appimage/-/jobs/92033231/artifacts/raw/shadowbeta-linux-x86_64.AppImage';
-
 				$.getJSON('https://gitlab.com/api/v4/projects/7962701/repository/tags', function(data) {
 					var latest = null;
 
@@ -361,9 +362,10 @@ python3 main.py</code></pre>
 					}
 
 					var version = latest.release.tag_name;
+					var url = 'https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/raw/shadowbeta-linux-x86_64.AppImage?job=bionic_build';
 
-					$('#app_link').attr('href', 'https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=bionic_build');
-					$('#app_link_code').text('https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/download?job=bionic_build');
+					$('#app_link').attr('href', url);
+					$('#app_link_code').text(url);
 					$('#app_version').text('(v' + version + ')');
 					$('.app_version').text(version);
 					$('.app_code').show();
