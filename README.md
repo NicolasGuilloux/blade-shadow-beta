@@ -106,4 +106,4 @@ If you want to support me, rather than make donations, I prefer to use the refer
 
 ### Community projects
 
-- Shadow Gaming: A discord to share the configuration of the game and discuss about benchmark. https://discord.gg/N48zStu
+- Shadow Gaming: A discord to share the configuration of the game and discuss about benchmark. https://discord.gg/d5Exqk9
