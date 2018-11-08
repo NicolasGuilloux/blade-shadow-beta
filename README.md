@@ -17,7 +17,6 @@ The AppImage is confirmed to work on the following distributions, but is likely 
 
  Installation scripts currently support:
 - Arch Linux
-- Debian
 - Linux Mint
 
 Download it from this link: https://nicolasguilloux.github.io/blade-shadow-beta/#appimage
@@ -59,13 +58,6 @@ An AUR package is available. If it is not working after installation, please fol
 First, go to the directory where the script is located and make it executable: `cd Arch && chmod +x install-arch.sh`.
 
 To install it, launch install-arch.sh: `./install-arch.sh`.
-
-
-### Debian
-
-Make the script executable: `chmod +x Debian/*`
-
-To install or update Shadow bêta, simply launch the script and follow instructions: `Debian/install_debian.sh`.
 
 
 ### Linux Mint

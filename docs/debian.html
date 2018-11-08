@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
 		<link rel="icon" type="image/png" href="images/logo.png" />
-		
+
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/custom.css" />
 		<link rel="stylesheet" href="assets/css/styles/color-brewer.css">
@@ -42,8 +42,12 @@
 								<h1>Debian</h1>
 
 								<p>
-									The application works well on Debian but needs several tweaks to work perfectly, including a dirty installation of the Qt library which will take 1GB on your storage or dirty installation of Ubuntu's libraries (which is BAD, really BAD).<br />
-									Sadly, the AppImage do not work on Debian, so you will have to do all the tricks bellow to make it work.
+									We strongly recommand you to use the <a href="./#appimage">AppImage</a>, especially for Debian.<br />
+									Moreover, the old tutorial is deprecated. Please, seriously consider to use the AppImage.
+								</p>
+
+								<p>
+									If you still plan to tweak an installation from the DEB file, we won't be able to help you.
 								</p>
 
 
@@ -61,64 +65,6 @@
 								<p style="text-align: center;">
 									<span class="image"><img src="images/xorg_pick.png" alt=""></span>
 								</p>
-
-								<p>
-									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
-								</p>
-
-
-								<h2>Installation</h2>
-
-								<p>
-									First things first, let's install the needed dependencies: <code>sudo apt-get install libjson-c3 libsdl2-dev vainfo libgconf2-dev</code>
-								</p>
-
-								<p>
-									The next step is to install the Qt library. It will take 1GB on your storage, and also will take time so grab a cup of coffee, or start to watch Rick & Morty.
-
-<pre><code>echo "Installing qt. This may take a while."
-wget http://download.qt.io/official_releases/qt/5.9/5.9.1/qt-opensource-linux-x64-5.9.1.run
-chmod a+x qt-opensource-linux-x64-5.9.1.run
-sudo ./qt-opensource-linux-x64-5.9.1.run
-rm qt-opensource-linux-x64-5.9.1.run</code></pre>
-								</p>
-
-								<p>
-									Because it's not enough DIRTY, we have to install some Ubuntu's libraries by hand and put them in the libs folder. It is dirty. Again, it is really dirty. It's not too late to download the AppImage.
-
-<pre><code>mkdir debs_shadow
-cd debs_shadow
-
-if ! [ -f "/usr/bin/curl" ]; then
-    wget https://launchpad.net/~ubuntu-security/+archive/ubuntu/ppa/+build/13787618/+files/curl_7.52.1-4ubuntu1.4_amd64.deb
-fi
-
-if ! [ -f "/usr/lib/x86_64-linux-gnu/libcurl.so.3" ]; then
-    wget https://launchpad.net/~ubuntu-security/+archive/ubuntu/ppa/+build/13787618/+files/libcurl3_7.52.1-4ubuntu1.4_amd64.deb
-fi
-
-if ! [ -f "/lib/x86_64-linux-gnu/libssl.so.1.0.0" ]; then
-    wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu13.6_amd64.deb
-fi
-
-if ! [ -z "$(ls)" ]; then
-    echo "Installing libssl, libcurl and curl if needed"
-    sudo dpkg -i *.deb
-fi</code></pre>
-								</p>
-
-								<p>
-									With your frankenstein Debian, you can now install the deb file by downloading it (<a href="https://macosx.update.blade-group.fr/mpl/linux/beta/artful/shadowbeta.deb">https://macosx.update.blade-group.fr/mpl/linux/beta/artful/shadowbeta.deb</a>) and install it <code>sudo apt install ./shadowbeta.deb</code>
-								</p>
-
-
-								<p>Shadow does not work on Wayland, so if <code>echo $XDG_SESSION_TYPE</code> does not return x11, log out, click on the engine weel and select "Xorg" then log in again. It will look exactly the same but it will actually run on Xorg.</p>
-
-								<p style="text-align: center;">
-									<span class="image"><img src="images/xorg_pick.png" alt=""></span>
-								</p>
-
-								<p>You will need also to add your user to the "input" group by doing: <code>sudo gpasswd -a $USER input</code>. You will need to reboot after this step.</p>
 
 								<p>
 									For all distribution, you may experience an issue with the VA-API which is involved in the decoding process. Please follow the tutorial we made right <a href="./#vainfo">here</a>.
