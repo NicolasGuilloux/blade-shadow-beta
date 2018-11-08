@@ -51,6 +51,7 @@ Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --
 
 The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed. There is no need to use the scripts if you are using the AppImage, and reciprocally.
 
+
 ### Arch Linux
 
 An AUR package is available. If it is not working after installation, please follow the tutorial or the Bash files: https://aur.archlinux.org/packages/shadow-beta
@@ -63,13 +64,6 @@ To install it, launch install-arch.sh: `./install-arch.sh`.
 ### Linux Mint
 
 No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi` is required. Install it with: `sudo apt install gstreamer1.0-vaapi` then install the vanilla Shadow Beta .deb file.
-
-
-### Solus
-
-**The Solus install script is not working yet. An updated version taking care of the extra dependencies will be available soon. Meanwhile, the AppImage works, and is the recommended solution.**
-
-See issues in this [gist](https://gist.github.com/Kabouik/f738c03f5dbb8a363870e4eddced3e54) or this [ticket](https://dev.solus-project.com/T6736) on dev-solus.org.
 
 
 # Acknowledgments
