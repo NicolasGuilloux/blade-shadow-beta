@@ -106,4 +106,7 @@ If you want to support me, rather than make donations, I prefer to use the refer
 
 ### Community projects
 
-- Shadow Gaming: A discord to share the configuration of the game and discuss about benchmark. https://discord.gg/d5Exqk9
+- [Shadow Live OS](https://gitlab.com/NicolasGuilloux/shadow-live-os): A live Linux that start Shadow and all needed components, ready out of the box !
+- [ShadowOS Networked boot](https://gitlab.com/aar642/shadowos-boot): A small ISO (~1Mo) that use iPXE to boot the Shadow Live OS using network.
+- [Shadow Kodi Addon](https://gitlab.com/NicolasGuilloux/shadow-kodi-addon/tree/master): A Kodi addon to start Kodi from the Kodi interface.
+- [Shadow Gaming](https://discord.gg/d5Exqk9): A discord to share the configuration of the game and discuss about benchmark.
