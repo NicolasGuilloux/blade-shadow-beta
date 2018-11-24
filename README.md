@@ -4,6 +4,8 @@ The Shadow cloud-computing application by Blade (https://shadow.tech) is availab
 
 A sexy website is in the works to summarize everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
 
+Check out our side-projects Discord: https://discord.gg/9HwHnHq
+
 # How to use
 
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know):
@@ -15,11 +17,10 @@ The AppImage is confirmed to work on the following distributions, but is likely 
  - Fedora 28
  - GalliumOS 3.0
 
+
  Installation scripts currently support:
 - Arch Linux
 - Linux Mint
-
-Download it from this link: https://nicolasguilloux.github.io/blade-shadow-beta/#appimage
 
 Note that none of these solutions are compatible with Nvidia GPUs yet. An unsatisfactory workaround is to take care of H.264/H.265 hardware decoding of with the Intel GPU instead, but since only one GPU can normally be active at a time (except from tweaks not covered here), this mean your dedicated Nvidia GPU would have to be uninstalled. This is a limitation of the current Shadow application.
 
@@ -95,4 +96,4 @@ If you want to support me, rather than make donations, I prefer to use the refer
 - [Shadow Live OS](https://gitlab.com/NicolasGuilloux/shadow-live-os): A live Linux that start Shadow and all needed components, ready out of the box !
 - [ShadowOS Networked boot](https://gitlab.com/aar642/shadowos-boot): A small ISO (~1Mo) that use iPXE to boot the Shadow Live OS using network.
 - [Shadow Kodi Addon](https://gitlab.com/NicolasGuilloux/shadow-kodi-addon/tree/master): A Kodi addon to start Kodi from the Kodi interface.
-- [Shadow Gaming](https://discord.gg/d5Exqk9): A discord to share the configuration of the game and discuss about benchmark.
+- [Shadow Gaming](https://discord.gg/5yhkeV5): A discord to share the configuration of the game and discuss about benchmark.
