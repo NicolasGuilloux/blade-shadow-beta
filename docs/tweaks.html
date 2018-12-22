@@ -57,12 +57,12 @@
 
 										<ul style="list-style-type: none;">
 											<li><a href="#mount" class="scrolly">Mount the Shadow in your filesystem</a></li>
+											<li><a href="#usb" class="scrolly">Forward USB devices directly in your Shadow</a></li>
 										</ul>
 									</div>
 								</div>
 							</section>
 
-						<!-- Application Issues -->
 							<section class="main" id="mount">
 								<div class="content">
 									<header class="major">
@@ -153,6 +153,82 @@
 								</div>
 							</section>
 
+							<section class="main" id="usb">
+								<div class="content">
+									<header class="major">
+										<h2>Forward USB devices directly in your Shadow</h2>
+									</header>
+
+									<p>
+										<a href="https://www.virtualhere.com/" target="_blank">VirtualHere</a> will use the technology "USB Over IP" coded in the Linux Kernel to mount an USB device on the client computer whatever the OS. It was designed for a local network or, at least, a secured network. It uses the port 7575 and work really well in a local network.<br />
+										Openning the port 7575 of your box to forward VirtualHere to the outside world is <b>very very very dangerous</b>. You litterally open your computer to anybody, and then can have a full access to your peripherals (like your webcam) or damage your computer. Please, do not do this.
+									</p>
+									<p>
+										A way to bring Shadow inside your local network is to use <a href="https://www.vpn.net/" target="_blank">Hamachi</a>. It creates a private tunnel between every members of your network using the VPN technology. It's safe, it's pretty low latency and easy to use. Moreover, as you will be on a "local" (secured is more appropriated) network with your Shadow, you will be able to use VirtualHere.<br />
+										<b>This tutorial is quite outdated as we strongly recommand you to use <a href="https://www.zerotier.com/" target="_blank">ZeroTier</a> instead of Hamachi. It is a free solution with a lot less restriction and also less intrusive.</b>
+									</p>
+
+									<hr />
+									<h3>Setup</h3>
+
+									<p>
+										Now, let's install it, shall we ? We will consider that the computer where the gamepad is plugged is a Linux. But keep in mind that you can for instance plug a device on your Raspberry Pi and forward this device to your Shadow asweel, it's magic ! We will also that the "client" will be a Shadow, so on Windows.
+									</p>
+
+									<p>
+										First, we will install <b>VirtualHere</b>. On Linux, it is very straighforward as the Linux kernel already have this technology. Open a terminal, move where you want to put the one-file software and then, execute the following code:
+
+<pre><code>wget http://www.virtualhere.com/sites/default/files/usbserver/vhusbdx86_64
+chmod +x ./vhusbdx86_64
+sudo ./vhusbdx86_64</code></pre>
+
+										To run the service in the background, use the argument <code>-b</code> like follwing: <code>sudo ./vhusbdx86_64 -b</code>.
+									</p>
+
+									<p>
+										Next, we will install <a href="https://www.vpn.net/" target="_blank">Hamachi</a> on your machine. I let you download the appropriate file for your distribution and architecture on this link: <a href="https://www.vpn.net/linux" target="_blank">https://www.vpn.net/linux</a> (for Arch users, <a href="https://aur.archlinux.org/packages/logmein-hamachi/" target="_blank">logmein-hamachi</a><sup>AUR</sup>).<br />
+										Hamachi on Linux do not have a GUI, but you're not effraid right ? First let's configure Hamachi to allow your user to use it.
+									</p>
+
+									<p>
+										<code>echo "Ipc.User $USER" | sudo tee -a /var/lib/logmein-hamachi/h2-engine-override.cfg</code>
+									</p>
+
+									<p>
+										Then start the Hamachi service. This command depends on your distribution, I let you do this. Then, create an account on the official website of <a href="https://www.vpn.net/" target="_blank">Hamachi</a>. Then open a terminal, and let's configure Hamachi by doing <code>hamachi login && hamachi attach-net YOUR_EMAIL</code>. After this, go on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a> and accept the join request.
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/hamachi_virtualhere_linux.png" alt="" style="width: 40em;" /></span>
+									</p>
+
+									<p>
+										<b>Start the Shadow</b>, we are close to the end. Download the <a href="https://www.virtualhere.com/usb_client_software" target="_blank">VirtualHere executable</a> and Hamachi on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a>.
+									</p>
+
+									<p>
+										Install Hamachi first by following the steps. When the window is finally opened, log you in. The go on the <a href="https://www.vpn.net/" target="_blank">Hamachi website</a>, log you in and accept the request. Then create a network by clicking on "My network" and "Create a network". Choose a "mesh" architecture and name it whatever your want. When done, add your 2 computers, the Shadow and your PC, in the created network. You can now close your webbrowser but keep the Hamachi window open.
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/hamachi_config.png" alt="" style="width: 30em;" /></span>
+									</p>
+
+									<p>
+										Now start the VirtualHere executable, right click on the window, and select "Specify Hubs..." option. Click on "Add", then copy the Hamachi IPv4 of your computer via the Hamachi window. Click on "Okay" and back to the VirtualHere main window, you should see after loading a little + that show a tree of devices.
+									</p>
+
+									<p style="text-align: center;">
+										<span class="image"><img src="images/hamachi_virtualhere.png" alt="" style="width: 30em;" /></span>
+									</p>
+
+									<p>
+										Keep in mind that to use this system, both VirtualHere and Hamachi should be launched on every computer. With the free Hamachi account, you can add up to 5 computers on this network.
+									</p>
+
+								</div>
+
+							</section>
 					</div>
 
 				<!-- Footer -->

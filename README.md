@@ -36,6 +36,8 @@ The Shadow application requires your machine to support hardware decoding for H.
 
 If your active GPU is an Intel chipset and you have no dedicated GPU, you will need the i965 Intel driver. On an APT-based distribution, install the driver with: `sudo apt install i965-va-driver`. On Solus, install it with `sudo eopkg it libva-intel-driver`.
 
+For NVIDIA users, we recommand you to patch your OS with this one made by the wonderful community: https://gitlab.com/aar642/libva-vdpau-driver
+
 
 ## AppImage
 

@@ -63,6 +63,7 @@ $return .= "\n-------------------------------------\n\n";
 
 # -------- Environment -------- #
 $return .= 'Environment server: ' . `echo \$XDG_SESSION_TYPE`;
+$return .= 'Windows Manager: ' . `echo \$XDG_CURRENT_DESKTOP`;
 if( index(`groups \$USER`, 'input') == -1 ) {
     $return .= '/!\ The user is not in the "input" group.';
 } else {
@@ -79,8 +80,11 @@ $return .= `ldd -v "$path/resources/app.asar.unpacked/native/linux/Shadow" | gre
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";
-$return .= "               Vainfo\n";
+$return .= "                GPU\n";
 $return .= "-------------------------------------\n";
+
+$return .= "\nGPU detected:\n";
+$return .= `lspci | grep VGA` . "\n";
 
 if( -f '/usr/bin/vainfo' ) {
     $return .= `vainfo`;
