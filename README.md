@@ -1,6 +1,6 @@
 # Why this?
 
-The Shadow cloud-computing application by Blade (https://shadow.tech) is available in Beta for Ubuntu 17.10 and 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation, or using scripts to get the missing dependencies on your OS and install/update the vanilla Shadow application. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled with the AppImage.
+The Shadow cloud-computing application by Blade (https://shadow.tech) is available in Beta for Ubuntu 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled within the AppImage.
 
 A sexy website is in the works to summarize everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
 
@@ -8,24 +8,21 @@ Check out our side-projects Discord: https://discord.gg/9HwHnHq
 
 # How to use
 
-The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know):
- - Arch Linux
- - Debian
- - Solus (the current i965 Intel driver for video hardware decoding (package libva-intel-driver in eopkg) in Solus Stable is not compatible, but it will be updated within days; this is only relevant if you are using your Intel GPU as your active GPU)
- - Ubuntu 18.04 (the official application should run too, but the AppImage might fix undocumented prerequisites of the Shadow application like adding $USER to group `input`)
- - Linux Mint 19
- - Fedora 28
- - GalliumOS 3.0
+The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know).
 
-
- Installation scripts currently support:
-- Arch Linux
-- Linux Mint
-
-Note that none of these solutions are compatible with Nvidia GPUs yet. An unsatisfactory workaround is to take care of H.264/H.265 hardware decoding of with the Intel GPU instead, but since only one GPU can normally be active at a time (except from tweaks not covered here), this mean your dedicated Nvidia GPU would have to be uninstalled. This is a limitation of the current Shadow application.
+|  Work on      |  Do not work on  |
+|      :-:      |        :-:       |
+| Ubuntu 18.04  | Ubuntu 16.04     |
+| Linux Mint 19 | Linux Mint 18    |
+| Debian 10+    | Debian 9         |
+| Arch Linux    | GalliumOS 2.2    |
+| Solus Budgie  |                  |
+| Fedora 28     |                  |
+| GalliumOS 3.0 |                  |
 
 The scripts were written by the [Shadow Discord](https://discord.gg/shadowtech) community and are not affiliated with the Blade company. There is no guarantee whatsoever that the scripts will work for you. Use them at your own risk, preferably after reviewing them yourself. The AppImage should be harmless, worst case scenario is it does not work.
 
+An additional folder is also present in the repository to support the [Arch User Repository](https://wiki.archlinux.org/index.php/Arch_User_Repository) installation. This initiative is led and maintained by **agentcobra#6142**. The folder is there to support him.
 
 ## VA Drivers
 
@@ -34,39 +31,28 @@ The Shadow application requires your machine to support hardware decoding for H.
 - Debian based: https://doc.ubuntu-fr.org/vaapi
 - Arch Linux: https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Installing_VA-API
 
-If your active GPU is an Intel chipset and you have no dedicated GPU, you will need the i965 Intel driver. On an APT-based distribution, install the driver with: `sudo apt install i965-va-driver`. On Solus, install it with `sudo eopkg it libva-intel-driver`.
+#### For most cases:
 
-For NVIDIA users, we recommand you to patch your OS with this one made by the wonderful community: https://gitlab.com/aar642/libva-vdpau-driver
+If your active GPU is an Intel chipset and you have no dedicated GPU, you will need the i965 Intel driver.
+- Ubuntu: `sudo apt install i965-va-driver`
+- Arch Linx: `sudo pacman -S libva-intel-driver`
+- Solus: `sudo eopkg it libva-intel-driver`
 
+For NVIDIA users, you have 2 options:
+- Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API.
+- Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards.
+
+In both cases, we strongly recommend you to follow this link: https://gitlab.com/aar642/shadowos-boot#support
 
 ## AppImage
 
 **Alex^#1629** built an AppImage that should work on most recent (>2017) distributions. Please, [create an issue](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/new) if it fails on your distribution. Compatibility could be further extended if Blade would compile their application for Ubuntu 16.04 LTS. It could be improved soon when the unified version will be released.
 
-The AppImage embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it requires a **working libVA** on your system and a **compatible GLIBC**.
+The AppImage embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it requires a **working libVA** on your system and a **compatible GLIBC**.
 
-To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `sudo chmod a+x shadowbeta-linux-x86_64.AppImage` and run it. It will check the compatibility of your system and hardware, and if confirmed, offer to create a menu entry by placing a .desktop file in ~/.local/share/applications/. We recommend to do so as it will then be listed in the Application Menu of your distribution.
+To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `chmod a+x shadowbeta-linux-x86_64.AppImage` and run it. It will check the compatibility of your system and hardware, and if confirmed, offer to create a menu entry by placing a .desktop file in `~/.local/share/applications/`. We recommend to do so as it will then be listed in the Application Menu of your distribution.
 
 Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --help`.
-
-
-## Scripts
-
-The below scripts are meant to be run by your normal user, do not execute them as root. They will prompt for the root password if needed. There is no need to use the scripts if you are using the AppImage, and reciprocally.
-
-
-### Arch Linux
-
-An AUR package is available. If it is not working after installation, please follow the tutorial or the Bash files: https://aur.archlinux.org/packages/shadow-beta
-
-First, go to the directory where the script is located and make it executable: `cd Arch && chmod +x install-arch.sh`.
-
-To install it, launch install-arch.sh: `./install-arch.sh`.
-
-
-### Linux Mint
-
-No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi` is required. Install it with: `sudo apt install gstreamer1.0-vaapi` then install the vanilla Shadow Beta .deb file.
 
 
 # Acknowledgments
@@ -74,6 +60,8 @@ No script is necessary for Linux Mint, but the extra package `gstreamer1.0-vaapi
 Thanks to **Alex^#1629** on Discord for being available every time somebody needs to kill a bug. Thanks a lot for the wonderful AppImage!
 
 Thanks to **agentcobra#6142** on Discord for maintaining the AUR package and review my code. Many mistakes were corrected by you.
+
+Thanks to **0x4cc3a96f#4425** for "mastering" Linux. We greatly appreciate all you help and efforts to make the Linux app better and better.
 
 Thanks to **raphco#0312** on Discord for being the guinea pig for Arch.
 
@@ -83,14 +71,10 @@ Thanks to **kabouik#7008** for relentlessly bothering us to add support for Solu
 
 Thanks to **TheWolf#0985** and **Brother/Ilya#0013** for their help with the german translations.
 
-You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech).
+You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech). We are also available on all other Discord but please, speak English so we can understand you ;)
 
 
 # Miscalleneous
-
-### Support
-
-If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP
 
 
 ### Community projects
@@ -99,3 +83,7 @@ If you want to support me, rather than make donations, I prefer to use the refer
 - [ShadowOS Networked boot](https://gitlab.com/aar642/shadowos-boot): A small ISO (~1Mo) that use iPXE to boot the Shadow Live OS using network.
 - [Shadow Kodi Addon](https://gitlab.com/NicolasGuilloux/shadow-kodi-addon/tree/master): A Kodi addon to start Kodi from the Kodi interface.
 - [Shadow Gaming](https://discord.gg/5yhkeV5): A discord to share the configuration of the game and discuss about benchmark.
+
+### Support
+
+If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP

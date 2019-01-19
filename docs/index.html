@@ -124,7 +124,7 @@
 										The Deb file was designed to use Ubuntu libraries, which is very unconvinient for non-Ubuntu distribution as it forces to tweaks in a dirty way with the libraries and messing them up. <b>Alex^#1629</b> did a really wonderful job by building this AppImage.
 									</p>
 									<p>
-										It embeds Ubuntu Bionic (18.04) libs, Qt 5.9.5 and the official Shadow Beta application. However, it still needs a <a href="#vainfo">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
+										It embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it still needs a <a href="#vainfo" class="scrolly">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
 									</p>
 
 									<p>
@@ -146,15 +146,19 @@
 												</tr>
 												<tr>
 													<td>Linux Mint 19</td>
-													<td>GalliumOS 2.2</td>
+													<td>Linux Mint 18</td>
 												</tr>
 												<tr>
-													<td>Arch Linux</td>
+													<td>Debian 10+</td>
 													<td>Debian 9</td>
 												</tr>
 												<tr>
+													<td>Arch Linux</td>
+													<td>GalliumOS 2.2</td>
+												</tr>
+												<tr>
 													<td>Solus Budgie</td>
-													<td>Linux Mint 18</td>
+													<td></td>
 												</tr>
 												<tr>
 													<td>Fedora 28</td>
@@ -237,11 +241,6 @@ chmod +x shadowbeta-linux-x86_64.AppImage
 								</header>
 
 								<p>
-									<b style="color: red;">NVIDIA GPU aren't supported by VA-API because this brand chose a proprietary encode/decode system. That is why NVIDIA GPU aren't supported by Shadow for Linux. A fix needs to be released by Blade itself. Find out more over <a href="issues.html#nvidia">here</a>.</b><br />
-									Still, an effort made by the community to patch the VA-API to force use VDPAU was designed and is available <a href="https://gitlab.com/aar642/libva-vdpau-driver" target="_blank">here</a>. You may try the rest of the tutorial after patching your OS.
-								</p>
-
-								<p>
 									First things first, <code>vainfo</code> needs to be installed on your OS. It is a program that describes how your GPU is detected by the VA-API.
 								</p>
 
@@ -322,6 +321,31 @@ vainfo: Supported profile and entrypoints
 
 								<p>
 									Always check your <code>vainfo</code>. You do not need to reboot after the installation of the drivers.
+								</p>
+
+								<h5>For most cases</h5>
+
+								<p>
+									If your active GPU is an Intel chipset and you have no dedicated GPU, you will need the i965 Intel driver.
+								</p>
+
+								<ul>
+									<li>Ubuntu: <code>sudo apt install i965-va-driver</code></li>
+									<li>Arch Linx: <code>sudo pacman -S libva-intel-driver</code></li>
+									<li>Solus: <code>sudo eopkg it libva-intel-driver</code></li>
+								</ul>
+
+								<p>
+									For NVIDIA users, you have 2 options:
+								</p>
+
+								<ul>
+									<li>Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API.</li>
+									<li>Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards.</li>
+								</ul>
+
+								<p>
+									In both cases, we strongly recommend you to follow this link: <a href="https://gitlab.com/aar642/shadowos-boot#support" target="_blank">https://gitlab.com/aar642/shadowos-boot#support</a>
 								</p>
 							</section>
 
