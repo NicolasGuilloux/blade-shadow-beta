@@ -318,7 +318,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         push @warnings, $lang{'lang-de'}
     }
 
-    # Force the launcher in english
+    # Force the launcher in french
     if( $arg eq '--force-fr' ) {
         $langF = 'LANG=fr_FR.utf8 ';
         %lang = %fr;
