@@ -86,4 +86,10 @@ You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech)
 
 ### Support
 
-If you want to support me, rather than make donations, I prefer to use the referral program for Shadow. My code is `NICNC9DP`. You can also use the following link:  https://shop.shadow.tech/invite/NICNC9DP
+If you want to support us, rather than make donations, we prefer to use the referral program for Shadow. As we are some people behind this git, you can choose the code you will use.
+
+
+|  Pseudo         |  Referral code  |     Link                                  |
+|      :-         |        :-:      |     :-                                    |
+| GiantPandaRoux  | `JLRYV`         |  https://shop.shadow.tech/invite/JLRYV    |
+| Nover           | `NICNC9DP`      |  https://shop.shadow.tech/invite/NICNC9DP |
