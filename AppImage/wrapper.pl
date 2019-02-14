@@ -17,12 +17,6 @@ use locale;
 use Cwd 'abs_path';
 use File::Basename;
 
-# ------ Exit if the user is root ------- #
-if( $> == 0 ) {
-    print "Please do not launch this application with the super administrator account.\n\n";
-    exit 1;
-}
-
 # ----------- Translations ------------ #
 
 my %fr = (
@@ -36,8 +30,11 @@ my %fr = (
     'lang-de'           => "Langage forcé en allemand (de_DE)",
     'lang-fr'           => "Langage forcé en français (fr_FR)",
 
-    'vainfo-nvidia'     => "Votre carte graphique est de marque Nvidia. Ces cartes ne sont pas supportées par Shadow sur Linux. Il faut attendre une nouvelle version de l'application.",
     'vainfo-optimus'    => "Votre GPU est NVIDIA. L'application ne peut pas fonctionner sur ce GPU. Néanmoins, vous disposez de la technologie Optimus. Lancez le panneau de controle NVIDIA, allez dans la rubrique Prime profiles, choisissez le GPU Intel et relancez votre session.",
+    'vainfo-arekinath'  => "Votre carte est une NVIDIA de série 1000 ou plus. Si vous rencontrez des problèmes lors du démarrage du stream, il vous faudra probablement installer le patch d'Arekinath: https://gitlab.com/aar642/libva-vdpau-driver",
+    'vainfo-nouveau'    => 'Votre carte est une NVIDIA de série inférieure à 1000. Nous vous recommandons de ne pas utiliser les drivers officiels de NVIDIA, et de choisir Nouveau à la place. Ensuite, vous pourrez installer le firmware NVIDIA qui tentera de rendre votre GPU compatible avec VA API (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
+    'vainfo-firmware'   => 'Votre carte est une NVIDIA de série inférieure à 1000 et vous utilisez le driver Nouveau. Nous vous conseillons d\'installer le firmware NVIDIA qui tentera de rendre votre GPU compatible avec VA API (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
+
     'vainfo-missing'    => "La commande 'vainfo' n'a pas été trouvée, le support H.264 et H.265 par votre carte graphique ne peut pas être vérifié. Installez 'vainfo' (Ubuntu, Linux Mint, Debian) ou 'libva-utils' (Arch, Solus) puis relancez l'application.",
     'vainfo-bad'        => "Votre carte graphique ne supporte aucun encodage utilisé par Shadow. Vous devez changer votre carte graphique pour une compatible, ou vérifier vos drivers VA-API.",
     'vainfo-good'       => "Votre carte graphique ne supporte que le H.264. N'activez pas le H.265 (HEVC) dans l'application.",
@@ -76,8 +73,10 @@ my %en = (
     'lang-de'           => "Language forced in german (de_DE)",
     'lang-fr'           => "Language forced in french (fr_FR)",
 
-    'vainfo-nvidia'     => "Your GPU brand is Nvidia. This brand is not supported by Shadow on Linux. You have to wait for a new release from Blade.",
     'vainfo-optimus'    => "Your currently using the NVIDIA GPU. You can't start the application with it, but your computer supports Prime. Start the NVIDIA control panel, select the Prime panel, choose the Intel GPU and restart your session.",
+    'vainfo-arekinath'  => "Your GPU brand is NVIDIA with the 1000 serie or more. If you experience issues while starting the stream, please consider to use the patch made by Arekinath: https://gitlab.com/aar642/libva-vdpau-driver",
+    'vainfo-nouveau'    => 'Your GPU brand is NVIDIA with less than the 1000 serie. We recommand you to use the Nouveau drivers instead of the NVIDIA drivers and install the NVIDIA firmware to attempt to improve VA API compatibility with your GPU (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
+    'vainfo-firmware'   => 'Your GPU brand is NVIDIA with less than the 1000 serie and you use the Nouveau drivers. We recommand your to install the NVIDIA firmware to attempt to improve VA API compatibility with your GPU (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
     'vainfo-missing'    => "'vainfo' not found, H.264 and H.265 support by your GPU could not be checked. Install 'vainfo' (Ubuntu, Linux Mint, Debian) or 'libva-utils' (Arch, Solus) and restart the application.",
     'vainfo-bad'        => "Your GPU does not support any encoding technology used by Shadow. You have to change you GPU or check your VA-API drivers to use this application.",
     'vainfo-good'       => "Your GPU supports only H.264. Do not enable H.265 (HEVC) in the application.",
@@ -117,8 +116,10 @@ my %de = (
     'lang-de'           => "Sprache erzwungen in german (de_DE)",
     'lang-fr'           => "Sprache erzwungen in french (fr_FR)",
 
-    'vainfo-nvidia'     => "Ihre GPU-Marke ist Nvidia. Diese Marke wird von Shadow unter Linux nicht unterstützt. Sie müssen auf eine neue Version von Blade warten.",
     'vainfo-optimus'    => "Sie verwenden derzeit den NVIDIA Grafikprozessor. Sie können die Anwendung damit nicht starten, aber Ihr Computer unterstützt Prime. Starten Sie das NVIDIA Control Panel, wählen Sie das Prime Panel, wählen Sie den Intel Grafikprozessor und starten Sie Ihre Sitzung neu.",
+    'vainfo-arekinath'  => "Ihre GPU-Marke ist NVIDIA mit der Serie 1000 oder mehr.. Wenn beim Starten des Streams Probleme auftreten, müssen Sie wahrscheinlich den Arekinath-Patch installieren: https://gitlab.com/aar642/libva-vdpau-driver",
+    'vainfo-nouveau'    => 'Ihre Karte ist ein serielles NVIDIA mit weniger als 1000 Karten. Wir empfehlen Ihnen, nicht die offiziellen Treiber von NVIDIA zu verwenden und stattdessen Neu zu wählen. Anschließend können Sie die NVIDIA-Firmware installieren, die versucht, Ihren Grafikprozessor mit der VA-API kompatibel zu machen (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
+    'vainfo-firmware'   => 'Ihre Karte ist ein serielles NVIDIA unter 1000 und Sie verwenden den neuen Treiber. Wir empfehlen Ihnen, die NVIDIA-Firmware zu installieren, die versucht, Ihren Grafikprozessor mit der VA-API kompatibel zu machen (https://nouveau.freedesktop.org/wiki/VideoAcceleration/#firmware)',
     'vainfo-missing'    => "'vainfo' nicht gefunden werden, konnte die H.264- und H.265-Unterstützung durch Ihren Grafikprozessor nicht überprüft werden. Installieren Sie 'vainfo' (Ubuntu, Linux  Mint, Debian) oder 'libva-utils' (Arch, Solus) und starten Sie die Anwendung neu.",
     'vainfo-bad'        => "Ihr Grafikprozessor unterstützt keine von Shadow verwendete Kodierungstechnologie. Sie müssen Ihren Grafikprozessor wechseln oder Ihre VA-API-Treiber überprüfen, um diese Anwendung nutzen zu können.",
     'vainfo-good'       => "Ihr Grafikprozessor unterstützt nur H.264. Sie können H.265 (HEVC) nicht verwenden.",
@@ -206,6 +207,8 @@ my $help = "Wrapper for Shadow Beta that checks your configuration and compatibi
 Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
     --help             Show this help
     --version          Get the version of the AppImage
+    --changelog        Display the application changelogs
+    --bypass-root      Bypass root checking.
     --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
     --clientsdl        Directly launch the ClientSDL renderer
 
@@ -237,15 +240,21 @@ if( -d 'opt' ) {
 }
 
 
-# ----------- Bypass Check priority ------------ #
-for(my $i=0; $i < $#ARGV+1; $i++) {
-    my $arg = $ARGV[$i];
+# ------ Display help ------- #
+if( grep( /^--help/, @ARGV ) ) {
+    print "\n$help\n\n";
+    exit;
+}
 
-    # Bypass the check and launch
-    if( $arg eq '--bypass-check' ) {
-        push @warnings, $lang{'bypass'};
-        goto START_SHADOW;
-    }
+# ------ Exit if the user is root ------- #
+if( $> == 0 && !grep( /^--bypass-root$/, @ARGV ) ) {
+    print "Please do not launch this application with the super administrator user or use the option --bypass-root.\n\n";
+    exit 1;
+}
+
+# ----------- Bypass Check priority ------------ #
+if( grep( /^--bypass-check$/, @ARGV ) ) {
+    goto START_SHADOW;
 }
 
 
@@ -280,15 +289,22 @@ if( $isAppImg ) {
 for(my $i=0; $i < $#ARGV+1; $i++) {
     my $arg = $ARGV[$i];
 
-    # Display help and stop the program
-    if( $arg eq '--help' ) {
-        print "\n$help\n\n";
+    # Display the version of the AppImage
+    if( $arg eq '--version' ) {
+        print "$version\n";
         exit;
     }
 
-    # Get the version of the AppImage
-    if( $arg eq '--version' ) {
-        print "$version\n";
+    # Display the changelog of the application
+    if( $arg eq '--changelog' ) {
+
+        my $document = do {
+            local $/ = undef;
+            open my $fh, "<", 'CHANGELOG.md'
+                or die "could not open 'CHANGELOG.md': $!";
+            print <$fh>;
+        };
+
         exit;
     }
 
@@ -302,7 +318,6 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
         exit 0;
     }
-
 
     # Force the launcher in english
     if( $arg eq '--force-en' ) {
@@ -324,7 +339,6 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         %lang = %fr;
         push @warnings, $lang{'lang-fr'}
     }
-
 
     # Start Shadow with Strace
     if( $arg eq '--strace' ) {
@@ -358,14 +372,15 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
         exit 0;
     }
-
 }
 
+
 # -------- NVIDIA check -------- #
-if( index(`lspci | grep 'VGA'`, 'NVIDIA') != -1 ) {
+my $lspci = `lspci | grep 'VGA'`;
+if( index($lspci, 'NVIDIA') != -1 ) {
 
     # Intel iGPU detected
-    if( index(`lspci | grep 'VGA'`, 'Intel') != -1 ) {
+    if( index($lspci, 'Intel') != -1 ) {
 
         # Currently on the NVIDIA GPU
         if( index(`nvidia-smi -L`, 'GPU ') != 1 ) {
@@ -374,7 +389,24 @@ if( index(`lspci | grep 'VGA'`, 'NVIDIA') != -1 ) {
 
     # Only NVIDIA GPU available
     } else {
-        push @errors, $lang{'vainfo-nvidia'};
+        my $gpu = `echo $lspci | grep 'GeForce GTX'`;
+        $gpu = $gpu =~ s/.*?([0-9]{3,4}).*/$1/;
+
+        # 1000 series
+        if( $gpu > 1000 ) {
+            if( index(`vainfo`, 'arekinath') != -1 ) {
+                push @warnings, $lang{'vainfo-arekinath'};
+            }
+
+        } else {
+            if( `lsmod | grep nouveau` eq '' ) {
+                push @warnings, $lang{'vainfo-nouveau'};
+
+            } else {
+                push @warnings, $lang{'vainfo-firmware'};
+            }
+
+        }
     }
 }
 
@@ -393,7 +425,7 @@ if( -f '/usr/bin/vainfo' ) {
         }
 
     } else {
-        push @errors, $lang{'vainfo-fail'};
+        push @warnings, $lang{'vainfo-fail'};
     }
 
 } else {
@@ -405,7 +437,6 @@ if( -f '/usr/bin/vainfo' ) {
 my $groups = `groups \$USER`;
 
 if( index($groups, 'input') == -1 ) {
-
     print "$lang{'input-adding'}\n";
     my $in = `pkexec gpasswd -a \$USER input`;
 
@@ -424,7 +455,6 @@ if( $env ne 'x11') {
     } else {
         push @warnings, $lang{'xorg-empty'}
     }
-
 }
 
 
