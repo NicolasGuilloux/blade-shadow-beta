@@ -58,7 +58,7 @@ if( -f 'shadow-appimage-version' ) {
 # -------- Distribution information -------- #
 $return .= "\n-------------------------------------\n\n";
 $return .= `cat /etc/*-release`;
-$return .= `uname -mrs`;
+$return .= `uname -a`;
 $return .= "\n-------------------------------------\n\n";
 
 # -------- Environment -------- #
@@ -92,6 +92,13 @@ if( -f '/usr/bin/vainfo' ) {
 } else {
     $return .= "'vainfo' is not installed.";
 }
+
+# -------- Hardware -------- #
+$return .= "\n-------------------------------------\n";
+$return .= "               HARDWARE\n";
+$return .= "-------------------------------------\n";
+
+$return .= `lspci -v` . "\n";
 
 # -------- Logs -------- #
 $return .= "\n-------------------------------------\n";
