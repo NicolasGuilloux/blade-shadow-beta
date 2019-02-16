@@ -92,4 +92,5 @@ If you want to support us, rather than make donations, we prefer to use the refe
 |  Pseudo         |  Referral code  |     Link                                  |
 |      :-         |        :-:      |     :-                                    |
 | GiantPandaRoux  | `JLRYV`         |  https://shop.shadow.tech/invite/JLRYV    |
+| AgentCobra      | `4LKBA`         |  https://show.shadow.tech/invite/4LKBA    |
 | Nover           | `NICNC9DP`      |  https://shop.shadow.tech/invite/NICNC9DP |
