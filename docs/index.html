@@ -133,14 +133,19 @@
 									</header>
 
 									<p>
-										The Deb file was designed to use Ubuntu libraries, which is very unconvinient for non-Ubuntu distribution as it forces to tweaks in a dirty way with the libraries and messing them up. <b>Alex^#1629</b> did a really wonderful job by building this AppImage.
+										The Deb file was designed to use Ubuntu libraries, which is very unconvinient for non-Ubuntu distribution as it forces to tweaks in a dirty way with the libraries and messing them up.
 									</p>
 									<p>
-										It embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it still needs a <a href="#vainfo" class="scrolly">working VA-API</a> and a compatible GLIBC. Moreover, a wrapper around the app itself will check your configuration and provides a diagnostic of the fatal errors.
+										<b>Alex^#1629</b> previously built an AppImage as Blade was not providing one. They started to build one, so the AppImage is no longer available to avoid duplicity.
 									</p>
 
 									<p>
-										The 2.0.0 version and greater uses the unified client. It supports the trackpad and the gamepads.
+										The previous versions are still available on <a href="https://gitlab.com/aar642/shadow-appimage" target="_blank">Alex's repository</a> but will be not updated at all. We strongly recommand you to now download the application from the Official Website only.<br />
+										The download button will directly point to the official website.
+									</p>
+
+									<p>
+										Even if the AppImage is now available on the official website, this website is still updated as the tutorial are still up to date.
 									</p>
 
 									<div class="table-wrapper">
@@ -189,57 +194,13 @@
 									</p>
 
 									<ul class="actions special">
-										<li><a href="https://gitlab.com/aar642/shadow-appimage/-/jobs/" target="_blank" class="button primary icon fa-download" id="app_link">Download the AppImage <span id="app_version"></span></a></li>
+										<li>
+											<a href="https://shadow.tech/linux/shadow-beta.zip" target="_blank" class="button primary icon fa-download" id="app_link">
+												Download the official application
+											</a>
+										</li>
 									</ul>
-
-									<p class="app_code" style="display: none;">
-										For lazy people, here is a set of command that do everything and put the AppImage in <code>~/.local/share/Shadow Beta/</code> folder:
-									</p>
-
-									<pre class="app_code" style="display: none;">
-<code>mkdir -p ~/.local/share/Shadow\ Beta
-cd ~/.local/share/Shadow\ Beta/
-rm -f shadowbeta-linux-x86_64.AppImage
-wget --content-disposition <span id="app_link_code"></span>
-chmod +x shadowbeta-linux-x86_64.AppImage
-./shadowbeta-linux-x86_64.AppImage</code>
-									</pre>
 								</div>
-							</section>
-
-
-						<!-- Distribution tutorials -->
-							<section id="distrib" class="main special">
-								<header class="major">
-									<h2>Distribution tutorials</h2>
-								</header>
-
-								<ul class="features">
-									<li>
-										<a href="ubuntu.html" class="bloc">
-											<span class="icon major"><img src="images/logos/ubuntu.png" alt="" /></span>
-											<h3>Ubuntu</h3>
-										</a>
-									</li>
-									<li>
-										<a href="arch.html" class="bloc">
-											<span class="icon major"><img src="images/logos/arch.png" alt="" /></span>
-											<h3>Arch Linux</h3>
-										</a>
-									</li>
-									<li>
-										<a href="debian.html" class="bloc">
-											<span class="icon major"><img src="images/logos/debian.png" alt="" /></span>
-											<h3>Debian</h3>
-										</a>
-									</li>
-									<li>
-										<a href="mint.html" class="bloc">
-											<span class="icon major"><img src="images/logos/mint.png" alt="" /></span>
-											<h3>Linux Mint</h3>
-										</a>
-									</li>
-								</ul>
 							</section>
 
 						<!-- Second Section -->
@@ -364,7 +325,7 @@ vainfo: Supported profile and entrypoints
 						<!-- Get Started -->
 							<section id="tool" class="main special">
 								<header class="major">
-									<h2>Shadow tool</h2>
+									<h2>Shadow tool (partially outdated)</h2>
 								</header>
 
 								<p>
@@ -417,11 +378,6 @@ python3 main.py</code></pre>
 						<p class="copyright">Designed by Nicolas Guilloux. This is a <a href="https://html5up.net/" target="_blank">HTML5Up</a> template.</p>
 					</footer>
 
-				<!-- Alert -->
-					<div id="alert">
-						The new application is a broken release. The known bug are Bluetooth adaptor renaming, no mouse cursor in Fullscreen mode and (almost) no keyboard input. That is why the AppImage is not updated on the Website.
-					</div>
-
 			</div>
 
 		<!-- Scripts -->
@@ -432,30 +388,6 @@ python3 main.py</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-			<script>
-				$.getJSON('https://gitlab.com/api/v4/projects/7962701/repository/tags', function(data) {
-					var latest = null;
-
-					for(var i=0; i<data.length; i++) {
-						data[i].date = new Date( data[i]['commit']['created_at'] );
-
-						if( data[i].release && ( !latest  || latest.date < data[i].date ) ) {
-							latest = data[i];
-						}
-					}
-
-					var version = latest.release.tag_name;
-					var url = 'https://gitlab.com/aar642/shadow-appimage/-/jobs/artifacts/' + version + '/raw/shadowbeta-linux-x86_64.AppImage?job=bionic_build';
-
-					$('#app_link').attr('href', url);
-					$('#app_link_code').text(url);
-					$('#app_version').text('(v' + version + ')');
-					$('.app_version').text(version);
-					$('.app_code').show();
-				});
-
-			</script>
 
 			<script src="assets/js/highlight.pack.js"></script>
 			<script>
