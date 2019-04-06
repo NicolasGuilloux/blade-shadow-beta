@@ -363,6 +363,8 @@ if( scalar @errors > 0 ) {
 
     print bold('ERROR') . ":\n$str\n";
     alert($lang{'errors'}, "\n$str");
+
+    exit 1;
 }
 
 # Display a message if everything is alright
