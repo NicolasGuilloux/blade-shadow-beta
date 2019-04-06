@@ -10,7 +10,7 @@ use warnings;
 
 # Send to Hostbin
 #
-# @parem String Content
+# @param String Content
 #
 # @return String URL
 sub share {
@@ -21,9 +21,9 @@ sub share {
     print 'Sending the data to the server...';
     my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
 
-    # system('rm /tmp/report_shadow');
+    system('rm /tmp/report_shadow');
 
-    return $url;
+    return "Share the following link to get some help: $url";
 }
 
 # ------- Check application path ------- #
@@ -41,9 +41,11 @@ if (! glob($path . '/shadow-preprod')) {
     }
 }
 
-my $return = "Shadow Report";
+my $return = "Shadow Report\n";
 
-$return .= "\n";
+if ($path ne '') {
+    $return .= "\nRenderer version: " . `cat $path/resources/app.asar.unpacked/release/native/version.txt`;
+}
 
 # -------- Distribution information -------- #
 $return .= "\n-------------------------------------\n\n";
