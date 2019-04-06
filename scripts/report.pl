@@ -14,46 +14,36 @@ use warnings;
 #
 # @return String URL
 sub share {
-    open(my $fh, '>', '/var/tmp/report_shadow');
+    open(my $fh, '>', '/tmp/report_shadow');
     print $fh $_[0];
     close $fh;
 
-    my $url = `curl -sf --data-binary "@/var/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
+    print 'Sending the data to the server...';
+    my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
 
-    system('rm /var/tmp/report_shadow');
+    # system('rm /tmp/report_shadow');
 
     return $url;
 }
 
-# ------- Check AppImage ------- #
-my $path = '/opt/shadowbeta';
-my $isAppImg = 0;
+# ------- Check application path ------- #
+my $path = '/tmp/.mount_Shadow*';
 
-if( $#ARGV > -1 ) {
-    if( $ARGV[0] eq '--appimage' ) {
-        $path = './opt/shadowbeta';
-        $isAppImg = 1;
+if (! glob($path . '/shadow-preprod')) {
+    $path = '/opt/shadowbeta';
+
+    if (! -d "$path") {
+        $path = '/opt/Shadow Beta';
+
+        if (! -d "$path") {
+            $path = '';
+        }
     }
 }
 
-
 my $return = "Shadow Report";
 
-if( $isAppImg ) { $return .= " (AppImage)"; }
-
 $return .= "\n";
-
-# -------- AppImage version -------- #
-if( -f 'shadow-appimage-version' ) {
-
-    # Local version
-    open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
-      or die "Could not open file 'shadow-appimage-version' $!";
-    my $localVersion = <$fh>;
-    chomp $localVersion;
-
-    $return .= "AppImage $localVersion \n";
-}
 
 # -------- Distribution information -------- #
 $return .= "\n-------------------------------------\n\n";
@@ -64,7 +54,7 @@ $return .= "\n-------------------------------------\n\n";
 # -------- Environment -------- #
 $return .= 'Environment server: ' . `echo \$XDG_SESSION_TYPE`;
 $return .= 'Windows Manager: ' . `echo \$XDG_CURRENT_DESKTOP`;
-if( index(`groups \$USER`, 'input') == -1 ) {
+if (index(`groups \$USER`, 'input') == -1) {
     $return .= '/!\ The user is not in the "input" group.';
 } else {
     $return .= 'The user is in the "input" group.';
@@ -75,8 +65,12 @@ $return .= "\n\n-------------------------------------\n";
 $return .= "          Missing libraries\n";
 $return .= "-------------------------------------\n";
 
-$return .= `ldd -v "$path/shadow-beta" | grep "not found"`;
-$return .= `ldd -v "$path/resources/app.asar.unpacked/native/linux/Shadow" | grep "not found"`;
+if ($path eq '') {
+    $return .= 'No installation detected';
+} else {
+    $return .= `ldd -v $path/shadow-preprod | grep "not found"`;
+    $return .= `ldd -v $path/resources/app.asar.unpacked/release/native/Shadow | grep "not found"`;
+}
 
 # -------- VA-API check -------- #
 $return .= "\n-------------------------------------\n";
@@ -86,7 +80,7 @@ $return .= "-------------------------------------\n";
 $return .= "\nGPU detected:\n";
 $return .= `lspci | grep VGA` . "\n";
 
-if( -f '/usr/bin/vainfo' ) {
+if (-f '/usr/bin/vainfo') {
     $return .= `vainfo`;
 
 } else {
@@ -105,7 +99,7 @@ $return .= "\n-------------------------------------\n";
 $return .= "                Logs\n";
 $return .= "-------------------------------------\n";
 
-if( -f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log' ){
+if (-f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log') {
     my @logs = split(/Welcome/, `cat ~/.cache/blade/shadow/shadow.log`);
     $return .= 'Welcome' . $logs[-1];
 
@@ -114,4 +108,4 @@ if( -f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log' ){
 }
 
 # -------- Send to Hostbin -------- #
-print share($return) . "\n";
+print "\n" . share($return) . "\n";

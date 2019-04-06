@@ -10,9 +10,9 @@ A clear and concise description of what the bug is.
 **System**
  - OS: [e.g. Ubuntu]
  - OS Version: [e.g. 18.04]
- - Environment: [e.g. KDE]
+ - Environment: [e.g. Gnome]
  - Application: [e.g. AppImage]
- - Application Version: [e.g. 2.0.2]
+ - Application Version: [e.g. 4.17]
 
 **Configuration**
  - The user is in input group ?

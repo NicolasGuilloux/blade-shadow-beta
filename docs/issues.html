@@ -58,7 +58,6 @@
 										<ul style="list-style-type: none;">
 											<li><a href="#gamepad" class="scrolly">The application do not detect my gamepad</a></li>
 											<li><a href="#nvidia" class="scrolly">The NVIDIA issue and workaround for Optimus</a></li>
-											<li><a href="#scroll" class="scrolly">The scroll is reversed</a></li>
 											<li><a href="#strace" class="scrolly">The application crashed when I try to strace (AppImage)</a></li>
 										</ul>
 									</div>
@@ -131,68 +130,6 @@
 								</div>
 							</section>
 
-							<section class="main" id="scroll">
-								<div class="content">
-									<header class="major">
-										<h2>The scroll is reverted</h2>
-									</header>
-
-									<p>
-										The scroll can be reverted compare to your local computer. In fact, the stream transmits the double tap event so the gesture is not computed by your computer but directly sent to the Shadow.
-									</p>
-
-									<p>
-										irtimiD#6396 found a tutorial to change the scrolling orientation on Windows (so on your Shadow): <a href="https://lecrabeinfo.net/inverser-scroll-sens-de-defilement-de-souris-windows.html" target="_blank">https://lecrabeinfo.net/inverser-scroll-sens-de-defilement-de-souris-windows.html</a><br />
-										As it is a french tutorial, let us summarize it.
-									</p>
-
-									<p>
-										To reverse the mouse scroll, the register entry FlipFlopWheel will be used. The first step is to open the Windows PowerShell with admin rights. Simply search PowerShell, right click on the right shortcut and execute it with admin rights.
-									</p>
-
-									<p>
-										The are only 3 commands to manipulate this registry entry:
-
-										<table>
-											<thead>
-												<tr>
-													<th style="width: 12em">Result</th>
-													<th>Command</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Get the current value</td>
-													<td>
-														<code>Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Enum\HID\*\*\Device` Parameters FlipFlopWheel -EA 0</code>
-													</td>
-												</tr>
-
-												<tr>
-													<td>Set to 1 (reversed)</td>
-													<td>
-														<code>Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Enum\HID\*\*\Device` Parameters FlipFlopWheel -EA 0 | ForEach-Object { Set-ItemProperty $_.PSPath FlipFlopWheel 1 }</code>
-													</td>
-												</tr>
-
-												<tr>
-													<td>Set the 0</td>
-													<td>
-														<code>Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Enum\HID\*\*\Device` Parameters FlipFlopWheel -EA 0 | ForEach-Object { Set-ItemProperty $_.PSPath FlipFlopWheel 0 }</code>
-													</td>
-												</tr>
-
-											</tbody>
-										</table>
-
-									</p>
-
-									<p>
-										So if the scroll is reversed and the current version is 0, set it to 1 and vice versa. You need to <strong>reboot</strong> after modification.
-									</p>
-								</div>
-							</section>
-
 							<section class="main" id="strace">
 								<div class="content">
 									<header class="major">
@@ -205,12 +142,12 @@
 									</p>
 
 									<p>
-										First, mount the AppImage using the following command: <code>./shadowbeta-linux-x86_64.AppImage --appimage-mount</code>. You will get a path to a folder.
+										First, mount the AppImage using the following command: <code>./ShadowBeta.AppImage --appimage-mount</code>. You will get a path to a folder.
 									</p>
 
 									<p>
 										From another terminal, go to this folder, and use the following command to start the strace:<br />
-										<code>strace -f  ./shadow-wrapper.pl  &> /var/tmp/strace_shadowbeta && tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta && rm /var/tmp/strace_shadowbeta</code>
+										<code>strace -f  ./shadow-preprod.pl  &> /var/tmp/strace_shadowbeta && tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta && rm /var/tmp/strace_shadowbeta</code>
 									</p>
 
 									<p>

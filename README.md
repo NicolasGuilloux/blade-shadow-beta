@@ -39,20 +39,22 @@ If your active GPU is an Intel chipset and you have no dedicated GPU, you will n
 - Solus: `sudo eopkg it libva-intel-driver`
 
 For NVIDIA users, you have 2 options:
-- Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API.
-- Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards.
+- Use the Nouveau driver and install the old [NVIDIA firmware](https://aur.archlinux.org/packages/nouveau-fw) that provides support for the VA API.
+- Use the [Arekinath patch](https://gitlab.com/aar642/libva-vdpau-driver) to provides VA API compatibility for recent NVIDIA cards.
 
 In both cases, we strongly recommend you to follow this link: https://gitlab.com/aar642/shadowos-boot#support
 
 ## AppImage
 
-**Alex^#1629** built an AppImage that should work on most recent (>2017) distributions. Please, [create an issue](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/new) if it fails on your distribution. Compatibility could be further extended if Blade would compile their application for Ubuntu 16.04 LTS. It could be improved soon when the unified version will be released.
+Shadow built an AppImage that should work on most recent distributions (> 2017). If you find any bug, please report it on the Discord or [create an issue](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/new).
 
 The AppImage embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it requires a **working libVA** on your system and a **compatible GLIBC**.
 
-To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `chmod a+x shadowbeta-linux-x86_64.AppImage` and run it. It will check the compatibility of your system and hardware, and if confirmed, offer to create a menu entry by placing a .desktop file in `~/.local/share/applications/`. We recommend to do so as it will then be listed in the Application Menu of your distribution.
+To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `chmod a+x ShadowBeta.AppImage` and run it. It will check the compatibility of your system and hardware, and if confirmed, offer to create a menu entry by placing a .desktop file in `~/.local/share/applications/`. We recommend to do so as it will then be listed in the Application Menu of your distribution.
 
-Extra options are available, please check `./shadowbeta-linux-x86_64.AppImage --help`.
+## The AUR package
+
+The AUR package [shadow-beta](https://aur.archlinux.org/packages/shadow-beta/) available for all Arch Linux based distribution was initially created by **agentcobra#6142** and now also maintained by **Nover#9563**. It is a quick way to install Shadow on the machine and get the updates frequently with the system updates.
 
 
 # Acknowledgments
