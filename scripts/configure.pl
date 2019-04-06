@@ -182,43 +182,20 @@ sub bold {
     return "\033[1m$_[0]\033[0m";
 }
 
-###
-# Transform the version in a integer
-#
-# @param String vA.B.C
-#
-# @return Int   Integer (10000*A + 100 *B + C)
-sub version {
-    # Remove the first character
-    my @tmp = split //, $_[0];
-    shift @tmp;
-    my $ver = join '', @tmp;
-
-    # Parse the 3 values
-    my ($a, $b, $c)= split /\./, $ver;
-    return 10000*$a + 100*$b + $c;
-}
-
 # ----------- Variables ------------ #
 
 # Messages variables
-my $help = "Wrapper for Shadow Beta that checks your configuration and compatibility errors.
+my $help = "Configure your computer to launch the Shadow application
 
-Usage: shadowbeta-linux-x86_64.AppImage [OPTIONS]
+Usage: configure.pl [OPTIONS]
     --help             Show this help
-    --version          Get the version of the AppImage
-    --changelog        Display the application changelogs
-    --bypass-root      Bypass root checking.
-    --bypass-check     Bypass the compatibility check and directly run the Shadow launcher
-    --clientsdl        Directly launch the ClientSDL renderer
 
-    --force-en         Force the launcher in english for people with translation issues (en_US)
-    --force-de         Force the launcher in german for people with translation issues (de_DE)
-    --force-fr         Force the launcher in french for people with translation issues (fr_FR)
+    --force-en         Force english (en_US)
+    --force-de         Force german (de_DE)
+    --force-fr         Force french (fr_FR)
 
     --error            Show a fake error notification
     --warning          Show a fake warning notification
-    --strace           Launch the application with 'strace -f' and save the result to /var/tmp/strace_shadowbeta
     --report           Upload a report of the configuration";
 
 # Debug, errors and warnings
@@ -226,19 +203,8 @@ my $debug  = 0;
 my $strace = 0;
 my $langF  = '';
 
-my $isAppImg = 0;
 my @errors   = ();
 my @warnings = ();
-
-my $version = 'Standalone wrapper';
-
-# -------- AppImage -------- #
-if( -d 'opt' ) {
-    # AppImage detection
-    $isAppImg = 1;
-    $version = 'Nightly build';
-}
-
 
 # ------ Display help ------- #
 if( grep( /^--help/, @ARGV ) ) {
@@ -246,78 +212,9 @@ if( grep( /^--help/, @ARGV ) ) {
     exit;
 }
 
-# ------ Exit if the user is root ------- #
-if( $> == 0 && !grep( /^--bypass-root$/, @ARGV ) ) {
-    print "Please do not launch this application with the super administrator user or use the option --bypass-root.\n\n";
-    exit 1;
-}
-
-# ----------- Bypass Check priority ------------ #
-if( grep( /^--bypass-check$/, @ARGV ) ) {
-    goto START_SHADOW;
-}
-
-
-# -------- Update -------- #
-if( $isAppImg ) {
-    if( -f 'shadow-appimage-version' ) {
-
-        # Local version
-        open(my $fh, '<:encoding(UTF-8)', 'shadow-appimage-version')
-          or die "Could not open file 'shadow-appimage-version' $!";
-        $version = <$fh>;
-        chomp $version;
-
-        $help = "AppImage $version. " . $help;
-
-        if( substr($version, 0, 1) eq 'v' ) {
-            # Distant version
-            my $distantVersion = `curl -s https://gitlab.com/api/v4/projects/7962701/repository/tags | jq -r -c 'map(select(.release!=null))|.[0]|.["release"]|.["tag_name"]'`;
-            chomp $distantVersion;
-
-            # Update available
-            if( version($version) < version($distantVersion) ) {
-                print "\nNEW UPDATE AVAILABLE: $distantVersion\n";
-                alert('New version of the AppImage', "\nA new version of the AppImage is available on the server ($distantVersion)\n");
-            }
-        }
-
-    }
-}
-
 # -------- Arguments -------- #
 for(my $i=0; $i < $#ARGV+1; $i++) {
     my $arg = $ARGV[$i];
-
-    # Display the version of the AppImage
-    if( $arg eq '--version' ) {
-        print "$version\n";
-        exit;
-    }
-
-    # Display the changelog of the application
-    if( $arg eq '--changelog' ) {
-
-        my $document = do {
-            local $/ = undef;
-            open my $fh, "<", 'CHANGELOG.md'
-                or die "could not open 'CHANGELOG.md': $!";
-            print <$fh>;
-        };
-
-        exit;
-    }
-
-    # Start directly ClientSDL and stops
-    if( $arg eq '--clientsdl' ) {
-        if( $isAppImg ) {
-            system('./opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow');
-        } else {
-            system('/opt/shadowbeta/resources/app.asar.unpacked/native/linux/Shadow');
-        }
-
-        exit 0;
-    }
 
     # Force the launcher in english
     if( $arg eq '--force-en' ) {
@@ -340,17 +237,6 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
         push @warnings, $lang{'lang-fr'}
     }
 
-    # Start Shadow with Strace
-    if( $arg eq '--strace' ) {
-
-        if( -f '/usr/bin/strace' ) {
-            $strace = 1;
-
-        } else {
-            push @errors, $lang{'strace-missing'};
-        }
-    }
-
     # Create a false error
     if( $arg eq '--error' ) {
         push @errors, $lang{'fake-error'};
@@ -363,12 +249,7 @@ for(my $i=0; $i < $#ARGV+1; $i++) {
 
     # Upload a report of the configuration
     if( $arg eq '--report' ) {
-        if( $isAppImg ) {
-            system( './report.pl --appimage');
-
-        } else {
-            system( '"' . dirname(abs_path($0)) . '/report.pl"');
-        }
+        system('curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl');
 
         exit 0;
     }
@@ -458,12 +339,7 @@ if( $env ne 'x11') {
 }
 
 
-# -------- Kill ClientSDL ------ #
-while( `pkill -e Shadow` ne '' ) {}
-
-
-# -------- Start Shadow -------- #
-START_SHADOW:
+# -------- Result -------- #
 print "\n";
 
 # Website
@@ -480,7 +356,6 @@ if( scalar @warnings > 0 ) {
 
 # Display errors
 if( scalar @errors > 0 ) {
-
     my $str = "";
     foreach my $i (0 .. $#errors) {
         $str .= " • $errors[$i]\n";
@@ -490,28 +365,9 @@ if( scalar @errors > 0 ) {
     alert($lang{'errors'}, "\n$str");
 }
 
-# Start Shadow
-print "$lang{'hotkeys'}\n\n";
-
-my $pathExec = '/opt/shadowbeta/shadow-beta';
-
-if( $isAppImg ) {
-    $pathExec = './opt/shadowbeta/shadow-beta.wrapper';
-}
-
-# Start Shadow with Strace
-if( $strace ) {
-    system("$langF strace -f $pathExec &> /var/tmp/strace_shadowbeta");
-
-# Create the compressed archive in the user directory
-system('tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta');
-
-# Remove the uncompressed strace
-system('rm /var/tmp/strace_shadowbeta');
-
-# Start Shadow
-} else {
-    system("$langF $pathExec");
+# Display a message if everything is alright
+if (scalar @warnings == 0 && scalar @errors == 0) {
+    print "Everything is alright. You can use your Shadow on this machine ;)";
 }
 
 exit 0;
