@@ -33,9 +33,9 @@ if (! glob($path . '/shadow-preprod')) {
     $path = '/opt/shadowbeta';
 
     if (! -d "$path") {
-        $path = '/opt/Shadow Beta';
+        $path = "/opt/Shadow\\ Beta";
 
-        if (! -d "$path") {
+        if (! -d "/opt/Shadow Beta") {
             $path = '';
         }
     }
@@ -94,7 +94,7 @@ $return .= "\n-------------------------------------\n";
 $return .= "               HARDWARE\n";
 $return .= "-------------------------------------\n";
 
-$return .= `lspci -v` . "\n";
+$return .= `lspci -v`;
 
 # -------- Logs -------- #
 $return .= "\n-------------------------------------\n";
@@ -102,8 +102,8 @@ $return .= "                Logs\n";
 $return .= "-------------------------------------\n";
 
 if (-f $ENV{"HOME"} . '/.cache/blade/shadow/shadow.log') {
-    my @logs = split(/Welcome/, `cat ~/.cache/blade/shadow/shadow.log`);
-    $return .= 'Welcome' . $logs[-1];
+    my @logs = split(/Shadow client version/, `cat ~/.cache/blade/shadow/shadow.log`);
+    $return .= 'Shadow client version' . $logs[-1];
 
 } else {
     $return .= 'Logs not found.';
