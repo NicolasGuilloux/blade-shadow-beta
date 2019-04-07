@@ -6,6 +6,8 @@ A sexy website is in the works to summarize everything on this git: https://nico
 
 Check out our side-projects Discord: https://discord.gg/9HwHnHq
 
+To generate a report and share your configuration in one link, please execute the following line in your terminal: `curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl`
+
 # How to use
 
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know).
