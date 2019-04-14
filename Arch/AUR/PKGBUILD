@@ -7,8 +7,8 @@
 
 pkgname=shadow-beta
 pkgname=shadow-beta
-pkgver=4.1.17
-pkgrel=2
+pkgver=4.2.1
+pkgrel=1
 pkgdesc="Shadow launcher"
 arch=('x86_64')
 url="http://shadow.tech"
