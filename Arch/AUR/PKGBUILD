@@ -44,6 +44,7 @@ package() {
 
 	### Edit launcher
 	sed -e 's/^Categories=.*$/Categories=Games;Game;Utility;Virtualization/g' "${pkgdir}/usr/share/applications/shadow-dev.desktop" > shadow-beta.desktop
+	sed -i 's/Icon=shadow-dev/Icon=shadow-beta/g' shadow-beta.desktop
 	chmod g-w shadow-beta.desktop
 
 	rm "${pkgdir}/usr/share/applications/shadow-dev.desktop"
