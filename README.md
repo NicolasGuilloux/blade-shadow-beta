@@ -58,6 +58,8 @@ To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/b
 
 The AUR package [shadow-beta](https://aur.archlinux.org/packages/shadow-beta/) available for all Arch Linux based distribution was initially created by **agentcobra#6142** and now also maintained by **Nover#9563**. It is a quick way to install Shadow on the machine and get the updates frequently with the system updates.
 
+To build it locally, download the git files from the AUR website and build the package by executing `makepkg`.
+
 
 # Acknowledgments
 
