@@ -59,7 +59,7 @@
 											<li><a href="#gamepad" class="scrolly">The application do not detect my gamepad</a></li>
 											<li><a href="#mouse" class="scrolly">The mouse cursor disappear in Fullscreen mode</a></li>
 											<li><a href="#nvidia" class="scrolly">The NVIDIA issue and workaround for Optimus</a></li>
-											<li><a href="#strace" class="scrolly">The application crashed when I try to strace (AppImage)</a></li>
+											<li><a href="#compositing" class="scrolly">The application makes my environment jerky and all transparent component opaque</a></li>
 										</ul>
 									</div>
 								</div>
@@ -146,32 +146,22 @@
 								</div>
 							</section>
 
-							<section class="main" id="strace">
+							<section class="main" id="compositing">
 								<div class="content">
 									<header class="major">
-										<h2>The application crashed when I try to strace (AppImage)</h2>
+										<h2>The application makes my environment jerky and all transparent component opaque</h2>
 									</header>
 
 									<p>
-										The strace may crash the Shadow client with the AppImage. Indeed, strace disturbs the FUSE component of the AppImage used to mount it on your drive.<br />
-										A workaround is to manually mount the AppImage, then start the strace on the shadow-wrapper.pl.
+										When the stream starts, the application can kind of interfere with the transparent components. This is actually a feature asked a long time ago by the Linux community.
 									</p>
 
 									<p>
-										First, mount the AppImage using the following command: <code>./ShadowBeta.AppImage --appimage-mount</code>. You will get a path to a folder.
+										The <a href="https://en.wikipedia.org/wiki/Compositing_window_manager#Linux" target="_blank">compositing</a> is a component that uses the GPU acceleration to bring some effects to the window manager. But you are playing a video game, it is not necessary to loose performance for effects you're not supposed to see. So, when an application uses intensively the GPU, the window manager stops the compositing, so the transparent effects.
 									</p>
 
 									<p>
-										From another terminal, go to this folder, and use the following command to start the strace:<br />
-										<code>strace -f  ./shadow-preprod.pl  &> /var/tmp/strace_shadowbeta && tar -zcvf ~/strace_shadowbeta.tar.gz /var/tmp/strace_shadowbeta && rm /var/tmp/strace_shadowbeta</code>
-									</p>
-
-									<p>
-										Use your Shadow. When finished, close the launcher. Wait for the terminal to finish the process. When done, it should have created a archive in your user directory. This is what you should share.
-									</p>
-
-									<p>
-										You may now close the first terminal to unmount the AppImage.
+										On KDE, it is pretty easy to avoid this effect. In the general configuration, in the section <code>Window management</code>, you add a <code>Window rule</code>. Click on <code>New</code>, and set the class of windows to <code>shadow</code>. Then go to the <code>Appearence and corrections</code> tab and at the bottom, you will find an option called <code>Block the compositing</code>. Check it, select <code>Force</code> and select <code>No</code>. Now restart your application and Voilà!
 									</p>
 								</div>
 							</section>
