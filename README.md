@@ -1,30 +1,29 @@
 # Why this?
 
-The Shadow cloud-computing application by Blade (https://shadow.tech) is available in Beta for Ubuntu 18.04. This repository extends compatibility to additional distributions using a standalone AppImage application that embeds most dependencies and requires no installation. Tools to check the compatibility of your system and hardware are also available separately (shadow-tools) or bundled within the AppImage.
+The Shadow cloud-computing application by Blade (https://shadow.tech) is available for Ubuntu 18.04. This repository extends compatibility to additional distributions and hardwares, providing scripts and documentation. The usefulness of this repository decreases during time as Blade improves its compatibility and fixes bugs. Still, this repository provides great documentations made by the community!
 
-A sexy website is in the works to summarize everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
+A sexy website is available ans summarizes everything on this git: https://nicolasguilloux.github.io/blade-shadow-beta/
 
 Check out our side-projects Discord: https://discord.gg/9HwHnHq
 
-To generate a report and share your configuration in one link, please execute the following line in your terminal: `curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl`
+To generate a report and share your configuration in one command, please execute the following line in your terminal: `curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl`
+
 
 # How to use
 
 The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know).
 
-|  Work on      |  Do not work on  |
-|      :-:      |        :-:       |
-| Ubuntu 18.04  | Ubuntu 16.04     |
-| Linux Mint 19 | Linux Mint 18    |
-| Debian 10+    | Debian 9         |
-| Arch Linux    | GalliumOS 2.2    |
-| Solus Budgie  |                  |
-| Fedora 28     |                  |
-| GalliumOS 3.0 |                  |
+|  Work on       |  Do not work on  |
+|      :-:       |        :-:       |
+| Ubuntu 18.04+  | Ubuntu 16.04     |
+| Linux Mint 19+ | Linux Mint 18    |
+| Debian 10+     | Debian 9         |
+| Arch Linux     | GalliumOS 2.2    |
+| Solus Budgie   |                  |
+| Fedora 28      |                  |
+| GalliumOS 3.0  |                  |
 
 The scripts were written by the [Shadow Discord](https://discord.gg/shadowtech) community and are not affiliated with the Blade company. There is no guarantee whatsoever that the scripts will work for you. Use them at your own risk, preferably after reviewing them yourself. The AppImage should be harmless, worst case scenario is it does not work.
-
-An additional folder is also present in the repository to support the [Arch User Repository](https://wiki.archlinux.org/index.php/Arch_User_Repository) installation. This initiative is led and maintained by **agentcobra#6142**. The folder is there to support him.
 
 ## VA Drivers
 
@@ -46,19 +45,28 @@ For NVIDIA users, you have 2 options:
 
 In both cases, we strongly recommend you to follow this link: https://gitlab.com/aar642/shadowos-boot#support
 
+#### For other cases:
+
+If you still experience issues, more information are available on the [website](https://nicolasguilloux.github.io/blade-shadow-beta/#vainfo). Moreover, contact the Linux community on the [Discord](https://discord.gg/shadowtech) to get some help.
+
+
 ## AppImage
 
 Shadow built an AppImage that should work on most recent distributions (> 2017). If you find any bug, please report it on the Discord or [create an issue](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/new).
 
-The AppImage embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it requires a **working libVA** on your system and a **compatible GLIBC**.
+The AppImage embeds Ubuntu Bionic (18.04) libs and the official Shadow Beta application. However, it still requires a **working libVA** on your system and a **compatible GLIBC**.
 
-To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `chmod a+x ShadowBeta.AppImage` and run it. It will check the compatibility of your system and hardware, and if confirmed, offer to create a menu entry by placing a .desktop file in `~/.local/share/applications/`. We recommend to do so as it will then be listed in the Application Menu of your distribution.
+To use the AppImage, [download the AppImage](https://nicolasguilloux.github.io/blade-shadow-beta/#appimage) to the folder you want, make it executable with `chmod a+x Shadow*.AppImage` and run it. 
 
 ## The AUR package
 
 The AUR package [shadow-beta](https://aur.archlinux.org/packages/shadow-beta/) available for all Arch Linux based distribution was initially created by **agentcobra#6142** and now also maintained by **Nover#9563**. It is a quick way to install Shadow on the machine and get the updates frequently with the system updates.
 
 To build it locally, download the git files from the AUR website and build the package by executing `makepkg`.
+
+## Issues
+
+Check out the [known issues](https://nicolasguilloux.github.io/blade-shadow-beta/issues.html) or dig into the [Github issues page](https://github.com/NicolasGuilloux/blade-shadow-beta/issues) to solve it. If it is unsolved, create a new one!
 
 
 # Acknowledgments
@@ -87,7 +95,6 @@ You can talk to us on the [French Shadow Discord](https://discord.gg/shadowtech)
 
 - [Shadow Live OS](https://gitlab.com/NicolasGuilloux/shadow-live-os): A live Linux that start Shadow and all needed components, ready out of the box !
 - [ShadowOS Networked boot](https://gitlab.com/aar642/shadowos-boot): A small ISO (~1Mo) that use iPXE to boot the Shadow Live OS using network.
-- [Shadow Kodi Addon](https://gitlab.com/NicolasGuilloux/shadow-kodi-addon/tree/master): A Kodi addon to start Kodi from the Kodi interface.
 - [Shadow Gaming](https://discord.gg/5yhkeV5): A discord to share the configuration of the game and discuss about benchmark.
 
 ### Support

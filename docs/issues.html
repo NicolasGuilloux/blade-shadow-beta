@@ -34,7 +34,6 @@
 						<ul>
 							<li><a href="./#appimage">AppImage</a></li>
 							<li><a href="./#vainfo">Setup your GPU</a></li>
-							<li><a href="./#tool">Shadow tool</a></li>
 							<li><a href="#" class="active">Known issues</a></li>
 							<li><a href="tweaks.html">Tweaks</a></li>
 							<li><a href="https://github.com/NicolasGuilloux/blade-shadow-beta" target="_blank">Our work on Github</a></li>
@@ -56,10 +55,13 @@
 										</p>
 
 										<ul style="list-style-type: none;">
-											<li><a href="#gamepad" class="scrolly">The application do not detect my gamepad</a></li>
+											<li><a href="#gamepad" class="scrolly">The application does not detect my gamepad</a></li>
 											<li><a href="#mouse" class="scrolly">The mouse cursor disappear in Fullscreen mode</a></li>
 											<li><a href="#nvidia" class="scrolly">The NVIDIA issue and workaround for Optimus</a></li>
 											<li><a href="#compositing" class="scrolly">The application makes my environment jerky and all transparent component opaque</a></li>
+											<li><a href="#drirc" class="scrolly">The stream is colored or not sharp with an AMD card</a></li>
+											<li><a href="#intel-init" class="scrolly">The stream is half rendered or freezes the computer</a></li>
+											<li><a href="#sandbox" class="scrolly">The application does not start at all</a></li>
 										</ul>
 									</div>
 								</div>
@@ -69,7 +71,7 @@
 							<section class="main" id="gamepad">
 								<div class="content">
 									<header class="major">
-										<h2>The application do not detect my gamepad</h2>
+										<h2>The application does not detect my gamepad</h2>
 									</header>
 									<p>
 										Some gamepads are sometimes badly recognized by the Shadow app. As the developer team <b>needs</b> to know which gamepads are badly recognized, please send us a message on Discord and mention the brand and reference of your device so we can transfer this to the developpers.
@@ -162,6 +164,55 @@
 
 									<p>
 										On KDE, it is pretty easy to avoid this effect. In the general configuration, in the section <code>Window management</code>, you add a <code>Window rule</code>. Click on <code>New</code>, and set the class of windows to <code>shadow</code>. Then go to the <code>Appearence and corrections</code> tab and at the bottom, you will find an option called <code>Block the compositing</code>. Check it, select <code>Force</code> and select <code>No</code>. Now restart your application and Voilà!
+									</p>
+								</div>
+							</section>
+
+							<section class="main" id="drirc">
+								<div class="content">
+									<header class="major">
+										<h2>The stream is colored or not sharp with an AMD card</h2>
+									</header>
+									<p>
+										The AMD drivers may not be well configured for Shadow, especially about the bit range for the colors. A quick fix is to configure properly the drivers by executing the following command:
+									</p>
+									<p>
+										<code>sudo curl https://gitlab.com/NicolasGuilloux/shadow-live-os/raw/arch-master/airootfs/etc/drirc -o /etc/drirc</code>
+									</p>
+									<p>
+										<b>Be carefull!</b> This a <code>sudo</code> command, it is not harmless !
+									</p>
+								</div>
+							</section>
+
+							<section class="main" id="intel-init">
+								<div class="content">
+									<header class="major">
+										<h2>The stream is half rendered or freezes the computer</h2>
+									</header>
+									<p>
+										Some intel GPU requires a specific initialization. Shadow did a quick fix, but requires the name of your GPU card if it happens. Please execute the <code>vainfo</code> command and send the output to the support or the Discord.
+									</p>
+								</div>
+							</section>
+
+							<section class="main" id="sandbox">
+								<div class="content">
+									<header class="major">
+										<h2>The application does not start at all</h2>
+									</header>
+									<p>
+										Due to a <a href="" target="_blank">Debian bug</a>, the AppImage may not launch the application. To fix this quickly, start the application with the <code>--no-sandbox</code> parameter.
+									</p>
+									<p>
+										Another solution to fix it during time is to let the user create a sandbox for the application. 2 ways of doing it:
+									</p>
+									<ul>
+										<li><code>sudo sysctl -w kernel.unprivileged_userns_clone=1</code></li>
+										<li><code>sudo sh -c 'echo "kernel.unprivileged_userns_clone=1" > /etc/sysctl.d/99-shadow.conf'</code></li>
+									</ul>
+									<p>
+										<b>Be carefull!</b> These are <code>sudo</code> commands, they are not harmless !
 									</p>
 								</div>
 							</section>
