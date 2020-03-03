@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # Autheur: Nicolas Guilloux
 # Website: https://nicolasguilloux.eu/
@@ -56,11 +56,6 @@ $return .= "\n-------------------------------------\n\n";
 # -------- Environment -------- #
 $return .= 'Environment server: ' . `echo \$XDG_SESSION_TYPE`;
 $return .= 'Windows Manager: ' . `echo \$XDG_CURRENT_DESKTOP`;
-if (index(`groups \$USER`, 'input') == -1) {
-    $return .= '/!\ The user is not in the "input" group.';
-} else {
-    $return .= 'The user is in the "input" group.';
-}
 
 # -------- Missing libraries -------- #
 $return .= "\n\n-------------------------------------\n";

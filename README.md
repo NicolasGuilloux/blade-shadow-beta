@@ -9,21 +9,16 @@ Check out our side-projects Discord: https://discord.gg/9HwHnHq
 To generate a report and share your configuration in one command, please execute the following line in your terminal: `curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl`
 
 
-# How to use
 
-The AppImage is confirmed to work on the following distributions, but is likely compatible with others (let us know).
+# Disclaimer
 
-|  Work on       |  Do not work on  |
-|      :-:       |        :-:       |
-| Ubuntu 18.04+  | Ubuntu 16.04     |
-| Linux Mint 19+ | Linux Mint 18    |
-| Debian 10+     | Debian 9         |
-| Arch Linux     | GalliumOS 2.2    |
-| Solus Budgie   |                  |
-| Fedora 28      |                  |
-| GalliumOS 3.0  |                  |
+This Github is *NOT* official. It was created by regular users only to centralize scripts and reports. As this Github is not affiliated with the Blade company, no Shadow developper has to answer the issues and therefore, don't expect any quick response. The goal is to provide a support about what we know, and gather as much information as possible to help people.
 
-The scripts were written by the [Shadow Discord](https://discord.gg/shadowtech) community and are not affiliated with the Blade company. There is no guarantee whatsoever that the scripts will work for you. Use them at your own risk, preferably after reviewing them yourself. The AppImage should be harmless, worst case scenario is it does not work.
+That being said, there is no reason what so ever to complain about Shadow or Blade in general on this Github. This is not the place and it is not appropriate as we don't work for them. To complain about something, please use the official Discords where you will get an official response.
+
+Moreover, we expect respect when talking to each other. We all are regular users, and we are all looking for some help or to help. To learn more about what we expect, please our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+
 
 ## VA Drivers
 
@@ -38,6 +33,7 @@ If your active GPU is an Intel chipset and you have no dedicated GPU, you will n
 - Ubuntu: `sudo apt install i965-va-driver`
 - Arch Linx: `sudo pacman -S libva-intel-driver`
 - Solus: `sudo eopkg it libva-intel-driver`
+- Fedora: `sudo dnf install libva-intel-hybrid-driver`
 
 For NVIDIA users, you have 2 options:
 - Use the Nouveau driver and install the old [NVIDIA firmware](https://aur.archlinux.org/packages/nouveau-fw) that provides support for the VA API.
@@ -64,7 +60,20 @@ The AUR package [shadow-beta](https://aur.archlinux.org/packages/shadow-beta/) a
 
 To build it locally, download the git files from the AUR website and build the package by executing `makepkg`.
 
-## Issues
+## NixOS
+
+**Elyhaka** built a NixOS package for Shadow. [Check out his repository](https://github.com/Elyhaka/shadow-nix).
+
+
+# Other configuration
+
+
+### Fedora
+
+Make sure you installed `librtmp` from RMP Fusion. Checkout the issue [#49](https://github.com/NicolasGuilloux/blade-shadow-beta/issues/49).
+
+
+# Issues
 
 Check out the [known issues](https://nicolasguilloux.github.io/blade-shadow-beta/issues.html) or dig into the [Github issues page](https://github.com/NicolasGuilloux/blade-shadow-beta/issues) to solve it. If it is unsolved, create a new one!
 
@@ -76,6 +85,8 @@ Thanks to **Alex^#1629** on Discord for being available every time somebody need
 Thanks to **agentcobra#6142** on Discord for maintaining the AUR package and review my code. Many mistakes were corrected by you.
 
 Thanks to **0x4cc3a96f#4425** for "mastering" Linux. We greatly appreciate all you help and efforts to make the Linux app better and better.
+
+Thanks to **Ely#5135** who built the NixOS package and helped me a lot with the LiveOS.
 
 Thanks to **raphco#0312** on Discord for being the guinea pig for Arch.
 
@@ -107,3 +118,5 @@ If you want to support us, rather than make donations, we prefer to use the refe
 | GiantPandaRoux  | `JLRYV`         |  https://shop.shadow.tech/invite/JLRYV    |
 | AgentCobra      | `4LKBA`         |  https://show.shadow.tech/invite/4LKBA    |
 | Nover           | `NICNC9DP`      |  https://shop.shadow.tech/invite/NICNC9DP |
+| Elyhaka         | `JRMIXPEY`      |  https://shop.shadow.tech/invite/JRMIXPEY |
+
