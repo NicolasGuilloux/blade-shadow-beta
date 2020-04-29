@@ -19,6 +19,12 @@ check_codec() {
     fi
 }
 
+nvidia() {
+    echo -e "For NVIDIA users, you have 2 options:\n"
+    echo -e "\t* Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API."
+    echo -e "\t* Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards."
+}
+
 DISTRO=$(cat /etc/*-release |& awk -F= '/^NAME/ { print $2 }' | sed 's/"//g')
 case $DISTRO in
     "Ubuntu" | "Debian GNU/Linux")
@@ -36,9 +42,7 @@ case $DISTRO in
             sudo apt-get install mesa-va-drivers -y
         elif [[ $pilot == *"NVIDIA"* ]]
         then
-            echo -e "For NVIDIA users, you have 2 options:\n"
-            echo -e "\t* Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API."
-            echo -e "\t* Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards."
+            nvidia
         fi
 
         check_codec
@@ -57,9 +61,7 @@ case $DISTRO in
             sudo pacman -S libva-mesa-driver
         elif [[ $pilot == *"NVIDIA"* ]]
         then
-            echo -e "For NVIDIA users, you have 2 options:\n"
-            echo -e "\t* Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API."
-            echo -e "\t* Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards."
+            nvidia
         fi
 
         check_codec
@@ -75,9 +77,7 @@ case $DISTRO in
             sudo eopkg it libva-intel-driver
         elif [[ $pilot == *"NVIDIA"* ]]
         then
-            echo -e "For NVIDIA users, you have 2 options:\n"
-            echo -e "\t* Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API."
-            echo -e "\t* Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards."
+            nvidia
         fi
 
         check_codec
@@ -90,9 +90,7 @@ case $DISTRO in
         fi
         if [[ $pilot == *"NVIDIA"* ]]
         then
-            echo -e "For NVIDIA users, you have 2 options:\n"
-            echo -e "\t* Use the Nouveau driver and install the old NVIDIA firmware that provides support for the VA API."
-            echo -e "\t* Use the Arekinath patch to provides VA API compatibility for recent NVIDIA cards."
+            nvidia
         fi
 
         check_codec
