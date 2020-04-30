@@ -209,7 +209,7 @@ main() {
                 if [[ $pilot == *"Intel"* ]]
                 then
                     sudo dnf install libva-intel-hybrid-driver libvdpau-va-gl
-                    sudo sh -c "echo 'export LIBVA_DRIVER_NAME=i965' >> /etc/profile"
+                    sudo sh -c "echo 'export VDPAU_DRIVER=va_gl' >> /etc/profile"
                 elif [[ $pilot == *"NVIDIA"* ]]
                 then
                     print_nvidia
