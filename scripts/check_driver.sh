@@ -17,7 +17,6 @@ check_h264() {
     then
         true
     else
-        echo -e "❌ \e[91mH264 not found.\e[0m\nPlease generate a report with the following command:\n\t- curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl"
         false
     fi
 }
