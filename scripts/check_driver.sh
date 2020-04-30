@@ -101,7 +101,7 @@ main() {
             ;;
         "Arch Linux")
             print_distro $DISTRO
-            if ! type "vaino" > /dev/null 2>&1
+            if ! type "vainfo" > /dev/null 2>&1
             then
                 print_vainfo_warning
                 sudo pacman -S libsndio-61-compat libva-utils
@@ -143,7 +143,7 @@ main() {
             ;;
         "Solus Budgie")
             print_distro $DISTRO
-            if ! type "vaino" > /dev/null 2>&1
+            if ! type "vainfo" > /dev/null 2>&1
             then
                 print_vainfo_warning
                 sudo eopkg it libva-utils
