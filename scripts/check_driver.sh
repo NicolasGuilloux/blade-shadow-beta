@@ -182,7 +182,7 @@ main() {
             ;;
         "Fedora")
             print_distro $DISTRO
-            if ! type "vaino" > /dev/null 2>&1
+            if ! type "vainfo" > /dev/null 2>&1
             then
                 print_vainfo_warning
                 sudo dnf install librtmp
