@@ -217,6 +217,9 @@
 										<strong>For Fedora users,</strong> you may check that you have installed the library <a href="https://pkgs.org/search/?q=librtmp" target="_blank">librtmp</a>.
 									</p>
 
+									<p>
+										<strong>For Debian or Ubuntu users with CPU Gen 8+,</strong> you may set an environment variable <code>LIBVA_DRIVER_NAME=iHD</code> or start the AppImage like this <code>LIBVA_DRIVER_NAME=iHD ./Shadow.AppImage --no-sandbox</code>.
+									</p>
 
 									<p>
 										<strong>For every user who wants the "remember me" feature,</strong> you need to install <code>gnome-keyring</code>
@@ -329,7 +332,8 @@ vainfo: Supported profile and entrypoints
 								</p>
 
 								<ul>
-									<li>Ubuntu: <code>sudo apt install i965-va-driver</code></li>
+									<li>Ubuntu/Debian: <code>sudo apt install i965-va-driver</code></li>
+									<li>Ubuntu/Debian with CPU Gen 8+ : <code>sudo apt install intel-media-va-driver-non-free</code></li>
 									<li>Arch Linx: <code>sudo pacman -S libva-intel-driver</code></li>
 									<li>Solus: <code>sudo eopkg it libva-intel-driver</code></li>
 								</ul>
