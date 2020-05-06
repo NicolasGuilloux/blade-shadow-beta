@@ -1,0 +1,19 @@
+<driconf>
+  <device driver="radeonsi">
+    <application name="Shadow" executable="Shadow">
+      <option name="allow_rgb10_configs" value="false" />
+      <option name="radeonsi_clear_db_cache_before_clear" value="true" /> 
+    </application>
+  </device>
+  <device driver="radeon">
+    <application name="Shadow" executable="Shadow">
+      <option name="allow_rgb10_configs" value="false" />
+    </application>
+  </device>
+  <device driver="iris">
+    <application name="Shadow" executable="Shadow">
+      <option name="allow_rgb10_configs" value="false" />
+    </application>
+  </device>  
+</driconf>
+
