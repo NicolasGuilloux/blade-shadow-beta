@@ -6,9 +6,15 @@ A sexy website is available ans summarizes everything on this git: https://nicol
 
 Check out our side-projects Discord: https://discord.gg/9HwHnHq
 
-To generate a report and share your configuration in one command, please execute the following line in your terminal: `curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl`
+To generate a report and share your configuration in one command, please execute the following line in your terminal:
+```bash
+curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/report.pl | perl
+```
 
-
+To check and install the necessary drivers, please execute the following line in your terminal:
+```bash
+curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/scripts/check_driver.sh | bash
+```
 
 # Disclaimer
 
