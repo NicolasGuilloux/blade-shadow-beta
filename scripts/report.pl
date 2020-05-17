@@ -7,6 +7,7 @@
 use strict;
 use warnings;
 
+my $url = 'http://shadow.test';
 
 # Send to Hostbin
 #
@@ -19,11 +20,11 @@ sub share {
     close $fh;
 
     print 'Sending the data to the server...';
-    my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
+    my $id = `curl -sf --data-binary "@/tmp/report_shadow" $url/api/hostbin`;
 
     system('rm /tmp/report_shadow');
 
-    return "Share the following link to get some help: $url";
+    return "Share the following link to get some help: $url/troubleshoot/$id";
 }
 
 # ------- Check application path ------- #
@@ -77,18 +78,15 @@ $return .= "-------------------------------------\n";
 $return .= "\nGPU detected:\n";
 $return .= `lspci | grep VGA` . "\n";
 
-if (-f '/usr/bin/vainfo') {
-    $return .= `vainfo`;
-
-} else {
-    $return .= "'vainfo' is not installed.";
-}
+$return .= `vainfo 2> /dev/null`;
 
 # -------- Hardware -------- #
 $return .= "\n-------------------------------------\n";
 $return .= "               HARDWARE\n";
 $return .= "-------------------------------------\n";
 
+$return .= `LANG=UK_en lscpu`;
+$return .= "\n";
 $return .= `lspci -v`;
 
 # -------- Logs -------- #
