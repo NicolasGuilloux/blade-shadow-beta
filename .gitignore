@@ -1,5 +1,6 @@
-# VSCodium
+# Editors
 /.vscode
+/.idea
 
 # NodeJS
 /.cache
