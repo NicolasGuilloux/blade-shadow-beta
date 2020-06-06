@@ -23,10 +23,15 @@
     </head>
     <body class="leading-normal tracking-normal text-white gradient">
         <script>
-            window.Elm.Pages.Home.Main.init({
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            window.Elm.Pages.Troubleshoot.Main.init({
                 flags: {
-                    actualPage: 'home',
-                    subFlags: {},
+                    actualPage: 'troubleshoot',
+                    subFlags: {
+                        uid: urlParams.get('uid')
+                    },
                 }
             });
         </script>

@@ -1,0 +1,35 @@
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    border-style: none;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+
+    .gradient, nav{
+        background: linear-gradient(90deg, #000 0%, #161E28 100%);
+    }
+
+    .color-inverted {
+        filter: invert(100%);
+    }
+
+    .anchor {
+        padding-top: 50px;
+        margin-top: -50px;
+    }
+
+    @media (min-width: 1024px) {
+        .anchor {
+            padding-top: 120px;
+            margin-top: -120px;
+        }
+    }
+}
+

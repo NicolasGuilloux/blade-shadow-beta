@@ -1,0 +1,11 @@
+# VSCodium
+/.vscode
+/.cache
+
+# NodeJS
+/node_modules
+/static
+
+# Elm
+/elm-stuff
+/assets/elm/Libs
