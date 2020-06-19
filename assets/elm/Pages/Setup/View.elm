@@ -110,7 +110,7 @@ vainfoSetup =
                 [ ul []
                     [ li []
                         [ text "Debian: "
-                        , code [] [ text "sudo apt install libva-gl2 vainfo" ]
+                        , code [] [ text "sudo apt install libva-glx2 vainfo" ]
                         ]
                     , li []
                         [ text "Arch Linux: "
