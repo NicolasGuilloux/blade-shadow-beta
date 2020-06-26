@@ -81,6 +81,14 @@ setupGuide =
                     ]
                 , text "."
                 ]
+            , p []
+                [ strong [] [ text "For Ubuntu 20.04+ users" ]
+                , text ", you may need to install the following driver for Intel GPUs "
+                , a [ href "https://packages.ubuntu.com/search?keywords=intel-media-va-driver-non-free", target "_blank" ]
+                    [ code [ TW.ml1, TW.fontNormal ] [ text "intel-media-va-driver-non-free" ]
+                    ]
+                , text "."
+                ]
             , p [ TW.pt12 ]
                 [ text "The community built a wonderful report script that gather all information to debug quickly your setup. Everytime you ask for help, please join the link given back the following command:"
                 ]
