@@ -180,7 +180,7 @@ drircIssue =
         { title = "The DRIRC fix"
         , body =
             [ p []
-                [ img [ src "images/rgba_issue.jpg" ] []
+                [ img [ src "images/rgba_issue.png" ] []
                 ]
             , p []
                 [ text """
