@@ -19,6 +19,6 @@ main =
 
 partialView : Model -> Document Msg
 partialView model =
-    { title = "Setup - Shadow Linux Community"
+    { title = "Tweaks - Shadow Linux Community"
     , body = View.view model
     }

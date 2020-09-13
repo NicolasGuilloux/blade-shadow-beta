@@ -21,7 +21,7 @@ view _ =
 abstract : Html Msg
 abstract =
     Section.section
-        { title = "Known issues"
+        { title = "Tweaks"
         , body =
             [ p []
                 [ text """
@@ -90,7 +90,7 @@ mountShadow =
                 , text " to find the IP address of your Shadow. This will be useful."
                 ]
             , p [ TW.my4 ]
-                [ img [ src "images/zerotier_network.png", TW.roundedLg ] []
+                [ img [ src "images/zerotier_network.png" ] []
                 ]
             , p []
                 [ h4 [] [ text "Sharing setup" ]
@@ -141,7 +141,7 @@ mountShadow =
                     """
                 ]
             , p []
-                [ img [ src "images/share_folder.png", TW.roundedLg ] []
+                [ img [ src "images/share_folder.png" ] []
                 ]
             , p []
                 [ text """
@@ -152,7 +152,7 @@ mountShadow =
                 , text " and entering the share user and his password. On Dolphin, you can add a shortcut for instance under Network."
                 ]
             , p []
-                [ img [ src "images/dolphin_share.png", TW.roundedLg ] []
+                [ img [ src "images/dolphin_share.png" ] []
                 ]
             ]
         }

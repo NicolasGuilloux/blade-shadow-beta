@@ -180,6 +180,9 @@ drircIssue =
         { title = "The DRIRC fix"
         , body =
             [ p []
+                [ img [ src "images/rgba_issue.jpg" ] []
+                ]
+            , p []
                 [ text """
                   The AMD or Intel drivers may not be well configured for Shadow, especially about the bit range for the
                   colors . A quick fix is to configure properly the drivers by executing the following command:

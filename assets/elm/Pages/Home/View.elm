@@ -68,21 +68,21 @@ appimage =
                   , isTargetBlank = False
                   , buttonLabel = "Userspace"
                   , icon = Just FontAwesome.externalLinkAlt
-                  , items = [ "More stable renderer", "Shadow Control Panel in the VM" ]
+                  , items = [ "QuickMenu", "Nvidia 1000+ series fix", "Microphone" ]
                   }
                 , { title = "Beta"
                   , url = "https://account.shadow.tech/apps"
                   , isTargetBlank = True
                   , buttonLabel = "Userspace"
                   , icon = Just FontAwesome.externalLinkAlt
-                  , items = [ "QuickMenu", "Microphone" ]
+                  , items = [ "QuickMenu", "Nvidia 1000+ series fix", "Microphone" ]
                   }
                 , { title = "Alpha"
                   , url = "#discord"
                   , isTargetBlank = False
                   , buttonLabel = "Join Discord"
                   , icon = Just FontAwesome.discord
-                  , items = [ "QuickMenu", "Microphone", "Latest renderer" ]
+                  , items = [ "QuickMenu", "Nvidia 1000+ series fix", "Microphone", "Latest renderer" ]
                   }
                 ]
             ]

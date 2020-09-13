@@ -198,6 +198,7 @@ img attributes =
     Html.img
         (attributes
             |> (::) TW.maxWFull
+            |> (::) TW.roundedLg
         )
 
 
