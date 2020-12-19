@@ -2,3 +2,10 @@ __pycache__
 AppImage/test
 .directory
 /.idea
+
+# Website artifacts
+/node_modules
+/assets
+/public
+/.cache
+/elm-stuff
