@@ -151,7 +151,7 @@ copyright =
     div [ bgWhite, textCenter, p6 ]
         [ p [ textGray600 ]
             [ text "This website and its content are not linked with the "
-            , a [ href "", target "_blank", fontBold, textGray900 ] [ text "Blade" ]
+            , a [ href "http://www.blade-group.com", target "_blank", fontBold, textGray900 ] [ text "Blade" ]
             , text " company. It was made by the community for the community."
             ]
         , p [ textGray600 ]

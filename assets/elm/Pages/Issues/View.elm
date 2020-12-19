@@ -199,6 +199,25 @@ drircIssue =
                 , code [] [ text "sudo" ]
                 , text " command, it is not harmless!"
                 ]
+            , p []
+                [ text """
+                  To add it to user space, simply execute the following command:
+                  """
+                ]
+            , p []
+                [ code []
+                    [ text "curl https://raw.githubusercontent.com/NicolasGuilloux/blade-shadow-beta/master/resources/drirc -o ~/.drirc"
+                    ]
+                ]
+            , p []
+                [ text "If these manipulation did not fix your issue, you can refer to the "
+                , a [ href "https://github.com/NicolasGuilloux/blade-shadow-beta/issues/79", target "_blank" ]
+                    [ text "#79" ]
+                , text " issue that propose to use "
+                , a [ href "https://gitlab.com/aar642/shadowcker/", target "_blank" ]
+                    [ text "Shadowcker" ]
+                , text "."
+                ]
             ]
         }
 
