@@ -19,7 +19,7 @@ sub share {
     close $fh;
 
     print 'Sending the data to the server...';
-    my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://nicolasguilloux.eu/hostbin`;
+    my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://shadow.nicolasguilloux.eu/hostbin`;
 
     system('rm /tmp/report_shadow');
 
