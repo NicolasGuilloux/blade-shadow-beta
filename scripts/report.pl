@@ -1,5 +1,9 @@
 #!/usr/bin/env perl
 
+
+# -------- Archived repository -------- #
+print "\n/!\\ This script is not maintained since july 2021, the 19th. It may not work in the future.\n\n";
+
 # Autheur: Nicolas Guilloux
 # Website: https://nicolasguilloux.eu/
 # Email:   novares.x@gmail.com

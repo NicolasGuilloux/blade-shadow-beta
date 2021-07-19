@@ -1,3 +1,5 @@
+> :warning: Since I canceled my subscription, I am no longer able to maintain this package. If somebody wants to continue the maintenance, feel free to fork or [contact me](mailto:nicolas.guilloux@protonmail.com)
+
 # Why this?
 
 The Shadow cloud-computing application by Blade (https://shadow.tech) is available for Ubuntu 18.04. This repository extends compatibility to additional distributions and hardwares, providing scripts and documentation. The usefulness of this repository decreases during time as Blade improves its compatibility and fixes bugs. Still, this repository provides great documentations made by the community!
