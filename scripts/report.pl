@@ -12,7 +12,7 @@ use strict;
 use warnings;
 
 
-# Send to Hostbin
+# Send to ix.io
 #
 # @param String Content
 #
@@ -23,7 +23,7 @@ sub share {
     close $fh;
 
     print 'Sending the data to the server...';
-    my $url = `curl -sf --data-binary "@/tmp/report_shadow" https://shadow.nicolasguilloux.eu/hostbin`;
+	my $url = `curl -F "f:1=@/tmp/report_shadow" ix.io`;
 
     system('rm /tmp/report_shadow');
 
